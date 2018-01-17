@@ -17,8 +17,23 @@ class RedirectIfAuthenticated
      */
     public function handle($request, Closure $next, $guard = null)
     {
-        if (Auth::guard($guard)->check()) {
-            return redirect('/home');
+        if (Auth::check()) {
+            if (Auth::user()->status == '1') {
+                $hakAkses = Auth::user()->hak_akses->slug;
+                if ($hakAkses == 'staff') {
+                    dd('Hak Akses : Staff');
+                } elseif ($hakAkses == 'asmen') {
+                    dd('Hak Akses : Asmen');
+                } elseif ($hakAkses == 'instruktur') {
+                    dd('Hak Akses : Instruktur');
+                } elseif ($hakAkses == 'peserta') {
+                    dd('Hak Akses : Peserta');
+                } else {
+                    return redirect()->route('getLogout');
+                }
+            } else {
+                return redirect()->route('getLogout');
+            }
         }
 
         return $next($request);
