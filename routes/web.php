@@ -37,7 +37,10 @@ Route::group(['prefix' => 'staff', 'middleware' => ['staff']], function() {
     });
 
     Route::get('/home', 'Staff\MainController@getStaffHomePage')->name('getStaffHomePage');
-    Route::get('/profil', 'Staff\MainController@getStaffProfilPage')->name('getStaffProfilPage');
+
+    // Route::get('/profil', 'Staff\MainController@getStaffProfilPage')->name('getStaffProfilPage');
+    Route::get('profil/ubah', 'General\ProfilController@getChangeProfilPage')->name('getChangeProfilPage');
+    Route::put('profil/ubah', 'General\ProfilController@putChangeProfil')->name('putChangeProfil');
 
 });
 

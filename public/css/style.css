@@ -4,6 +4,10 @@
 	background: linear-gradient(to left, #237A57, #093028);
 }
 
+.category {
+	color: #227856;
+}
+
 .sidebar-collapse .navbar-collapse:before {
 	background: #34e89e;
 	background: -webkit-linear-gradient(to bottom, #0f3443, #34e89e); 
@@ -16,6 +20,39 @@
 
 .profil-text {
 	margin-bottom: 5px;
+}
+
+.form-control {
+	border-radius: 0;
+	border-color: #b3b3b4;
+}
+
+.form-control:focus {
+	border-color: #0e3d31;
+}
+
+textarea.form-control {
+	border: 1px solid #b3b3b4;
+}
+
+textarea.form-control:focus {
+	border: 1px solid #0e3d31;
+}
+
+select.form-control {
+	-webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+}
+
+.btn-green {
+	background-color: #0d3d30;
+	color: #fff;
+}
+
+.btn-green:focus, .btn-green:hover, .btn-green:active {
+	background-color: #1d6a4d;
+	color: #fff;
 }
 
 footer {

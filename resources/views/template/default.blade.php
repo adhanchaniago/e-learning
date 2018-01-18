@@ -2,7 +2,7 @@
 <html lang="en">
     <head>
 
-        <title>Home</title>
+        <title> @yield('title') </title>
 
         <meta charset="utf-8" />
         <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
@@ -32,39 +32,14 @@
                 <div class="container devider-top">
                     <div class="row">
                         <div class="col-md-9">
-                            <div class="card">
-                                <div class="card-body">
-                                    <p class="category">Title Here</p>
-                                    <p>
-                                        I think that’s a responsibility that I have, to push possibilities, to show people, this is the level that things could be at. So when you get something that has the name Kanye West on it, it’s supposed to be pushing the furthest possibilities. I will be the leader of a company that ends up being worth billions of dollars, because I got the answers. I understand culture. I am the nucleus.
-                                    </p>
-                                    <p>
-                                        I think that’s a responsibility that I have, to push possibilities, to show people, this is the level that things could be at. So when you get something that has the name Kanye West on it, it’s supposed to be pushing the furthest possibilities. I will be the leader of a company that ends up being worth billions of dollars, because I got the answers. I understand culture. I am the nucleus.
-                                    </p>
-                                    <p>
-                                        I think that’s a responsibility that I have, to push possibilities, to show people, this is the level that things could be at. So when you get something that has the name Kanye West on it, it’s supposed to be pushing the furthest possibilities. I will be the leader of a company that ends up being worth billions of dollars, because I got the answers. I understand culture. I am the nucleus.
-                                    </p>
-                                </div>
-                            </div>
+                            
+                            @yield('content')
+
                         </div>
                         <div class="col-md-3">
-                            <div class="card">
-                                <div class="card-body">
-                                    <div class="text-center">
-                                        <img src="{{ asset('vendor/now-ui-kit/img/default-avatar.png') }}" class="rounded-circle" height="150px">
-                                        <br><br>
-                                        <p class="profil-text">{{ Auth::user()->user_profil->nik }}</p>
-                                        <p class="profil-text">{{ Auth::user()->user_profil->nama }}</p>
-                                        <p class="profil-text">{{ Auth::user()->hak_akses->nama }}</p>
-                                    </div>
-                                </div>
-                                <div class="list-group">
-                                    <a href="#" class="list-group-item list-group-item-action">Kelola User Akun</a>
-                                    <a href="#" class="list-group-item list-group-item-action">Kelola Angkatan Diklat</a>
-                                    <a href="#" class="list-group-item list-group-item-action">Kelola Mata Pelajaran</a>
-                                    <a href="#" class="list-group-item list-group-item-action">Kelola Kelas Virtual</a>
-                                </div>
-                            </div>
+                            
+                            @include('template.partials.rightmenu')
+
                         </div>
                     </div>
                 </div>

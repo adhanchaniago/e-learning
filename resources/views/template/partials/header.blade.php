@@ -19,7 +19,7 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" rel="tooltip" title="Profil" data-placement="bottom" href="{{ route('getStaffProfilPage') }}">
+                    <a class="nav-link" rel="tooltip" title="Profil" data-placement="bottom" href="">
                         <i class="fa fa-user"></i>
                         <p class="d-lg-none d-xl-none">Profil</p>
                     </a>
@@ -31,7 +31,7 @@
                     </a>
                     <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">
                         <a class="dropdown-header">Pengaturan</a>
-                        <a class="dropdown-item" href="#"><i class="fa fa-edit"></i>&nbsp;Ubah Profil</a>
+                        <a class="dropdown-item" href="{{ route('getChangeProfilPage') }}"><i class="fa fa-edit"></i>&nbsp;Ubah Profil</a>
                         <a class="dropdown-item" href="#"><i class="fa fa-edit"></i>&nbsp;Ubah Password</a>
                         <a class="dropdown-item" href="{{ route('getLogout') }}"><i class="fa fa-sign-out"></i>&nbsp;Logout</a>
                     </div>
