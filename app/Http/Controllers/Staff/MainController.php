@@ -7,5 +7,8 @@ use App\Http\Controllers\Controller;
 
 class MainController extends Controller
 {
-    //
+    public function getStaffHomePage()
+    {
+        return view('staff.home');
+    }
 }

@@ -1,0 +1,27 @@
+.bg-green {
+	background: #093028;
+	background: -webkit-linear-gradient(to left, #237A57, #093028);
+	background: linear-gradient(to left, #237A57, #093028);
+}
+
+.sidebar-collapse .navbar-collapse:before {
+	background: #34e89e;
+	background: -webkit-linear-gradient(to bottom, #0f3443, #34e89e); 
+	background: linear-gradient(to bottom, #0f3443, #34e89e);
+}
+
+.devider-top {
+	margin-top: 20px;
+}
+
+.profil-text {
+	margin-bottom: 5px;
+}
+
+footer {
+	background: #f2f2f2;
+	position: fixed;
+	left: 0;
+	bottom: 0;
+	width: 100%;
+}

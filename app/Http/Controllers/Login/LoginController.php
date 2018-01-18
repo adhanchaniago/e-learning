@@ -26,7 +26,7 @@ class LoginController extends Controller
             return redirect()->back();
         }
 
-        return "gagal";
+        return redirect()->back();
     }
 
     public function getLogout()

@@ -34,6 +34,7 @@ class CreateAllTables extends Migration
         Schema::create('users_profil', function (Blueprint $table) {
             $table->increments('id');
             $table->string('nik')->unique();
+            $table->string('email')->unique();
             $table->string('nama');
             $table->string('tempat_lahir');
             $table->date('tanggal_lahir');

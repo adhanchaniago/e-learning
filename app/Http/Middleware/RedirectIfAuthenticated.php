@@ -21,7 +21,7 @@ class RedirectIfAuthenticated
             if (Auth::user()->status == '1') {
                 $hakAkses = Auth::user()->hak_akses->slug;
                 if ($hakAkses == 'staff') {
-                    dd('Hak Akses : Staff');
+                    return redirect()->route('getStaffHomePage');
                 } elseif ($hakAkses == 'asmen') {
                     dd('Hak Akses : Asmen');
                 } elseif ($hakAkses == 'instruktur') {
