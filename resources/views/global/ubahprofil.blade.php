@@ -8,11 +8,10 @@
 	<div class="card-body">
 		<p class="category">Ubah Profil</p>
 		<hr>
-		<p>
-			Silahkan lengkapi form berikut ini :
-		</p>
+		<p>Silahkan lengkapi form berikut ini :</p>
 		<div class="row">
 			<div class="col-md-9 offset-md-3">
+				@include('template.partials.formerror')
 				<form action="" method="post">
 					<input type="hidden" name="_token" value="{{ csrf_token() }}">
 					<input type="hidden" name="_method" value="PUT">
@@ -121,9 +120,8 @@
 <script src="{{ asset('vendor/air-datepicker/dist/js/i18n/datepicker.en.js') }}"></script>
 
 <script>
-	$(document).ready(function() {
 
-		
+	$(document).ready(function() {
 
 		$.fn.datepicker.language['en'] = {
 			days: ['Minggu', 'Senin', 'Selasa', 'Rabu', 'Kamis', 'Jumat', 'Sabtu'],
@@ -140,6 +138,7 @@
 		});
 
 	});
+
 </script>
 
 @endpush

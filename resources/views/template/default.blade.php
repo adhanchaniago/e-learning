@@ -15,6 +15,7 @@
         <link rel="stylesheet" href="{{ asset('vendor/now-ui-kit/css/now-ui-kit.css') }}" />
 
         <link rel="stylesheet" href="{{ asset('vendor/now-ui-kit/css/demo.css') }}" />
+        <link rel="stylesheet" href="{{ asset('vendor/animate/animate.css') }}">
         <link rel="stylesheet" href="{{ asset('css/style.css') }}">
 
         @stack('style')
@@ -33,6 +34,24 @@
                     <div class="row">
                         <div class="col-md-9">
                             
+                            @if (Session::has('success'))
+                                
+                                <div class="alert alert-success animated fadeInDown with-time-out" role="alert">
+                                    <div class="container">
+                                        <div class="alert-icon">
+                                            <i class="now-ui-icons ui-2_like"></i>
+                                        </div>
+                                        <strong>Sukses!</strong> {{ Session::get('success') }}
+                                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                            <span aria-hidden="true">
+                                                <i class="now-ui-icons ui-1_simple-remove"></i>
+                                            </span>
+                                        </button>
+                                    </div>
+                                </div>
+
+                            @endif
+
                             @yield('content')
 
                         </div>
@@ -55,6 +74,18 @@
         <script src="{{ asset('vendor/popper/popper.min.js') }}" type="text/javascript"></script>
         <script src="{{ asset('vendor/bootstrap/js/bootstrap.min.js') }}" type="text/javascript"></script>
         <script src="{{ asset('vendor/now-ui-kit/js/now-ui-kit.js') }}" type="text/javascript"></script>
+
+        <script>
+
+            $(document).ready(function() {
+
+                $(".with-time-out").delay(5000).slideUp(300, function() {
+                    $(this).alert('close');
+                });
+
+            });
+
+        </script>
 
         @stack('script')
 

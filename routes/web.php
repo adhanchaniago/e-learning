@@ -42,6 +42,9 @@ Route::group(['prefix' => 'staff', 'middleware' => ['staff']], function() {
     Route::get('profil/ubah', 'General\ProfilController@getChangeProfilPage')->name('getChangeProfilPage');
     Route::put('profil/ubah', 'General\ProfilController@putChangeProfil')->name('putChangeProfil');
 
+    Route::get('password/ubah', 'General\PasswordController@getChangePasswordPage')->name('getChangePasswordPage');
+    Route::put('password/ubah', 'General\PasswordController@putChangePassword')->name('putChangePassword');
+
 });
 
 // Instruktur Section

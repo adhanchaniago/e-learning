@@ -13,6 +13,6 @@
         <a href="#" class="list-group-item list-group-item-action"><i class="fa fa-edit"></i> Kelola Angkatan Diklat</a>
         <a href="#" class="list-group-item list-group-item-action"><i class="fa fa-edit"></i> Kelola Mata Pelajaran</a>
         <a href="#" class="list-group-item list-group-item-action"><i class="fa fa-edit"></i> Kelola Kelas Virtual</a>
-        <a href="#" class="list-group-item list-group-item-action"><i class="fa fa-sign-out"></i> Logout</a>
+        <a href="{{ route('getLogout') }}" class="list-group-item list-group-item-action"><i class="fa fa-sign-out"></i> Logout</a>
     </div>
 </div>

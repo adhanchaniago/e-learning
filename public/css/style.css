@@ -45,6 +45,12 @@ select.form-control {
     appearance: none;
 }
 
+.list-error {
+	padding-left: 0;
+	margin-bottom: 0;
+	font-size: 12px;
+}
+
 .btn-green {
 	background-color: #0d3d30;
 	color: #fff;
@@ -57,8 +63,4 @@ select.form-control {
 
 footer {
 	background: #f2f2f2;
-	position: fixed;
-	left: 0;
-	bottom: 0;
-	width: 100%;
 }

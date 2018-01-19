@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\General;
 
 use Auth;
+use Session;
 
 use App\Models\KantorCabang;
 use App\Models\UserProfil;
@@ -31,6 +32,13 @@ class ProfilController extends Controller
     		'nama' => 'required',
     		'email' => 'required|email',
     		'kantor_cabang_id' => 'required'
+    	],[
+    		'id.required' => 'ID tidak boleh kosong.',
+    		'nik.required' => 'NIK tidak boleh kosong.',
+    		'nama.required' => 'Nama tidak boleh kosong.',
+    		'email.required' => 'Email tidak boleh kosong.',
+    		'email.email' => 'Format Email tidak valid.',
+    		'kantor_cabang_id.required' => 'Kontor Cabang tidak boleh kosong.'
     	]);
 
     	$profil = UserProfil::find($request->id);
@@ -45,6 +53,7 @@ class ProfilController extends Controller
     	$profil->kantor_cabang_id = $request->kantor_cabang_id;
     	$profil->save();
 
+    	Session::flash('success', 'Profil berhasil diubah.');
     	return redirect()->back();
 
     }

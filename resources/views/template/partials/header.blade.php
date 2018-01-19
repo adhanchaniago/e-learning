@@ -32,7 +32,7 @@
                     <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">
                         <a class="dropdown-header">Pengaturan</a>
                         <a class="dropdown-item" href="{{ route('getChangeProfilPage') }}"><i class="fa fa-edit"></i>&nbsp;Ubah Profil</a>
-                        <a class="dropdown-item" href="#"><i class="fa fa-edit"></i>&nbsp;Ubah Password</a>
+                        <a class="dropdown-item" href="{{ route('getChangePasswordPage') }}"><i class="fa fa-edit"></i>&nbsp;Ubah Password</a>
                         <a class="dropdown-item" href="{{ route('getLogout') }}"><i class="fa fa-sign-out"></i>&nbsp;Logout</a>
                     </div>
                 </li>
