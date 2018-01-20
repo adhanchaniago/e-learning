@@ -16,21 +16,21 @@
 					<input type="hidden" name="_token" value="{{ csrf_token() }}">
 					<input type="hidden" name="_method" value="PUT">
 					<div class="form-group row">
-						<label for="nama" class="col-sm-5 col-form-label">Password Lama</label>
+						<label for="password_lama" class="col-sm-5 col-form-label">Password Lama</label>
 						<div class="col-sm-7">
-							<input type="password" class="form-control" id="nama" name="nama">
+							<input type="password" class="form-control" id="password_lama" name="password_lama">
 						</div>
 					</div>	
 					<div class="form-group row">
-						<label for="nama" class="col-sm-5 col-form-label">Password Baru</label>
+						<label for="password" class="col-sm-5 col-form-label">Password Baru</label>
 						<div class="col-sm-7">
-							<input type="password" class="form-control" id="nama" name="nama">
+							<input type="password" class="form-control" id="password" name="password">
 						</div>
 					</div>	
 					<div class="form-group row">
-						<label for="nama" class="col-sm-5 col-form-label">Konfirmasi Password Baru</label>
+						<label for="password_confirmation" class="col-sm-5 col-form-label">Konfirmasi Password Baru</label>
 						<div class="col-sm-7">
-							<input type="password" class="form-control" id="nama" name="nama">
+							<input type="password" class="form-control" id="password_confirmation" name="password_confirmation">
 						</div>
 					</div>	
 					<br>

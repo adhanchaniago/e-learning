@@ -50,6 +50,22 @@
                                     </div>
                                 </div>
 
+                            @elseif (Session::has('failure'))
+
+                                <div class="alert alert-danger animated fadeInDown with-time-out" role="alert">
+                                    <div class="container">
+                                        <div class="alert-icon">
+                                            <i class="now-ui-icons objects_support-17"></i>
+                                        </div>
+                                        <strong>Gagal!</strong> {{ Session::get('failure') }}
+                                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                            <span aria-hidden="true">
+                                                <i class="now-ui-icons ui-1_simple-remove"></i>
+                                            </span>
+                                        </button>
+                                    </div>
+                                </div>
+
                             @endif
 
                             @yield('content')

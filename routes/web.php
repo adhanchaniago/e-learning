@@ -38,12 +38,17 @@ Route::group(['prefix' => 'staff', 'middleware' => ['staff']], function() {
 
     Route::get('/home', 'Staff\MainController@getStaffHomePage')->name('getStaffHomePage');
 
-    // Route::get('/profil', 'Staff\MainController@getStaffProfilPage')->name('getStaffProfilPage');
-    Route::get('profil/ubah', 'General\ProfilController@getChangeProfilPage')->name('getChangeProfilPage');
-    Route::put('profil/ubah', 'General\ProfilController@putChangeProfil')->name('putChangeProfil');
+    Route::get('/profil/ubah', 'General\ProfilController@getChangeProfilPage')->name('getChangeProfilPage');
+    Route::put('/profil/ubah', 'General\ProfilController@putChangeProfil')->name('putChangeProfil');
 
-    Route::get('password/ubah', 'General\PasswordController@getChangePasswordPage')->name('getChangePasswordPage');
-    Route::put('password/ubah', 'General\PasswordController@putChangePassword')->name('putChangePassword');
+    Route::get('/password/ubah', 'General\PasswordController@getChangePasswordPage')->name('getChangePasswordPage');
+    Route::put('/password/ubah', 'General\PasswordController@putChangePassword')->name('putChangePassword');
+
+    Route::get('/angkatandiklat', 'Staff\AngkatanDiklatController@getAngkatanDiklatPage')->name('getAngkatanDiklatPage');
+    Route::get('/angkatandiklat/data', 'Staff\AngkatanDiklatController@getDataAngkatanDiklat')->name('getDataAngkatanDiklat');
+    Route::get('/angkatandiklat/tambah', 'Staff\AngkatanDiklatController@getAddAngkatanDiklatPage')->name('getAddAngkatanDiklatPage');
+
+    Route::get('/userakun', 'Staff\UserAkunController@getUserAkunPage')->name('getUserAkunPage');
 
 });
 

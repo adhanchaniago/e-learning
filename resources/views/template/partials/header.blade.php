@@ -18,12 +18,6 @@
                         <p class="d-lg-none d-xl-none">Beranda</p>
                     </a>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link" rel="tooltip" title="Profil" data-placement="bottom" href="">
-                        <i class="fa fa-user"></i>
-                        <p class="d-lg-none d-xl-none">Profil</p>
-                    </a>
-                </li>
                 <li class="nav-item dropdown">
                     <a href="#" class="nav-link dropdown-toggle" id="navbarDropdownMenuLink" data-toggle="dropdown">
                         <i class="fa fa-gear"></i>

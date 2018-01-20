@@ -50,8 +50,8 @@ class CreateAllTables extends Migration
         Schema::create('kantor_cabang', function (Blueprint $table) {
             $table->increments('id');
             $table->string('nama');
-            $table->string('alamat');
-            $table->string('telepon');
+            $table->string('alamat')->nullable();
+            $table->string('telepon')->nullable();
             $table->timestamps();
         });
 
@@ -60,7 +60,7 @@ class CreateAllTables extends Migration
             $table->string('nama_diklat');
             $table->date('tanggal_mulai');
             $table->date('tanggal_selesai');
-            $table->string('keterangan');
+            $table->string('keterangan')->nullable();
             $table->timestamps();
         });
     }

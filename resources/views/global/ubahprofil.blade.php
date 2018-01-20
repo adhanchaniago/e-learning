@@ -117,7 +117,7 @@
 @push('script')
 	
 <script src="{{ asset('vendor/air-datepicker/dist/js/datepicker.min.js') }}" type="text/javascript"></script>
-<script src="{{ asset('vendor/air-datepicker/dist/js/i18n/datepicker.en.js') }}"></script>
+<script src="{{ asset('vendor/air-datepicker/dist/js/i18n/datepicker.en.js') }}" type="text/javascript"></script>
 
 <script>
 
