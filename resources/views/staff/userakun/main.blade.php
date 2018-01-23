@@ -1,28 +1,32 @@
 @extends('template.default')
 
-@section('title', 'Staff Home')
+@section('title', 'User Akun')
 
 @section('content')
 
 <div class="card">
 	<div class="card-body">
 		<p class="category">Kelola User Akun</p><hr>
-		<p>
-			Kelola User Akun
-		</p>
-		<div>
-			<table id="tb-test" class="table table-bordered">
-				<thead>
-					<tr>
-						<th>NIK</th>
-						<th>Nama</th>
-						<th>header</th>
-						<th>header</th>
-					</tr>
-				</thead>
-				<tbody></tbody>
-			</table>
-		</div>
+		<a href="{{ route('getAddUserAkunPage') }}" class="btn btn-green">TAMBAH USER AKUN</a>
+		<hr>
+		<p><strong>Tabel Angkatan Diklat :</strong></p>
+		<table id="tb-test" class="table table-bordered" width="100%" style="font-size: 12px;">
+			<thead>
+				<tr>
+					<th>NIK</th>
+					<th>Nama</th>
+					<th>Tmp/Tgl Lahir</th>
+					<th>Jns Kelamin</th>
+					<th>Agama</th>
+					<th>Alamat</th>
+					<th>Telepon</th>
+					<th>Email</th>
+					<th>Cabang Asal</th>
+					<th>Aksi</th>
+				</tr>
+			</thead>
+			<tbody></tbody>
+		</table>
 	</div>
 </div>
 
@@ -41,21 +45,38 @@
 	<script>
 		$(function(){
 			$('#tb-test').DataTable({
-
-			// 	responsive: {
-			// 		details: {
-			// 			display: $.fn.dataTable.Responsive.display.modal( {
-			// 				header: function ( row ) {
-			// 					var data = row.data();
-			// 					return 'Details for '+data[0]+' '+data[1];
-			// 				}
-			// 			} ),
-			// 			renderer: $.fn.dataTable.Responsive.renderer.tableAll( {
-			// 				tableClass: 'table table-bordered'
-			// 			} )
-			// 		}
-			// 	}
-			// });
+				processing: true,
+				serverSide: true,
+				ajax: '{!! route('getDataUserAkun') !!}',
+				columns: [
+					{ data: 'nik', name: 'nik' },
+					{ data: 'nama', name: 'nama' },
+					{ data: 'ttl', name: 'ttl' },
+					{ data: 'jenis_kelamin', name: 'jenis_kelamin' },
+					{ data: 'agama', name: 'agama' },
+					{ data: 'alamat', name: 'alamat' },
+					{ data: 'telepon', name: 'telepon' },
+					{ data: 'email', name: 'email' },
+					{ data: 'kantor_cabang_id', name: 'kantor_cabang_id' },
+					{ data: 'action', name: 'action' },
+				],
+				responsive: {
+					details: {
+						display: $.fn.dataTable.Responsive.display.modal( {
+							header: function ( row ) {
+								var data = row.data();
+								return 'Detail Angkatan Diklat';
+							}
+						} ),
+						renderer: $.fn.dataTable.Responsive.renderer.tableAll( {
+							tableClass: 'table'
+						} )
+					}
+				}, 
+				language: {
+					url: '//cdn.datatables.net/plug-ins/1.10.16/i18n/Indonesian.json'
+				}
+			});
 		});
 	</script>
 

@@ -44,6 +44,12 @@ Route::group(['prefix' => 'staff', 'middleware' => ['staff']], function() {
     Route::get('/password/ubah', 'General\PasswordController@getChangePasswordPage')->name('getChangePasswordPage');
     Route::put('/password/ubah', 'General\PasswordController@putChangePassword')->name('putChangePassword');
 
+    Route::get('/userakun', 'Staff\UserAkunController@getUserAkunPage')->name('getUserAkunPage');
+    Route::get('/userakun/data', 'Staff\UserAkunController@getDataUserAkun')->name('getDataUserAkun');
+    Route::get('/userakun/tambah', 'Staff\UserAkunController@getAddUserAkunPage')->name('getAddUserAkunPage');
+    Route::post('/userakun/tambah', 'Staff\UserAkunController@postAddUserAkun')->name('postAddUserAkun');
+
+
     Route::get('/angkatandiklat', 'Staff\AngkatanDiklatController@getAngkatanDiklatPage')->name('getAngkatanDiklatPage');
     Route::get('/angkatandiklat/data', 'Staff\AngkatanDiklatController@getDataAngkatanDiklat')->name('getDataAngkatanDiklat');
     Route::get('/angkatandiklat/tambah', 'Staff\AngkatanDiklatController@getAddAngkatanDiklatPage')->name('getAddAngkatanDiklatPage');
@@ -61,8 +67,6 @@ Route::group(['prefix' => 'staff', 'middleware' => ['staff']], function() {
     Route::put('/matapelajaran/ubah/{id}', 'Staff\MataPelajaranController@putEditMataPelajaran')->name('putEditMataPelajaran');
     Route::get('/matapelajaran/hapus/{id}', 'Staff\MataPelajaranController@getHapusMataPelajaranPage')->name('getHapusMataPelajaranPage');
     Route::delete('/matapelajaran/hapus/{id}', 'Staff\MataPelajaranController@deleteHapusMataPelajaran')->name('deleteHapusMataPelajaran');
-
-    Route::get('/userakun', 'Staff\UserAkunController@getUserAkunPage')->name('getUserAkunPage');
 
 });
 

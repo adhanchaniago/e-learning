@@ -70,6 +70,13 @@ class CreateAllTables extends Migration
             $table->string('nama_pelajaran');
             $table->timestamps();
         });
+
+        Schema::create('angkatan_peserta', function (Blueprint $table) {
+            $table->increments('id');
+            $table->integer('angkatan_diklat_id')->unsigned();
+            $table->integer('users_account_id')->unsigned();
+            $table->timestamps();
+        });
     }
 
     /**
@@ -85,5 +92,6 @@ class CreateAllTables extends Migration
         Schema::dropIfExists('kantor_cabang');
         Schema::dropIfExists('angkatan_diklat');
         Schema::dropIfExists('mata_pelajaran');
+        Schema::dropIfExists('angkatan_peserta');
     }
 }

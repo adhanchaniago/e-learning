@@ -79,7 +79,7 @@ class UserAkunSeeder extends Seeder
         $userStaff->save();
 
         $staffProfil = new UserProfil([
-            'nik' => '444262',
+            'nik' => 'P444262',
             'email' => 'adiraka8@gmail.com',
             'nama' => 'Adi Raka Siwi',
             'tempat_lahir' => 'Padang',
@@ -108,7 +108,7 @@ class UserAkunSeeder extends Seeder
         $userAsmen->save();
 
         $asmenProfil = new UserProfil([
-            'nik' => '444353',
+            'nik' => 'P444353',
             'email' => 'taslim.boy@gmail.com',
             'nama' => 'Boy Taslim',
             'tempat_lahir' => 'Padang',
@@ -137,7 +137,7 @@ class UserAkunSeeder extends Seeder
         $userInstruktur->save();
 
         $instruktruProfil = new UserProfil([
-            'nik' => '441212',
+            'nik' => 'P441212',
             'email' => 'yes1234@gmail.com',
             'nama' => 'Yesmaidar',
             'tempat_lahir' => 'Pematang Siantar',
@@ -166,7 +166,7 @@ class UserAkunSeeder extends Seeder
         $userPeserta->save();
 
         $pesertaProfil = new UserProfil([
-            'nik' => '449890',
+            'nik' => 'P449890',
             'email' => 'sibutar.butar12@gmail.com',
             'nama' => 'Jhon Sibutarbutar',
             'tempat_lahir' => 'Medan',

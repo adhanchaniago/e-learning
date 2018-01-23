@@ -28,4 +28,8 @@ class UserAccount extends Authenticatable
     public function hak_akses() {
         return $this->belongsTo('App\Models\HakAkses', 'hak_akses_id', 'id');
     }
+
+    public function angkatan_peserta() {
+        return $this->hasMany('App\Models\AngkatanPeserta', 'users_account_id', 'id');
+    }
 }

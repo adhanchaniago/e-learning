@@ -64,3 +64,20 @@ select.form-control {
 footer {
 	background: #f2f2f2;
 }
+
+.select2-container--default .select2-selection--single {
+	border-radius: 0 !important;
+	height: 37px !important;
+}
+
+.select2-container--default .select2-selection--single :focus {
+	border-color: #000;
+}
+
+.select2-container--default .select2-selection--single .select2-selection__rendered {
+	line-height: 37px !important;
+}
+
+.select2-container--default .select2-selection--single .select2-selection__arrow {
+	height: 35px !important;
+}

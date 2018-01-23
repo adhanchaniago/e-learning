@@ -30,7 +30,7 @@
 						<div class="col-md-4"></div>
 						<div class="col-sm-8">
 							<button type="submit" class="btn btn-green">Tambah Mata Pelajaran</button>
-							<a href="{{ route('s') }}" class="btn btn-default">Batal</a>
+							<a href="{{ route('getMataPelajaranPage') }}" class="btn btn-default">Batal</a>
 						</div>
 					</div>
 				</form>
