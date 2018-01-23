@@ -10,7 +10,7 @@
 		<a href="{{ route('getAddAngkatanDiklatPage') }}" class="btn btn-green">TAMBAH ANGKATAN DIKLAT</a>
 		<hr>
 		<p><strong>Tabel Angkatan Diklat :</strong></p>
-		<table id="tb-test" class="table table-bordered" width="100%">
+		<table id="tb-test" class="table table-bordered" width="100%" style="font-size: 12px;">
 			<thead>
 				<tr>
 					<th>ID</th>
@@ -18,7 +18,7 @@
 					<th>Mulai</th>
 					<th>Selesai</th>
 					<th>Keterangan</th>
-					<th>Aksi</th>
+					<th style="width: 15%">Aksi</th>
 				</tr>
 			</thead>
 			<tbody></tbody>
@@ -64,6 +64,9 @@
 							tableClass: 'table'
 						} )
 					}
+				}, 
+				language: {
+					url: '//cdn.datatables.net/plug-ins/1.10.16/i18n/Indonesian.json'
 				}
 			});
 		});

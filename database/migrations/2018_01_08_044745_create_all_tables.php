@@ -63,6 +63,12 @@ class CreateAllTables extends Migration
             $table->string('keterangan')->nullable();
             $table->timestamps();
         });
+
+        Schema::create('mata_pelajaran', function (Blueprint $table) {
+            $table->increments('id');
+            $table->string('slug');
+            $table->string('nama_pelajaran');
+        });
     }
 
     /**
@@ -77,5 +83,6 @@ class CreateAllTables extends Migration
         Schema::dropIfExists('hak_akses');
         Schema::dropIfExists('kantor_cabang');
         Schema::dropIfExists('angkatan_diklat');
+        Schema::dropIfExists('mata_pelajaran');
     }
 }
