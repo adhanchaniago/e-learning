@@ -68,6 +68,7 @@ class CreateAllTables extends Migration
             $table->increments('id');
             $table->string('slug');
             $table->string('nama_pelajaran');
+            $table->timestamps();
         });
     }
 

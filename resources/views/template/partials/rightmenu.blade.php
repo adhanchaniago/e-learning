@@ -11,7 +11,7 @@
     <div class="list-group">
         <a href="{{ route('getUserAkunPage') }}" class="list-group-item list-group-item-action"><i class="fa fa-edit"></i> Kelola User Akun</a>
         <a href="{{ route('getAngkatanDiklatPage') }}" class="list-group-item list-group-item-action"><i class="fa fa-edit"></i> Kelola Angkatan Diklat</a>
-        <a href="#" class="list-group-item list-group-item-action"><i class="fa fa-edit"></i> Kelola Mata Pelajaran</a>
+        <a href="{{ route('getMataPelajaranPage') }}" class="list-group-item list-group-item-action"><i class="fa fa-edit"></i> Kelola Mata Pelajaran</a>
         <a href="#" class="list-group-item list-group-item-action"><i class="fa fa-edit"></i> Kelola Kelas Virtual</a>
         <a href="{{ route('getLogout') }}" class="list-group-item list-group-item-action"><i class="fa fa-sign-out"></i> Logout</a>
     </div>
