@@ -51,6 +51,13 @@ Route::group(['prefix' => 'staff', 'middleware' => ['staff']], function() {
     Route::get('/userakun/ubah/{id}', 'Staff\UserAkunController@getEditUserAkunPage')->name('getEditUserAkunPage');
     Route::put('/userakun/ubah/{id}', 'Staff\UserAkunController@putEditUserAkun')->name('putEditUserAkun');
     Route::get('/userakun/hapus/{id}', 'Staff\UserAkunController@getHapusUserAkunPage')->name('getHapusUserAkunPage');
+    Route::delete('/userakun/hapus/{id}', 'Staff\UserAkunController@deleteHapusUserAkun')->name('deleteHapusUserAkun');
+    Route::get('/userakun/blok/{id}', 'Staff\UserAkunController@getBlokUserAkunPage')->name('getBlokUserAkunPage');
+    Route::put('/userakun/blok/{id}', 'Staff\UserAkunController@putBlokUserAkun')->name('putBlokUserAkun');
+    Route::get('/userakun/unblok/{id}', 'Staff\UserAkunController@getUnblokUserAkunPage')->name('getUnblokUserAkunPage');
+    Route::put('/userakun/unblok/{id}', 'Staff\UserAkunController@putUnblokUserAkun')->name('putUnblokUserAkun');
+    Route::get('/userakun/reset/{id}', 'Staff\UserAkunController@getResetPasswordPage')->name('getResetPasswordPage');
+    Route::put('/userakun/reset/{id}', 'Staff\UserAkunController@putResetPassword')->name('putResetPassword');
 
     Route::get('/angkatandiklat', 'Staff\AngkatanDiklatController@getAngkatanDiklatPage')->name('getAngkatanDiklatPage');
     Route::get('/angkatandiklat/data', 'Staff\AngkatanDiklatController@getDataAngkatanDiklat')->name('getDataAngkatanDiklat');
@@ -69,6 +76,8 @@ Route::group(['prefix' => 'staff', 'middleware' => ['staff']], function() {
     Route::put('/matapelajaran/ubah/{id}', 'Staff\MataPelajaranController@putEditMataPelajaran')->name('putEditMataPelajaran');
     Route::get('/matapelajaran/hapus/{id}', 'Staff\MataPelajaranController@getHapusMataPelajaranPage')->name('getHapusMataPelajaranPage');
     Route::delete('/matapelajaran/hapus/{id}', 'Staff\MataPelajaranController@deleteHapusMataPelajaran')->name('deleteHapusMataPelajaran');
+
+    Route::get('/virtualclass', 'Staff\VirtualClassController@getVirtualClassPage')->name('getVirtualClassPage');
 
 });
 

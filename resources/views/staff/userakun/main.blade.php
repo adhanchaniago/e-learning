@@ -21,6 +21,7 @@
 					<th>Alamat</th>
 					<th>Telepon</th>
 					<th>Email</th>
+					<th>Status</th>
 					<th>Cabang Asal</th>
 					<th>Aksi</th>
 				</tr>
@@ -57,6 +58,7 @@
 					{ data: 'alamat', name: 'alamat' },
 					{ data: 'telepon', name: 'telepon' },
 					{ data: 'email', name: 'email' },
+					{ data: 'status', name: 'status' },
 					{ data: 'kantor_cabang_id', name: 'kantor_cabang_id' },
 					{ data: 'action', name: 'action' },
 				],

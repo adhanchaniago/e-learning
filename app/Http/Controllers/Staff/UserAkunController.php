@@ -30,10 +30,31 @@ class UserAkunController extends Controller
                 return $user->tempat_lahir.', '.Carbon::parse($user->tanggal_lahir)->format('d M Y');
             })
             ->addColumn('action', function ($user) {
-                return '
-                    <a href="userakun/ubah/'.$user->id.'" class="btn btn-sm btn-green btn-icon btn-icon-mini btn-round"><i class="fa fa-edit"></i></a>
-                    <a href="userakun/hapus/'.$user->id.'" class="btn btn-sm btn-danger btn-icon btn-icon-mini btn-round"><i class="fa fa-trash"></i></a>
-                ';
+                $status = $user->user_account->status;
+                if ($status == 1) {
+                    return '
+                        <a href="userakun/ubah/'.$user->id.'" class="btn btn-sm btn-green btn-icon btn-icon-mini btn-round"><i class="fa fa-edit"></i></a>
+                        <a href="userakun/blok/'.$user->id.'" class="btn btn-sm btn-warning btn-icon btn-icon-mini btn-round"><i class="fa fa-ban"></i></a>
+                        <a href="userakun/hapus/'.$user->id.'" class="btn btn-sm btn-danger btn-icon btn-icon-mini btn-round"><i class="fa fa-trash"></i></a>
+                        <a href="userakun/reset/'.$user->id.'" class="btn btn-sm btn-warning btn-icon btn-icon-mini btn-round"><i class="fa fa-key"></i></a>
+                    ';
+                } else {
+                    return '
+                        <a href="userakun/ubah/'.$user->id.'" class="btn btn-sm btn-green btn-icon btn-icon-mini btn-round"><i class="fa fa-edit"></i></a>
+                        <a href="userakun/unblok/'.$user->id.'" class="btn btn-sm btn-success btn-icon btn-icon-mini btn-round"><i class="fa fa-circle-o"></i></a>
+                        <a href="userakun/hapus/'.$user->id.'" class="btn btn-sm btn-danger btn-icon btn-icon-mini btn-round"><i class="fa fa-trash"></i></a>
+                        <a href="userakun/reset/'.$user->id.'" class="btn btn-sm btn-warning btn-icon btn-icon-mini btn-round"><i class="fa fa-key"></i></a>
+                    ';
+                }
+                
+            })
+            ->addColumn('status', function ($user){
+                $status = $user->user_account->status;
+                if ($status == '0') {
+                    return 'Tidak Aktif';
+                } else {
+                    return 'Aktif';
+                }
             })
             ->editColumn('kantor_cabang_id', function($user){
             	return $user->kantor_cabang->nama;
@@ -56,7 +77,7 @@ class UserAkunController extends Controller
     public function postAddUserAkun(Request $request)
     {
     	$this->validate($request, [
-    		'nik' => 'required',
+    		'nik' => 'required|unique:users_profil',
     		'nama' => 'required',
     		'email' => 'required|email|unique:users_profil',
     		'tempat_lahir' => 'required',
@@ -67,6 +88,7 @@ class UserAkunController extends Controller
     		'hak_akses_id' => 'required'
     	],[
             'nik.required' => 'NIK tidak boleh kosong.',
+            'nik.required' => 'NIK yang diinputkan sudah terdaftar.',
             'nama.required' => 'Nama tidak boleh kosong.',
             'email.required' => 'Email tidak boleh kosong',
             'email.email' => 'Email yang diinputkan tidak valid.',
@@ -169,6 +191,73 @@ class UserAkunController extends Controller
 
     public function getHapusUserAkunPage($id)
     {
+        $user = UserProfil::find($id);
+        return view('staff.userakun.delete', [
+            'user' => $user
+        ]);
+    }
+
+    public function deleteHapusUserAkun($id, Request $request)
+    {
+        $user = UserAccount::where('id', $request->id)->first();
+        $user->delete();
+
+        Session::flash('success', 'User Akun berhasil dihapus.');
+        return redirect()->route('getUserAkunPage');
+    }
+
+    public function getBlokUserAkunPage($id)
+    {
+        $user = UserProfil::find($id);
+        return view('staff.userakun.block', [
+            'user' => $user
+        ]);
+    }
+
+    public function putBlokUserAkun($id, Request $request)
+    {
+        $user = UserAccount::where('id', $request->id)->first();
+        $user->status = 0;
+        $user->save();
         
+        Session::flash('success', 'User Akun berhasil diblok.');
+        return redirect()->route('getUserAkunPage');
+    }
+
+    public function getUnblokUserAkunPage($id)
+    {
+        $user = UserProfil::find($id);
+        return view('staff.userakun.unblock', [
+            'user' => $user
+        ]);
+    }
+
+    public function putUnblokUserAkun($id, Request $request)
+    {
+        $user = UserAccount::where('id', $request->id)->first();
+        $user->status = 1;
+        $user->save();
+        
+        Session::flash('success', 'User Akun berhasil diunblok.');
+        return redirect()->route('getUserAkunPage');
+    }
+
+    public function getResetPasswordPage($id)
+    {
+        $user = UserProfil::find($id);
+        return view('staff.userakun.reset', [
+            'user' => $user
+        ]);
+    }
+
+    public function putResetPassword($id, Request $request)
+    {
+        $password = UserProfil::find($request->id)->nik;
+        $user = UserAccount::where('id', $request->id)->first();
+        $user->password = bcrypt($password);
+        $user->save();
+
+        Session::flash('success', 'Password berhasil direset.');
+        return redirect()->route('getUserAkunPage');
     }
 }

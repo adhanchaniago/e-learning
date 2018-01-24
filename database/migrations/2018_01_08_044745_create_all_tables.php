@@ -13,6 +13,14 @@ class CreateAllTables extends Migration
      */
     public function up()
     {
+        Schema::create('hak_akses', function (Blueprint $table) {
+            $table->increments('id');
+            $table->string('nama');
+            $table->string('slug')->unique();
+            $table->string('deskripsi');
+            $table->timestamps();
+        });
+
         Schema::create('users_account', function (Blueprint $table) {
             $table->increments('id');
             $table->string('username')->unique();
@@ -21,14 +29,8 @@ class CreateAllTables extends Migration
             $table->boolean('status');
             $table->rememberToken();
             $table->timestamps();
-        });
 
-        Schema::create('hak_akses', function (Blueprint $table) {
-            $table->increments('id');
-            $table->string('nama');
-            $table->string('slug')->unique();
-            $table->string('deskripsi');
-            $table->timestamps();
+            $table->foreign('hak_akses_id')->references('id')->on('hak_akses')->onDelete('cascade');
         });
 
         Schema::create('users_profil', function (Blueprint $table) {
@@ -45,6 +47,8 @@ class CreateAllTables extends Migration
             $table->string('photo')->nullable();
             $table->integer('kantor_cabang_id')->unsigned();
             $table->timestamps();
+
+            $table->foreign('id')->references('id')->on('users_account')->onDelete('cascade');
         });
 
         Schema::create('kantor_cabang', function (Blueprint $table) {
@@ -74,8 +78,24 @@ class CreateAllTables extends Migration
         Schema::create('angkatan_peserta', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('angkatan_diklat_id')->unsigned();
-            $table->integer('users_account_id')->unsigned();
+            $table->integer('users_account_id')->unsigned(); //user dengan hak akses peserta
             $table->timestamps();
+
+            $table->foreign('angkatan_diklat_id')->references('id')->on('angkatan_diklat')->onDelete('cascade');
+            $table->foreign('users_account_id')->references('id')->on('users_account')->onDelete('cascade');
+        });
+
+        Schema::create('kelas_virtual', function (Blueprint $table) {
+            $table->increments('id');
+            $table->string('nama_kelas');
+            $table->integer('angkatan_diklat_id')->unsigned();
+            $table->integer('mata_pelajaran_id')->unsigned();
+            $table->integer('users_account_id')->unsigned(); //user dengan hak akses instruktur
+            $table->timestamps();
+
+            $table->foreign('angkatan_diklat_id')->references('id')->on('angkatan_diklat')->onDelete('cascade');
+            $table->foreign('mata_pelajaran_id')->references('id')->on('mata_pelajaran')->onDelete('cascade');
+            $table->foreign('users_account_id')->references('id')->on('users_account')->onDelete('cascade');
         });
     }
 
@@ -86,9 +106,9 @@ class CreateAllTables extends Migration
      */
     public function down()
     {
+        Schema::dropIfExists('hak_akses');
         Schema::dropIfExists('users_account');
         Schema::dropIfExists('users_profil');
-        Schema::dropIfExists('hak_akses');
         Schema::dropIfExists('kantor_cabang');
         Schema::dropIfExists('angkatan_diklat');
         Schema::dropIfExists('mata_pelajaran');

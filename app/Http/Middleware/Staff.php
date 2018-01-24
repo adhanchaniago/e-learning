@@ -20,6 +20,9 @@ class Staff
             if (Auth::user()->hak_akses->slug != 'staff') {
                 return redirect()->route('getLoginPage');
             } else {
+                if (Auth::user()->status == '0') {
+                    return redirect()->route('getLogout');
+                }
                 return $next($request);
             }
         } else {
