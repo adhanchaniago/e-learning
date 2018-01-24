@@ -16,21 +16,21 @@ class AdditionalSeeder extends Seeder
         
     	DB::table('angkatan_diklat')->insert([
             [
-                'nama_diklat' => 'DIKLAT PENAKSIR & ANALIS KREDIT MUDA ANGKATAN XI TAHUN 2017',
+                'nama_diklat' => 'Diklat Penaksir & Analisis Kredit Muda Angkatan XI Tahun 2017',
                 'tanggal_mulai' => '2017-03-07',
                 'tanggal_selesai' => '2017-04-29',
                 'keterangan' => '-',
                 'created_at' => Carbon::now(),
                 'updated_at' => Carbon::now()
             ],[
-                'nama_diklat' => 'PENDIDIKAN DAN PELATIHAN GADAI SYARIAH',
+                'nama_diklat' => 'Pendidikan Dan Pelatihan Gadai Syariah',
                 'tanggal_mulai' => '2017-07-13',
                 'tanggal_selesai' => '2017-07-22',
                 'keterangan' => '-',
                 'created_at' => Carbon::now(),
                 'updated_at' => Carbon::now()
             ],[
-                'nama_diklat' => 'DIKLAT PENAKSIR & ANALIS KREDIT MADYA ANGKATAN II TAHUN 2017',
+                'nama_diklat' => 'Diklat Penaksir & Analisis Kredit Madya Angkatan II Tahun 2017',
                 'tanggal_mulai' => '2015-04-27',
                 'tanggal_selesai' => '2015-05-21',
                 'keterangan' => '-',

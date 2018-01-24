@@ -1,53 +1,55 @@
 @extends('template.default')
 
-@section('title', 'Tambah User Akun')
+@section('title', 'Ubah User Akun')
 
 @section('content')
 
 <div class="card">
 	<div class="card-body">
-		<p class="category">Tambah User Akun</p><hr>
+		<p class="category">Ubah User Akun</p><hr>
 		<p>Silahkan lengkapi form berikut ini :</p>
 		<div class="row">
 			<div class="col-md-9 offset-md-3">
 				@include('template.partials.formerror')
 				<form action="" method="post">
 					<input type="hidden" name="_token" value="{{ csrf_token() }}">
+					<input type="hidden" name="_method" value="PUT">
+					<input type="hidden" name="id" value="{{ $user->id }}">
 					<div class="form-group row">
 						<label for="nik" class="col-sm-3 col-form-label">NIK</label>
 						<div class="col-sm-9">
-							<input type="text" class="form-control" id="nik" name="nik">
+							<input type="text" class="form-control" id="nik" name="nik" value="{{ $user->nik }}">
 						</div>
 					</div>		
 					<div class="form-group row">
 						<label for="nama" class="col-sm-3 col-form-label">Nama Lengkap</label>
 						<div class="col-sm-9">
-							<input type="text" class="form-control" id="nama" name="nama">
+							<input type="text" class="form-control" id="nama" name="nama" value="{{ $user->nama }}">
 						</div>
 					</div>	
 					<div class="form-group row">
 						<label for="email" class="col-sm-3 col-form-label">Email</label>
 						<div class="col-sm-9">
-							<input type="text" class="form-control" id="email" name="email">
+							<input type="text" class="form-control" id="email" name="email" value="{{ $user->email }}">
 						</div>
 					</div>	
 					<div class="form-group row">
 						<label for="tempat_lahir" class="col-sm-3 col-form-label">Tempat Lahir</label>
 						<div class="col-sm-9">
-							<input type="text" class="form-control" id="tempat_lahir" name="tempat_lahir">
+							<input type="text" class="form-control" id="tempat_lahir" name="tempat_lahir" value="{{ $user->tempat_lahir }}">
 						</div>
 					</div>	
 					<div class="form-group row">
 						<label for="tanggal_lahir" class="col-sm-3 col-form-label">Tanggal Lahir</label>
 						<div class="col-sm-9">
-							<input type="text" class="form-control" id="tanggal_lahir" name="tanggal_lahir" readonly>
+							<input type="text" class="form-control" id="tanggal_lahir" name="tanggal_lahir" readonly value="{{ $user->tanggal_lahir }}">
 						</div>
 					</div>	
 					<div class="form-group row">
 						<label for="jenis_kelamin" class="col-sm-3 col-form-label">Jenis Kelamin</label>
 						<div class="col-sm-9">
 							<select name="jenis_kelamin" id="jenis_kelamin" class="form-control no-down-arrow">
-								<option></option>
+								<option value="{{ $user->jenis_kelamin }}" selected>{{ $user->jenis_kelamin }}</option>
 								<option value="Pria">Pria</option>
 								<option value="Wanita">Wanita</option>
 							</select>
@@ -57,7 +59,7 @@
 						<label for="agama" class="col-sm-3 col-form-label">Agama</label>
 						<div class="col-sm-9">
 							<select name="agama" id="agama" class="form-control">
-								<option></option>
+								<option value="{{ $user->agama }}" selected>{{ $user->agama }}</option>
 								<option value="Islam">Islam</option>
 								<option value="Katolik">Katolik</option>
 								<option value="Protestan">Protestan</option>
@@ -69,54 +71,31 @@
 					<div class="form-group row">
 						<label for="tanggal_lahir" class="col-sm-3 col-form-label">Alamat</label>
 						<div class="col-sm-9">
-							<textarea name="alamat" id="alamat" class="form-control darker-bottom"></textarea>
+							<textarea name="alamat" id="alamat" class="form-control darker-bottom">{{ $user->alamat }}</textarea>
 						</div>
 					</div>	
 					<div class="form-group row">
 						<label for="telepon" class="col-sm-3 col-form-label">Telepon</label>
 						<div class="col-sm-9">
-							<input type="text" class="form-control" id="telepon" name="telepon">
+							<input type="text" class="form-control" id="telepon" name="telepon" value="{{ $user->telepon }}">
 						</div>
 					</div>
 					<div class="form-group row">
 						<label for="kantor_cabang_id" class="col-sm-3 col-form-label">Kantor Cabang</label>
 						<div class="col-sm-9">
 							<select name="kantor_cabang_id" id="kantor_cabang_id" class="form-control">
-								<option></option>
+								<option value="{{ $user->kantor_cabang->id }}">{{ $user->kantor_cabang->nama }}</option>
 								@foreach ($cabang as $value)
 									<option value="{{ $value->id }}">{{ $value->nama }}</option>
 								@endforeach
 							</select>
-						</div>
-					</div>	
-					<div class="form-group row">
-						<label for="hak_akses_id" class="col-sm-3 col-form-label">Hak Akses</label>
-						<div class="col-sm-9">
-							<select name="hak_akses_id" id="hak_akses_id" class="form-control">
-								<option></option>
-								@foreach ($akses as $value)
-									<option value="{{ $value->id }}">{{ $value->nama }}</option>
-								@endforeach
-							</select>
-						</div>
-					</div>	
-					<div class="form-group row">
-						<label for="angkatan_diklat_id" class="col-sm-3 col-form-label">Angkatan Diklat*</label>
-						<div class="col-sm-9">
-							<select name="angkatan_diklat_id" id="angkatan_diklat_id" class="form-control">
-								<option></option>
-								@foreach ($angkatan as $value)
-									<option value="{{ $value->id }}">{{ $value->nama_diklat }}</option>
-								@endforeach
-							</select>
-							<small class="font-red"><strong>DI ISI APABILA HAK AKSES "PESERTA" !</strong></small>
 						</div>
 					</div>
 					<br>
 					<div class="form-group row">
 						<div class="col-md-3"></div>
 						<div class="col-sm-9">
-							<button type="submit" class="btn btn-green">Tambah User Akun</button>
+							<button type="submit" class="btn btn-green">Ubah User Akun</button>
 							<a href="{{ route('getUserAkunPage') }}" class="btn btn-default">Batal</a>
 						</div>
 					</div>
@@ -161,16 +140,6 @@
 
 		$('#kantor_cabang_id').select2({
 			placeholder: "Pilih Kantor Cabang",
-			allowClear: true
-		});
-
-		$('#hak_akses_id').select2({
-			placeholder: "Pilih Hak Akses",
-			allowClear: true
-		});
-
-		$('#angkatan_diklat_id').select2({
-			placeholder: "Pilih Angkatan Diklat",
 			allowClear: true
 		});
 
