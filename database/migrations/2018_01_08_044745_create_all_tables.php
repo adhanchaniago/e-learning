@@ -113,5 +113,6 @@ class CreateAllTables extends Migration
         Schema::dropIfExists('angkatan_diklat');
         Schema::dropIfExists('mata_pelajaran');
         Schema::dropIfExists('angkatan_peserta');
+        Schema::dropIfExists('kelas_virtual');
     }
 }
