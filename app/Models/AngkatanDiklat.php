@@ -15,4 +15,8 @@ class AngkatanDiklat extends Model
     public function angkatan_peserta() {
     	return $this->hasMany('App\Models\AngkatanPeserta', 'angkatan_diklat_id', 'id');
     }
+
+    public function kelas_virtual() {
+    	return $this->hasMany('App\Models\KelasVirtual', 'angkatan_diklat_id', 'id');
+    }
 }

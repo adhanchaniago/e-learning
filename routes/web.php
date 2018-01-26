@@ -78,6 +78,10 @@ Route::group(['prefix' => 'staff', 'middleware' => ['staff']], function() {
     Route::delete('/matapelajaran/hapus/{id}', 'Staff\MataPelajaranController@deleteHapusMataPelajaran')->name('deleteHapusMataPelajaran');
 
     Route::get('/virtualclass', 'Staff\VirtualClassController@getVirtualClassPage')->name('getVirtualClassPage');
+    Route::get('/virtualclass/data', 'Staff\VirtualClassController@getDataVirtualClass')->name('getDataVirtualClass');
+    Route::get('/virtualclass/tambah', 'Staff\VirtualClassController@getAddVirtualClassPage')->name('getAddVirtualClassPage');
+    Route::post('/virtualclass/tambah', 'Staff\VirtualClassController@postAddVirtualClass')->name('postAddVirtualClass');
+    Route::get('/virtualclass/ubah/{id}', 'Staff\VirtualClassController@getUbahVitualClassPage')->name('getUbahVitualClassPage');
 
 });
 

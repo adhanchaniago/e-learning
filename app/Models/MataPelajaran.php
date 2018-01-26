@@ -11,4 +11,8 @@ class MataPelajaran extends Model
     protected $fillable = [
         'slug', 'nama_pelajaran', 'created_at', 'updated_at'
     ];
+
+    public function kelas_virtual() {
+    	return $this->hasMany('App\Models\KelasVirtual', 'mata_pelajaran_id', 'id');
+    }
 }

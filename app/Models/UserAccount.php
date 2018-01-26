@@ -32,4 +32,8 @@ class UserAccount extends Authenticatable
     public function angkatan_peserta() {
         return $this->hasMany('App\Models\AngkatanPeserta', 'users_account_id', 'id');
     }
+
+    public function kelas_virtual() {
+        return $this->hasMany('App\Models\KelasVirtual', 'users_account_id', 'id');
+    }
 }
