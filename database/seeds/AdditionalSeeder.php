@@ -20,6 +20,7 @@ class AdditionalSeeder extends Seeder
                 'tanggal_mulai' => '2017-03-07',
                 'tanggal_selesai' => '2017-04-29',
                 'keterangan' => '-',
+                'status' => 1,
                 'created_at' => Carbon::now(),
                 'updated_at' => Carbon::now()
             ],[
@@ -27,6 +28,7 @@ class AdditionalSeeder extends Seeder
                 'tanggal_mulai' => '2017-07-13',
                 'tanggal_selesai' => '2017-07-22',
                 'keterangan' => '-',
+                'status' => 1,
                 'created_at' => Carbon::now(),
                 'updated_at' => Carbon::now()
             ],[
@@ -34,6 +36,7 @@ class AdditionalSeeder extends Seeder
                 'tanggal_mulai' => '2015-04-27',
                 'tanggal_selesai' => '2015-05-21',
                 'keterangan' => '-',
+                'status' => 1,
                 'created_at' => Carbon::now(),
                 'updated_at' => Carbon::now()
             ]

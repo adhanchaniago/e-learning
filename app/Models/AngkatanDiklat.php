@@ -9,7 +9,7 @@ class AngkatanDiklat extends Model
     protected $table = 'angkatan_diklat';
 
     protected $fillable = [
-        'nama_diklat', 'tanggal_mulai', 'tanggal_selesai', 'keterangan', 'created_at', 'updated_at'
+        'nama_diklat', 'tanggal_mulai', 'tanggal_selesai', 'keterangan', 'status', 'created_at', 'updated_at'
     ];
 
     public function angkatan_peserta() {

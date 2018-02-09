@@ -9,7 +9,7 @@ class KelasVirtual extends Model
     protected $table = 'kelas_virtual';
 
     protected $fillable = [
-        'nama_kelas', 'angkatan_diklat_id', 'mata_pelajaran_id', 'users_account_id', 'created_at', 'updated_at'
+        'nama_kelas', 'keterangan', 'status', 'angkatan_diklat_id', 'mata_pelajaran_id', 'users_account_id', 'created_at', 'updated_at'
     ];
 
     public function angkatan_diklat() {

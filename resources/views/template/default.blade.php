@@ -16,6 +16,7 @@
 
         <link rel="stylesheet" href="{{ asset('vendor/now-ui-kit/css/demo.css') }}" />
         <link rel="stylesheet" href="{{ asset('vendor/animate/animate.css') }}">
+        <link rel="stylesheet" href="{{ asset('vendor/pace/pace-theme-flash.css') }}">
         <link rel="stylesheet" href="{{ asset('css/style.css') }}">
 
         @stack('style')
@@ -90,6 +91,7 @@
         <script src="{{ asset('vendor/popper/popper.min.js') }}" type="text/javascript"></script>
         <script src="{{ asset('vendor/bootstrap/js/bootstrap.min.js') }}" type="text/javascript"></script>
         <script src="{{ asset('vendor/now-ui-kit/js/now-ui-kit.js') }}" type="text/javascript"></script>
+        <script src="{{ asset('vendor/pace/pace.min.js') }}" type="text/javascript"></script>
 
         <script>
 

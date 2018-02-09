@@ -10,13 +10,15 @@
 		<a href="{{ route('getAddVirtualClassPage') }}" class="btn btn-green">TAMBAH KELAS VIRTUAL</a>
 		<hr>
 		<p><strong>Tabel Kelas Virtual :</strong></p>
-		<table id="tb-test" class="table table-bordered" width="100%" style="font-size: 12px;">
+		<table id="tb-test" class="table table-bordered display responsive nowrap" width="100%" style="font-size: 12px;">
 			<thead>
 				<tr>
 					<th>Nama Kelas</th>
 					<th>Angkatan Diklat</th>
 					<th>Mata Pelajaran</th>
 					<th>Instruktur</th>
+					<th>Status</th>
+					<th>Keterangan</th>
 					<th>Aksi</th>
 				</tr>
 			</thead>
@@ -48,6 +50,8 @@
 					{ data: 'angkatan_diklat_id', name: 'angkatan_diklat_id' },
 					{ data: 'mata_pelajaran_id', name: 'mata_pelajaran_id' },
 					{ data: 'users_account_id', name: 'users_account_id' },
+					{ data: 'status', name: 'status' },
+					{ data: 'keterangan', name: 'keterangan' },
 					{ data: 'action', name: 'action' }
 				],
 				responsive: {

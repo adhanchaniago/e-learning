@@ -10,7 +10,7 @@
 		<a href="{{ route('getAddUserAkunPage') }}" class="btn btn-green">TAMBAH USER AKUN</a>
 		<hr>
 		<p><strong>Tabel Angkatan Diklat :</strong></p>
-		<table id="tb-test" class="table table-bordered" width="100%" style="font-size: 12px;">
+		<table id="tb-test" class="table table-bordered display responsive nowrap" width="100%" style="font-size: 12px;">
 			<thead>
 				<tr>
 					<th>NIK</th>
@@ -22,6 +22,7 @@
 					<th>Telepon</th>
 					<th>Email</th>
 					<th>Status</th>
+					<th>Hak Akses</th>
 					<th>Cabang Asal</th>
 					<th>Aksi</th>
 				</tr>
@@ -59,6 +60,7 @@
 					{ data: 'telepon', name: 'telepon' },
 					{ data: 'email', name: 'email' },
 					{ data: 'status', name: 'status' },
+					{ data: 'hak_akses', name: 'hak_akses' },
 					{ data: 'kantor_cabang_id', name: 'kantor_cabang_id' },
 					{ data: 'action', name: 'action' },
 				],

@@ -12,6 +12,9 @@
 */
 
 // Guest Section
+Route::get('/excel-reader', function(){
+    return view('test.laravel-reader');
+});
 
 // Route::get('/', 'GuestController@getGuestHome')->name('getGuestHome');
 Route::get('/', function() {
@@ -67,6 +70,8 @@ Route::group(['prefix' => 'staff', 'middleware' => ['staff']], function() {
     Route::put('/angkatandiklat/ubah/{id}', 'Staff\AngkatanDiklatController@putEditAngkatanDiklat')->name('putEditAngkatanDiklat');
     Route::get('/angkatandiklat/hapus/{id}', 'Staff\AngkatanDiklatController@getHapusAngkatanDiklatPage')->name('getHapusAngkatanDiklatPage');
     Route::delete('/angkatandiklat/hapus/{id}', 'Staff\AngkatanDiklatController@deleteHapusAngkatanDiklat')->name('deleteHapusAngkatanDiklat');
+    Route::get('/angkatandiklat/selesai/{id}', 'Staff\AngkatanDiklatController@getSelesaiPage')->name('getSelesaiPage');
+    Route::put('/angkatandiklat/selesai/{id}', 'Staff\AngkatanDiklatController@putSelesaiAngkatanDiklat')->name('putSelesaiAngkatanDiklat');
 
     Route::get('/matapelajaran', 'Staff\MataPelajaranController@getMataPelajaranPage')->name('getMataPelajaranPage');
     Route::get('/matapelajaran/data', 'Staff\MataPelajaranController@getDataMataPelajaran')->name('getDataMataPelajaran');
@@ -82,10 +87,33 @@ Route::group(['prefix' => 'staff', 'middleware' => ['staff']], function() {
     Route::get('/virtualclass/tambah', 'Staff\VirtualClassController@getAddVirtualClassPage')->name('getAddVirtualClassPage');
     Route::post('/virtualclass/tambah', 'Staff\VirtualClassController@postAddVirtualClass')->name('postAddVirtualClass');
     Route::get('/virtualclass/ubah/{id}', 'Staff\VirtualClassController@getUbahVitualClassPage')->name('getUbahVitualClassPage');
+    Route::put('/virtualclass/ubah/{id}', 'Staff\VirtualClassController@putUbahVirtualClass')->name('putUbahVirtualClass');
+    Route::get('/virtualclass/hapus/{id}', 'Staff\VirtualClassController@getHapusVirtualClassPage')->name('getHapusVirtualClassPage');
+    Route::delete('/virtualclass/hapus/{id}', 'Staff\VirtualClassController@deleteHapusVirtualClass')->name('deleteHapusVirtualClass');
 
 });
 
 // Instruktur Section
+
+Route::group(['prefix' => 'instruktur', 'middleware' => ['instruktur']], function() {
+
+    Route::get('/', function() {
+        return redirect()->route('getInstrukturHomePage');
+    });
+
+    Route::get('/home', 'Instruktur\MainController@getInstrukturHomePage')->name('getInstrukturHomePage');
+
+    Route::get('/profil/ubah', 'General\ProfilController@getChangeProfilPage')->name('getChangeProfilPage');
+    Route::put('/profil/ubah', 'General\ProfilController@putChangeProfil')->name('putChangeProfil');
+
+    Route::get('/password/ubah', 'General\PasswordController@getChangePasswordPage')->name('getChangePasswordPage');
+    Route::put('/password/ubah', 'General\PasswordController@putChangePassword')->name('putChangePassword');
+
+    Route::get('/materi', 'Instruktur\MateriController@getMateriPage')->name('getMateriPage');
+    Route::get('/materi/data', 'Instruktur\MateriController@getDataMateri')->name('getDataMateri');
+    Route::get('/materi/tambah', 'Instruktur\MateriController@getAddMateriPage')->name('getAddMateriPage');
+
+});
 
 // Peserta Section
 

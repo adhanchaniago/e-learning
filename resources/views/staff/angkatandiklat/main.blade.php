@@ -10,15 +10,16 @@
 		<a href="{{ route('getAddAngkatanDiklatPage') }}" class="btn btn-green">TAMBAH ANGKATAN DIKLAT</a>
 		<hr>
 		<p><strong>Tabel Angkatan Diklat :</strong></p>
-		<table id="tb-test" class="table table-bordered" width="100%" style="font-size: 12px;">
+		<table id="tb-test" class="table table-bordered display responsive nowrap" width="100%" style="font-size: 12px;">
 			<thead>
 				<tr>
 					<th>ID</th>
 					<th>Nama Diklat</th>
 					<th>Mulai</th>
 					<th>Selesai</th>
+					<th>Status</th>
 					<th>Keterangan</th>
-					<th style="width: 15%">Aksi</th>
+					<th>Aksi</th>
 				</tr>
 			</thead>
 			<tbody></tbody>
@@ -49,6 +50,7 @@
 					{ data: 'nama_diklat', name: 'nama_diklat' },
 					{ data: 'tanggal_mulai', name: 'tanggal_mulai' },
 					{ data: 'tanggal_selesai', name: 'tanggal_selesai' },
+					{ data: 'status', name: 'status' },
 					{ data: 'keterangan', name: 'keterangan' },
 					{ data: 'action', name: 'action' }
 				],

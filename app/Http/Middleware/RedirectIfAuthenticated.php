@@ -25,7 +25,7 @@ class RedirectIfAuthenticated
                 } elseif ($hakAkses == 'asmen') {
                     dd('Hak Akses : Asmen');
                 } elseif ($hakAkses == 'instruktur') {
-                    dd('Hak Akses : Instruktur');
+                    return redirect()->route('getInstrukturHomePage');
                 } elseif ($hakAkses == 'peserta') {
                     dd('Hak Akses : Peserta');
                 } else {

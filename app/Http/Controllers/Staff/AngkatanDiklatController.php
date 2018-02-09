@@ -19,14 +19,15 @@ class AngkatanDiklatController extends Controller
 
     public function getDataAngkatanDiklat()
     {
-    	$angkatanDiklat = AngkatanDiklat::select(['id', 'nama_diklat', 'tanggal_mulai', 'tanggal_selesai', 'keterangan']);
+    	$angkatanDiklat = AngkatanDiklat::select(['id', 'nama_diklat', 'tanggal_mulai', 'tanggal_selesai', 'keterangan', 'status']);
     	return Datatables::of($angkatanDiklat)
     		->addColumn('action', function ($angkatan) {
+                $disable = 'disabled';
+                $false = '';
                 return '
-                    <div class="text-center">
-                        <a href="angkatandiklat/ubah/'.$angkatan->id.'" class="btn btn-sm btn-green btn-icon btn-icon-mini btn-round"><i class="fa fa-edit"></i></a>
-                        <a href="angkatandiklat/hapus/'.$angkatan->id.'" class="btn btn-sm btn-danger btn-icon btn-icon-mini btn-round"><i class="fa fa-trash"></i></a>
-                    </div>
+                    <a href="angkatandiklat/ubah/'.$angkatan->id.'" class="btn btn-sm btn-green btn-icon btn-icon-mini btn-round"><i class="fa fa-edit"></i></a>
+                    <a href="angkatandiklat/selesai/'.$angkatan->id.'" class="btn btn-sm btn-success btn-icon btn-icon-mini btn-round '.(($angkatan->status == 0)?$disable:$false).'"><i class="fa fa-check"></i></a>
+                    <a href="angkatandiklat/hapus/'.$angkatan->id.'" class="btn btn-sm btn-danger btn-icon btn-icon-mini btn-round"><i class="fa fa-trash"></i></a>
                 ';
             })
     		->editColumn('tanggal_mulai', function ($angkatan){
@@ -34,7 +35,13 @@ class AngkatanDiklatController extends Controller
     		})
     		->editColumn('tanggal_selesai', function ($angkatan){
     			return Carbon::parse($angkatan->tanggal_selesai)->format('d-M-Y');
-    		})
+    		})->editColumn('status', function ($angkatan){
+                if ($angkatan->status == '1') {
+                    return 'Ongoing';
+                } elseif ($angkatan->status == '0') {
+                    return 'Done';
+                }
+            })
     		->make(true);
     }
 
@@ -43,7 +50,7 @@ class AngkatanDiklatController extends Controller
     	return view('staff.angkatandiklat.add');
     }
 
-    public function postAddAngkatanDiklatPage(Request $request)
+    public function postAddAngkatanDiklat(Request $request)
     {
         $this->validate($request, [
             'nama' => 'required',
@@ -61,7 +68,8 @@ class AngkatanDiklatController extends Controller
             'nama_diklat' => $request->nama,
             'tanggal_mulai' => $request->tanggal_mulai,
             'tanggal_selesai' => $request->tanggal_selesai,
-            'keterangan' => $request->keterangan
+            'keterangan' => $request->keterangan,
+            'status' => '1'
         ]);
 
         $angkatanDiklat->save();
@@ -121,6 +129,28 @@ class AngkatanDiklatController extends Controller
         $angkatanDiklat->delete();
 
         Session::flash('success', 'Angkatan Diklat berhasil dihapus.');
+        return redirect()->route('getAngkatanDiklatPage');
+    }
+
+    public function getSelesaiPage($id)
+    {
+        $angkatan = AngkatanDiklat::find($id);
+        return view('staff.angkatandiklat.done', [
+            'angkatan' => $angkatan
+        ]);
+    }
+
+    public function putSelesaiAngkatanDiklat($id, Request $request)
+    {
+        $this->validate($request, [
+            'id' => 'required'
+        ]);
+
+        $angkatan = AngkatanDiklat::find($request->id);
+        $angkatan->status = '0';
+        $angkatan->save();
+
+        Session::flash('success', 'Angkatan Diklat berhasil ditutup.');
         return redirect()->route('getAngkatanDiklatPage');
     }
 }

@@ -56,6 +56,10 @@ class UserAkunController extends Controller
                     return 'Aktif';
                 }
             })
+            ->addColumn('hak_akses', function ($user){
+                $hak_akses = $user->user_account->hak_akses->nama;
+                return $hak_akses;
+            })
             ->editColumn('kantor_cabang_id', function($user){
             	return $user->kantor_cabang->nama;
             })

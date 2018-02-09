@@ -65,6 +65,7 @@ class CreateAllTables extends Migration
             $table->date('tanggal_mulai');
             $table->date('tanggal_selesai');
             $table->string('keterangan')->nullable();
+            $table->boolean('status');
             $table->timestamps();
         });
 
@@ -88,6 +89,8 @@ class CreateAllTables extends Migration
         Schema::create('kelas_virtual', function (Blueprint $table) {
             $table->increments('id');
             $table->string('nama_kelas');
+            $table->string('keterangan')->nullable();
+            $table->enum('status', [0, 1, 5]);
             $table->integer('angkatan_diklat_id')->unsigned();
             $table->integer('mata_pelajaran_id')->unsigned();
             $table->integer('users_account_id')->unsigned(); //user dengan hak akses instruktur
@@ -96,6 +99,20 @@ class CreateAllTables extends Migration
             $table->foreign('angkatan_diklat_id')->references('id')->on('angkatan_diklat')->onDelete('cascade');
             $table->foreign('mata_pelajaran_id')->references('id')->on('mata_pelajaran')->onDelete('cascade');
             $table->foreign('users_account_id')->references('id')->on('users_account')->onDelete('cascade');
+        });
+
+        Schema::create('materi_pelajaran', function (Blueprint $table) {
+            $table->increments('id');
+            $table->string('judul_materi');
+            $table->string('keterangan')->nullable();
+            $table->integer('users_account_id')->unsigned(); //user dengan hak akses instruktur
+            $table->integer('mata_pelajaran_id')->unsigned();
+            $table->enum('jenis_file', ['pdf', 'ppt', 'video']);
+            $table->string('lokasi');
+            $table->timestamps();
+
+            $table->foreign('users_account_id')->references('id')->on('users_account')->onDelete('cascade');
+            $table->foreign('mata_pelajaran_id')->references('id')->on('mata_pelajaran')->onDelete('cascade');
         });
     }
 
@@ -114,5 +131,6 @@ class CreateAllTables extends Migration
         Schema::dropIfExists('mata_pelajaran');
         Schema::dropIfExists('angkatan_peserta');
         Schema::dropIfExists('kelas_virtual');
+        Schema::dropIfExists('materi_pelajaran');
     }
 }

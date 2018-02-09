@@ -36,4 +36,8 @@ class UserAccount extends Authenticatable
     public function kelas_virtual() {
         return $this->hasMany('App\Models\KelasVirtual', 'users_account_id', 'id');
     }
+
+    public function materi_pelajaran() {
+        return $this->hasMany('App\Models\MateriPelajaran', 'users_account_id', 'id');
+    }
 }
