@@ -16,7 +16,7 @@
             <a href="{{ route('getMataPelajaranPage') }}" class="list-group-item list-group-item-action"><i class="fa fa-edit"></i> Kelola Mata Pelajaran</a>
             <a href="{{ route('getVirtualClassPage') }}" class="list-group-item list-group-item-action"><i class="fa fa-edit"></i> Kelola Kelas Virtual</a>
         @elseif (Auth::user()->hak_akses->slug == 'instruktur')
-            <a href="#" class="list-group-item list-group-item-action"><i class="fa fa-gear"></i> Kelas Virtual</a>
+            <a href="{{ route('getVirtualClassListPage') }}" class="list-group-item list-group-item-action"><i class="fa fa-gear"></i> Kelas Virtual</a>
             <a href="{{ route('getMateriPage') }}" class="list-group-item list-group-item-action"><i class="fa fa-gear"></i> Materi</a>
             <a href="#" class="list-group-item list-group-item-action"><i class="fa fa-gear"></i> Forum Diskusi</a>
         @endif

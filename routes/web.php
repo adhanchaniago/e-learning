@@ -112,6 +112,13 @@ Route::group(['prefix' => 'instruktur', 'middleware' => ['instruktur']], functio
     Route::get('/materi', 'Instruktur\MateriController@getMateriPage')->name('getMateriPage');
     Route::get('/materi/data', 'Instruktur\MateriController@getDataMateri')->name('getDataMateri');
     Route::get('/materi/tambah', 'Instruktur\MateriController@getAddMateriPage')->name('getAddMateriPage');
+    Route::post('/materi/tambah', 'Instruktur\MateriController@postAddMateri')->name('postAddMateri');
+    Route::get('/materi/hapus/{id}', 'Instruktur\MateriController@getHapusMateriPage')->name('getHapusMateriPage');
+    Route::delete('/materi/hapus/{id}', 'Instruktur\MateriController@deleteHapusMateri')->name('deleteHapusMateri');
+    Route::get('/materi/download/{id}', 'Instruktur\MateriController@getDownloadMateri')->name('getDownloadMateri');
+
+    Route::get('/virtualclass/list', 'Instruktur\VirtualClassController@getVirtualClassListPage')->name('getVirtualClassListPage');
+    Route::get('/virtualclass/list/data', 'Instruktur\VirtualClassController@getDataVirtualClassList')->name('getDataVirtualClassList');
 
 });
 

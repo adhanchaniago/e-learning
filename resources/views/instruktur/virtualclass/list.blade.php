@@ -1,22 +1,20 @@
 @extends('template.default')
 
-@section('title', 'Materi Pelajaran')
+@section('title', 'Daftar Kelas Virtual')
 
 @section('content')
 
 <div class="card">
 	<div class="card-body">
-		<p class="category">Kelola Materi Pelajaran</p><hr>
-		<a href="{{ route('getAddMateriPage') }}" class="btn btn-green">TAMBAH MATERI PELAJARAN</a>
-		<hr>
-		<p><strong>Tabel Materi Pelajaran :</strong></p>
+		<p class="category">Daftar Kelas Virtual</p><hr>
 		<table id="tb-test" class="table table-bordered display responsive nowrap" width="100%" style="font-size: 12px;">
 			<thead>
 				<tr>
 					<th>ID</th>
-					<th>Judul Materi</th>
+					<th>Nama Kelas</th>
+					<th>Angkatan Diklat</th>
 					<th>Mata Pelajaran</th>
-					<th>Jenis File</th>
+					<th>Status</th>
 					<th>Keterangan</th>
 					<th>Aksi</th>
 				</tr>
@@ -43,21 +41,22 @@
 			$('#tb-test').DataTable({
 				processing: true,
 				serverSide: true,
-				ajax: '{!! route('getDataMateri') !!}',
+				ajax: '{!! route('getDataVirtualClassList') !!}',
 				columns: [
 					{ data: 'id', name: 'id' },
-					{ data: 'judul_materi', name: 'judul_materi' },
+					{ data: 'nama_kelas', name: 'nama_kelas' },
+					{ data: 'angkatan_diklat_id', name: 'angkatan_diklat_id' },
 					{ data: 'mata_pelajaran_id', name: 'mata_pelajaran_id' },
-					{ data: 'jenis_file', name: 'jenis_file' },
+					{ data: 'status', name: 'status' },
 					{ data: 'keterangan', name: 'keterangan' },
-					{ data: 'action', name: 'action' }
+					{ data: 'action', name: 'action' },
 				],
 				responsive: {
 					details: {
 						display: $.fn.dataTable.Responsive.display.modal( {
 							header: function ( row ) {
 								var data = row.data();
-								return 'Detail Materi Pelajaran';
+								return 'Detail Kelas Virtual';
 							}
 						}),
 						renderer: $.fn.dataTable.Responsive.renderer.tableAll( {
