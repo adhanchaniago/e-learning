@@ -99,7 +99,7 @@
 		});
 
 		$('#instruktur_id').select2({
-			placeholder: "Pilih Mata Pelajaran",
+			placeholder: "Pilih Nama Instruktur",
 			allowClear: true
 		});
 

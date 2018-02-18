@@ -114,6 +114,30 @@ class CreateAllTables extends Migration
             $table->foreign('users_account_id')->references('id')->on('users_account')->onDelete('cascade');
             $table->foreign('mata_pelajaran_id')->references('id')->on('mata_pelajaran')->onDelete('cascade');
         });
+
+        Schema::create('kelas_post', function (Blueprint $table) {
+            $table->increments('id');
+            $table->integer('users_account_id')->unsigned();
+            $table->integer('kelas_virtual_id')->unsigned();
+            $table->text('konten');
+            $table->boolean('sisipan')->default(0);
+            $table->string('lokasi_sisipan')->nullable();
+            $table->timestamps();
+
+            $table->foreign('users_account_id')->references('id')->on('users_account')->onDelete('cascade');
+            $table->foreign('kelas_virtual_id')->references('id')->on('kelas_virtual')->onDelete('cascade');
+        });
+
+        Schema::create('kelas_comment', function (Blueprint $table) {
+            $table->increments('id');
+            $table->integer('kelas_post_id')->unsigned();
+            $table->integer('users_account_id')->unsigned();
+            $table->text('konten');
+            $table->timestamps();
+
+            $table->foreign('kelas_post_id')->references('id')->on('kelas_post')->onDelete('cascade');
+            $table->foreign('users_account_id')->references('id')->on('users_account')->onDelete('cascade');
+        });
     }
 
     /**
@@ -132,5 +156,7 @@ class CreateAllTables extends Migration
         Schema::dropIfExists('angkatan_peserta');
         Schema::dropIfExists('kelas_virtual');
         Schema::dropIfExists('materi_pelajaran');
+        Schema::dropIfExists('kelas_post');
+        Schema::dropIfExists('kelas_comment');
     }
 }

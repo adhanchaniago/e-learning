@@ -119,6 +119,10 @@ Route::group(['prefix' => 'instruktur', 'middleware' => ['instruktur']], functio
 
     Route::get('/virtualclass/list', 'Instruktur\VirtualClassController@getVirtualClassListPage')->name('getVirtualClassListPage');
     Route::get('/virtualclass/list/data', 'Instruktur\VirtualClassController@getDataVirtualClassList')->name('getDataVirtualClassList');
+    Route::get('/virtualclass/main/{id}', 'Instruktur\VirtualClassController@getMainDataVirtualClassPage')->name('getMainDataVirtualClassPage');
+    Route::post('/virtualclass/ubahstat', 'Instruktur\VirtualClassController@postStatusVirtualClass')->name('postStatusVirtualClass');
+    Route::post('virtualclass/post', 'Instruktur\VirtualClassController@postKelasPost')->name('postKelasPost');
+    Route::post('virtualclass/comment', 'Instruktur\VirtualClassController@postKelasComment')->name('postKelasComment');
 
 });
 

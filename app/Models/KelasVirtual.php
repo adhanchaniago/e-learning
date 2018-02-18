@@ -24,4 +24,8 @@ class KelasVirtual extends Model
     {
     	return $this->belongsTo('App\Models\UserAccount', 'users_account_id', 'id');
     }
+
+    public function kelas_post() {
+        return $this->hasMany('App\Models\KelasPost', 'kelas_virtual_id', 'id');
+    }
 }

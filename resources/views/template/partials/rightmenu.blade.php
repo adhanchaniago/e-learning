@@ -1,4 +1,4 @@
-<div class="card">
+<div class="card top-card-green">
     <div class="card-body">
         <div class="text-center">
             <img src="{{ asset('vendor/now-ui-kit/img/default-avatar.png') }}" class="rounded-circle" height="150px">

@@ -40,4 +40,12 @@ class UserAccount extends Authenticatable
     public function materi_pelajaran() {
         return $this->hasMany('App\Models\MateriPelajaran', 'users_account_id', 'id');
     }
+
+    public function kelas_post() {
+        return $this->hasMany('App\Models\KelasPost', 'users_account_id', 'id');
+    }
+
+    public function kelas_comment() {
+        return $this->hasMany('App\Models\KelasComment', 'users_account_id', 'id');
+    }
 }
