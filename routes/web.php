@@ -1,22 +1,10 @@
 <?php
 
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| contains the "web" middleware group. Now create something great!
-|
-*/
-
 // Guest Section
 Route::get('/excel-reader', function(){
     return view('test.laravel-reader');
 });
 
-// Route::get('/', 'GuestController@getGuestHome')->name('getGuestHome');
 Route::get('/', function() {
 	return redirect()->route('getLoginPage');
 });
@@ -31,21 +19,29 @@ Route::group(['middleware' => ['guest']], function(){
 
 });
 
+// General Function
+
+Route::group(['middleware' => ['auth']], function() {
+
+    Route::get('/profil/ubah', 'General\ProfilController@getChangeProfilPage')->name('getChangeProfilPage');
+    Route::put('/profil/ubah', 'General\ProfilController@putChangeProfil')->name('putChangeProfil');
+    Route::get('/profil/foto', 'General\ProfilController@getChangeFotoPage')->name('getChangeFotoPage');
+    Route::put('/profil/foto', 'General\ProfilController@putChangeFoto')->name('putChangeFoto');
+
+    Route::get('/password/ubah', 'General\PasswordController@getChangePasswordPage')->name('getChangePasswordPage');
+    Route::put('/password/ubah', 'General\PasswordController@putChangePassword')->name('putChangePassword');
+
+});
+
 // Staff Section
 
-Route::group(['prefix' => 'staff', 'middleware' => ['staff']], function() {
+Route::group(['prefix' => 'staff', 'middleware' => ['auth', 'staff']], function() {
 
     Route::get('/', function() {
         return redirect()->route('getStaffHomePage');
     });
 
     Route::get('/home', 'Staff\MainController@getStaffHomePage')->name('getStaffHomePage');
-
-    Route::get('/profil/ubah', 'General\ProfilController@getChangeProfilPage')->name('getChangeProfilPage');
-    Route::put('/profil/ubah', 'General\ProfilController@putChangeProfil')->name('putChangeProfil');
-
-    Route::get('/password/ubah', 'General\PasswordController@getChangePasswordPage')->name('getChangePasswordPage');
-    Route::put('/password/ubah', 'General\PasswordController@putChangePassword')->name('putChangePassword');
 
     Route::get('/userakun', 'Staff\UserAkunController@getUserAkunPage')->name('getUserAkunPage');
     Route::get('/userakun/data', 'Staff\UserAkunController@getDataUserAkun')->name('getDataUserAkun');
@@ -95,19 +91,13 @@ Route::group(['prefix' => 'staff', 'middleware' => ['staff']], function() {
 
 // Instruktur Section
 
-Route::group(['prefix' => 'instruktur', 'middleware' => ['instruktur']], function() {
+Route::group(['prefix' => 'instruktur', 'middleware' => ['auth', 'instruktur']], function() {
 
     Route::get('/', function() {
         return redirect()->route('getInstrukturHomePage');
     });
 
     Route::get('/home', 'Instruktur\MainController@getInstrukturHomePage')->name('getInstrukturHomePage');
-
-    Route::get('/profil/ubah', 'General\ProfilController@getChangeProfilPage')->name('getChangeProfilPage');
-    Route::put('/profil/ubah', 'General\ProfilController@putChangeProfil')->name('putChangeProfil');
-
-    Route::get('/password/ubah', 'General\PasswordController@getChangePasswordPage')->name('getChangePasswordPage');
-    Route::put('/password/ubah', 'General\PasswordController@putChangePassword')->name('putChangePassword');
 
     Route::get('/materi', 'Instruktur\MateriController@getMateriPage')->name('getMateriPage');
     Route::get('/materi/data', 'Instruktur\MateriController@getDataMateri')->name('getDataMateri');
@@ -121,11 +111,28 @@ Route::group(['prefix' => 'instruktur', 'middleware' => ['instruktur']], functio
     Route::get('/virtualclass/list/data', 'Instruktur\VirtualClassController@getDataVirtualClassList')->name('getDataVirtualClassList');
     Route::get('/virtualclass/main/{id}', 'Instruktur\VirtualClassController@getMainDataVirtualClassPage')->name('getMainDataVirtualClassPage');
     Route::post('/virtualclass/ubahstat', 'Instruktur\VirtualClassController@postStatusVirtualClass')->name('postStatusVirtualClass');
-    Route::post('virtualclass/post', 'Instruktur\VirtualClassController@postKelasPost')->name('postKelasPost');
-    Route::post('virtualclass/comment', 'Instruktur\VirtualClassController@postKelasComment')->name('postKelasComment');
+    Route::post('/virtualclass/post', 'Instruktur\VirtualClassController@postKelasPost')->name('postKelasPost');
+    Route::post('/virtualclass/comment', 'Instruktur\VirtualClassController@postKelasComment')->name('postKelasComment');
 
 });
 
 // Peserta Section
+
+Route::group(['prefix' => 'peserta', 'middleware' => ['auth', 'peserta']], function() {
+
+    Route::get('/', function() {
+        return redirect()->route('getPesertaHomePage');
+    });
+
+    route::get('/home', 'Peserta\MainController@getPesertaHomePage')->name('getPesertaHomePage');
+
+    Route::get('/virtualclass/list', 'Peserta\VirtualClassController@getPVClassList')->name('getPVClassList');
+    Route::get('/virtualclass/main/{id}', 'Peserta\VirtualClassController@getMainPvClassList')->name('getMainPvClassList');
+    Route::post('/virtualclass/post', 'Peserta\VirtualClassController@postVClassPost')->name('postVClassPost');
+    Route::post('/virtualclass/comment', 'Peserta\VirtualClassController@postVClassComment')->name('postVClassComment');
+
+    Route::get('/materi', 'Peserta\VirtualClassController@getPMateriPage')->name('getPMateriPage');
+
+});
 
 // Pimpinan Section

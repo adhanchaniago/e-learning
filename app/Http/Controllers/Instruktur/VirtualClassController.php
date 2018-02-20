@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Instruktur;
 use App\Models\KelasVirtual;
 use App\Models\KelasPost;
 use App\Models\KelasComment;
+use App\Models\AngkatanPeserta;
 
 use Auth;
 use Pusher\Pusher;
@@ -61,11 +62,13 @@ class VirtualClassController extends Controller
     	$kelas = KelasVirtual::find($id);
         $listKelas = KelasVirtual::where('users_account_id', $user_id)->get();
         $posting = KelasPost::where('kelas_virtual_id', $id)->orderBy('created_at', 'desc')->paginate(5);
+        $anggota = AngkatanPeserta::where('angkatan_diklat_id', $kelas->angkatan_diklat_id)->get(); 
 
     	return view('instruktur.virtualclass.main', [
     		'kelas' => $kelas,
             'listKelas' => $listKelas,
-            'posting' => $posting
+            'posting' => $posting, 
+            'anggota' =>$anggota
     	]);
     }
 
@@ -103,6 +106,7 @@ class VirtualClassController extends Controller
         $posting = [
             'id' => $newPost->id,
             'nama' => $newPost->user_account->user_profil->nama,
+            'photo' => $newPost->user_account->user_profil->photo,
             'konten' => $newPost->konten,
             'waktu' => $waktu,
             'c_komen' => count(KelasComment::where('kelas_post_id', $newPost->id)->get()),
@@ -132,7 +136,9 @@ class VirtualClassController extends Controller
 
         $comment = [
             'id' => $newComment->id,
+            'post_id' => $newComment->kelas_post_id,
             'nama' => $newComment->user_account->user_profil->nama,
+            'photo' => $newComment->user_account->user_profil->photo,
             'konten' => $newComment->konten,
             'waktu' => $waktu,
         ];
@@ -143,6 +149,7 @@ class VirtualClassController extends Controller
 
         return response()->json([
             'success' => true,
+            'data' => $comment_json,
         ]);
     }
 

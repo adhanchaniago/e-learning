@@ -4,6 +4,8 @@ namespace App\Http\Controllers\General;
 
 use Auth;
 use Session;
+use Storage;
+use Carbon\Carbon;
 
 use App\Models\KantorCabang;
 use App\Models\UserProfil;
@@ -55,6 +57,38 @@ class ProfilController extends Controller
 
     	Session::flash('success', 'Profil berhasil diubah.');
     	return redirect()->back();
+    }
 
+    public function getChangeFotoPage()
+    {
+        return view('global.ubahfoto');
+    }
+
+    public function putChangeFoto(Request $request)
+    {
+        if ($request->hasFile('foto')) {
+            
+            $user_id = Auth::user()->id;
+            $filename = rand(11111,99999).'-'.$request->file('foto')->getClientOriginalName();
+            $extension = $request->file('foto')->getClientOriginalExtension();
+            $destinasi = 'public/profil';
+
+            $upload = $request->file('foto')->storeAs($destinasi, $filename);
+
+            if ($upload) {
+
+                $profil = UserProfil::find($user_id);
+                $profil->photo = $filename;
+                $profil->save();
+
+                Session::flash('success', 'Foto Profil berhasil diubah.');
+                return redirect()->back();
+
+            }
+
+        } else {
+            Session::flash('failure', 'Tidak ada file yang diinputkan.');
+            return redirect()->back();
+        }
     }
 }

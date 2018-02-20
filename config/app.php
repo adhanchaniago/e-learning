@@ -179,6 +179,7 @@ return [
 
         // Custom Vendor
         Yajra\Datatables\DatatablesServiceProvider::class,
+        Barryvdh\Elfinder\ElfinderServiceProvider::class,
 
     ],
 

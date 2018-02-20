@@ -27,7 +27,7 @@ class RedirectIfAuthenticated
                 } elseif ($hakAkses == 'instruktur') {
                     return redirect()->route('getInstrukturHomePage');
                 } elseif ($hakAkses == 'peserta') {
-                    dd('Hak Akses : Peserta');
+                    return redirect()->route('getPesertaHomePage');
                 } else {
                     return redirect()->route('getLogout');
                 }

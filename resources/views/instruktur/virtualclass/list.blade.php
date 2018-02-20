@@ -4,19 +4,11 @@
 
 @section('content')
 
-{{-- <div class="card">
-	<div class="card-body">
-		<p class="category">Daftar Kelas Virtual</p><hr>
-		<p>Silahkan pilih Kelas Virtual :</p>
-	</div>
-</div> --}}
-
 <ul class="list-unstyled">
 	@foreach ($listKelas as $kelas)
 		<div class="card">
 			<div class="card-body top-card-green">
 				<li class="media">
-					{{-- <img class="mr-3" src="{{ asset('img/vc-thumbnail.png') }}" alt="Generic placeholder image"> --}}
 					<div class="media-body">
 						<h5 class="mt-0 mb-1">
 							<a href="{{ route('getMainDataVirtualClassPage', $kelas->id) }}" class="cv-thumbnail-title">

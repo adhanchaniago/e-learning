@@ -102,8 +102,6 @@ class MateriController extends Controller
 
             }
 
-            dd($filefullpath);
-
         } else {
             Session::flash('failure', 'Tidak ada file yang diinputkan.');
             return redirect()->back();

@@ -68,14 +68,9 @@
 						<form action="" method="POST" id="post-form">
 							<div class="form-group">
 								<input type="hidden" id="kelas_id" name="kelas_id" value="{{ $kelas->id }}">
-								<textarea name="post-konten" id="post-konten" class="form-control" placeholder="Tulis kiriman anda disini." rows="3"></textarea>
+								<textarea name="post-konten" id="post-konten"></textarea>
 							</div>
 							<div class="form-group text-right">
-								<div class="pull-left">
-									<a href="" class="btn btn-sm btn-green btn-icon btn-icon-mini btn-round"><i class="fa fa-paperclip"></i></a> 
-									<a href="" class="btn btn-sm btn-green btn-icon btn-icon-mini btn-round"><i class="fa fa-file-text-o"></i></a>
-								</div>
-								<button type="reset" class="btn btn-sm btn-default">Reset</button>
 								<button type="submit" class="btn btn-green" id="post-submit">Kirim</button>
 							</div>
 						</form>
@@ -86,27 +81,47 @@
 						<div class="card" data-postid="{{ $value->id }}">
 					 		<div class="card-body" style="min-height: 50px;">
 					 			<div class="media">
-					 				<img class="mr-3" src="{!! asset('vendor/now-ui-kit/img/default-avatar.png') !!}" height="70px" width="70px"> 
+					 				<img class="mr-3 rounded-circle" src="{!! asset('storage/profil/'.$value->user_account->user_profil->photo) !!}" height="70px" width="70px"> 
 					 				<div class="media-body">
 					 					<p><a href="" class="cv-thumbnail-title"><strong>{{ $value->user_account->user_profil->nama }}</strong></a><p>
-										<p>{{ $value->konten }}</p>
+										<p>{!! $value->konten !!}</p>
 									</div>
 								</div>
 							</div>
 							<div class="card-footer">
 								<div class="text-right" style="font-size: 10pt">
-					 				<span class="pull-left">Komentar</span>
+					 				<span class="pull-left">{{ count($value->comment) }} Komentar</span>
 									<span>{{ $value->created_at->format("d M Y H:i") }}</span>
 								</div>
 					 		</div>
+					 		<div class="comment-area">
+					 			@if (count($value->comment) > 0)
+					 				@foreach ($value->comment->sortBy('created_at') as $element)
+										<div class="card-footer">
+											<div class="container">
+									 			<div class="media">
+													<img class="mr-3 rounded-circle" src="{{ asset('storage/profil/'.$element->user_account->user_profil->photo) }}" alt="Generic placeholder image" style="height: 50px; width: 50px;">
+													<div class="media-body">
+														<p style="font-size: 10pt;">
+															<a href="" class="cv-thumbnail-title"><strong>{{ $element->user_account->user_profil->nama }}</strong></a><small class="pull-right">{{ $element->created_at->format('d M Y H:i') }}</small> <br>
+															{{ $element->konten }}
+														</p>
+													</div>
+												</div>
+											</div>
+										</div>
+					 				@endforeach
+					 			@endif
+					 		</div>
 							<div class="card-footer">
-								<form action="" method="POST" id="comment-form">
+								<form action="" method="POST" class="comment-form">
 									<input type="hidden" id="post_id" value="{{ $value->id }}">
 					 				<input type="text" id="comment_konten" class="form-control" placeholder="Tulis komentar disini.">
 								</form>
 					 		</div>
 						</div>
 					@endforeach
+					{{ $posting->links() }}
 				</div>
 			</div>
 			<div class="tab-pane fade" id="tugas" role="tabpanel" aria-labelledby="tugas-tab">
@@ -126,7 +141,23 @@
 			<div class="tab-pane fade" id="anggota" role="tabpanel" aria-labelledby="anggota-tab">
 				<div class="card">
 					<div class="card-body" style="min-height: 50px;">
-						INI HALAMAN LIST ANGGOTA
+						<p class="category">{{ count($anggota)+1 }} Anggota</p><hr>
+						<div class="media">
+							<img class="align-self-center mr-3" src="{{ asset('storage/profil/'.$kelas->users_account->user_profil->photo) }}" height="100px" width="100px">
+							<div class="media-body">
+								<p><a href="" class="cv-thumbnail-title"><strong>{{ $kelas->users_account->user_profil->nama }}</strong></a><p>
+								Instruktur
+							</div>
+						</div><hr>
+						@foreach ($anggota as $peserta)
+							<div class="media">
+								<img class="align-self-center mr-3" src="{{ asset('storage/profil/'.$peserta->user_account->user_profil->photo) }}" height="100px" width="100px">
+								<div class="media-body">
+									<p><a href="" class="cv-thumbnail-title"><strong>{{ $peserta->user_account->user_profil->nama }}</strong></a><p>
+									Peserta
+								</div>
+							</div><hr>
+						@endforeach
 					</div>
 				</div>
 			</div>
@@ -137,8 +168,39 @@
 @endsection
 
 @push('script')
+
+	<script src="{{ asset('vendor/tinymce/jquery.tinymce.min.js') }}" type="text/javascript"></script>
+	<script src="{{ asset('vendor/tinymce/tinymce.min.js') }}" type="text/javascript"></script>
 	
 	<script>	
+
+		tinymce.init({
+			selector: '#post-konten',
+			height: 150,
+			theme: 'modern',
+			file_browser_callback : elFinderBrowser,
+			plugins: [
+				"advlist autolink lists link image charmap print preview anchor",
+				"searchreplace visualblocks code fullscreen",
+				"insertdatetime media table contextmenu paste imagetools wordcount"
+			],
+			toolbar: "insertfile undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image",
+		});
+
+		function elFinderBrowser (field_name, url, type, win) {
+			tinymce.activeEditor.windowManager.open({
+				file: '{!! route('elfinder.tinymce4') !!}',
+				title: 'elFinder 2.0',
+				width: 900,
+				height: 450,
+				resizable: 'yes'
+			}, {
+				setUrl: function (url) {
+					win.document.getElementById(field_name).value = url;
+				}
+			});
+			return false;
+		}
 
 		$(function() {
 
@@ -152,11 +214,12 @@
 			channel.bind('new-post', function(data) {
 				var newData = JSON.parse(data.data);
 				appendPost(newData);
+				location.reload();
 			});
 
 			channel.bind('new-comment', function(data) {
 				var newData = JSON.parse(data.data);
-				console.log(newData);
+				appendComment(newData);
 			})
 
 			function appendPost(post) {
@@ -164,10 +227,10 @@
 					return false;
 				}
 
-				var postBox = 	'<div class="card">';
+				var postBox = 	'<div class="card" id="new_add_section">';
 					postBox += 		'<div class="card-body" style="min-height: 50px;">';
 					postBox += 			'<div class="media">';
-					postBox += 				'<img class="mr-3" src="{!! asset('vendor/now-ui-kit/img/default-avatar.png') !!}" height="70px" width="70px">'; 
+					postBox += 				'<img class="mr-3 rounded-circle" src="/storage/profil/'+post.photo+'" height="70px"; width="70px";>'; 
 					postBox += 				'<div class="media-body">';
 					postBox += 					'<p><a href="" class="cv-thumbnail-title"><strong>'+post.nama+'</strong></a><p>';
 					postBox +=					'<p>'+post.konten+'</p>';
@@ -181,19 +244,73 @@
 					postBox +=			'</div>';
 					postBox += 		'</div>';
 					postBox +=		'<div class="card-footer">';
-					postBox +=			'<form action="" method="POST">';
-					postBox += 				'<input type="text" name="" class="form-control" placeholder="Tulis komentar disini.">';
+					postBox +=			'<form action="" method="POST" class="comment-form">';
+					postBox +=				'<input type="hidden" id="post_id" value="'+post.id+'">';
+					postBox += 					'<input type="text" id="comment_konten" class="form-control" placeholder="Tulis komentar disini.">';
+					postBox +=				'</div>'
 					postBox +=			'</form>';
 					postBox += 		'</div>';
 					postBox +=	'</div>';
 
 				$('.post-area').hide().prepend(postBox).fadeIn('slow');
+				$('#new_add_section').attr('data-postid', post.id);
+				$('.comment-form').bind('submit', function(event) {
+					var comBox = $(this).children('#comment_konten');
+					var postID = $(this).children('#post_id').val();
+					post_comment(event, comBox, postID);
+				});
 
 				return postBox;
 			}
 
-			function appendComment(comment) {
+			function post_comment(event, comBox, postID) {
+				event.preventDefault();
+				$.ajax({
+					url: '{!! route('postKelasComment') !!}',
+					method: 'POST',
+					dataType: 'json',
+					beforeSend: function() {
+						comBox.prop('disabled', 'disabled');
+					},
+					data: {
+						post_id: postID,
+						konten: comBox.val(),
+						_token: '{!! csrf_token() !!}'
+					},
+					success: function(data) {
+						comBox.val('');
+						comBox.removeAttr('disabled');
+					},
+					error: function(error) {
+						comBox.removeAttr('disabled');
+						alert('error');
+					}
+				});
+			}
 
+			function appendComment(comment) {
+				if(typeof comment.id == 'undefined' || comment.id <= 0) {
+					return false;
+				}
+
+				var commentBox = 	'<div class="card-footer">';
+					commentBox +=		'<div class="container">';
+					commentBox += 			'<div class="media">';
+					commentBox +=				'<img class="mr-3 rounded-circle" src="/storage/profil/'+comment.photo+'" alt="Generic placeholder image" style="height: 50px; width: 50px;">';
+					commentBox +=				'<div class="media-body">';
+					commentBox +=					'<p style="font-size: 10pt;">';
+					commentBox +=						'<a href="" class="cv-thumbnail-title"><strong>'+comment.nama+'</strong></a>';
+					commentBox +=						'<small class="pull-right">'+comment.waktu+'</small><br>';
+					commentBox +=						comment.konten;
+					commentBox +=					'</p>';
+					commentBox +=				'</div>';
+					commentBox +=			'</div>';
+					commentBox +=		'</div>'
+					commentBox +=	'</div>';
+
+				$('.card[data-postid="'+comment.post_id+'"]').children('.comment-area').hide().append(commentBox).fadeIn('slow');
+
+				return commentBox;
 			}
 
 			$('form#post-form').on('submit', function(event) {
@@ -221,15 +338,15 @@
 				});
 			});
 
-			$('form#comment-form').on('submit', function(event) {
+			$('.comment-form').on('submit', function(event) {
 				event.preventDefault();
-				// console.log($(this).children('#comment_konten').val());
+				var comBox = $(this).children('#comment_konten');
 				$.ajax({
 					url: '{!! route('postKelasComment') !!}',
 					method: 'POST',
 					dataType: 'json',
 					beforeSend: function() {
-						$('#comment_konten').prop('disabled', 'disabled');
+						comBox.prop('disabled', 'disabled');
 					},
 					data: {
 						post_id: $(this).children('#post_id').val(),
@@ -237,11 +354,11 @@
 						_token: '{!! csrf_token() !!}'
 					},
 					success: function(data) {
-						$('#comment_konten').val('');
-						$('#comment_konten').removeAttr('disabled');
+						comBox.val('');
+						comBox.removeAttr('disabled');
 					},
 					error: function(error) {
-						$('#comment_konten').removeAttr('disabled');
+						comBox.removeAttr('disabled');
 						alert('error');
 					}
 				});
