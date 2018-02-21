@@ -11,6 +11,7 @@ use App\Models\AngkatanPeserta;
 
 use Auth;
 use Session;
+use Storage;
 use Carbon\Carbon;
 use Yajra\Datatables\Datatables;
 use Illuminate\Http\Request;
@@ -138,6 +139,8 @@ class UserAkunController extends Controller
     		]);
     		$angkatanPeserta->save();
     	}
+
+        // Storage::makeDirectory('public/kelas/'.$userAkun->id, 0777);
 
     	Session::flash('success', 'User Akun berhasil ditambahkan.');
     	return redirect()->route('getUserAkunPage');

@@ -26,7 +26,7 @@ return array(
     |    ]
     */
     'disks' => [
-        'kelas'
+        // 'kelas'
     ],
 
     /*
@@ -40,7 +40,7 @@ return array(
 
     'route' => [
         'prefix' => 'elfinder',
-        'middleware' => NULL, //Set to null to disable middleware filter
+        'middleware' => 'App\Http\Middleware\FileBrowser',
     ],
 
     /*
@@ -64,7 +64,14 @@ return array(
     |
     */
 
-    'roots' => null,
+    'roots' => [
+        [
+            'driver' => 'LocalFileSystem',
+            'path' => storage_path('app/public/kelas/'),
+            'URL' => 'http://e-learning.test/storage/kelas/',
+            'alias' => 'USERNAME',
+        ]
+    ],
 
     /*
     |--------------------------------------------------------------------------

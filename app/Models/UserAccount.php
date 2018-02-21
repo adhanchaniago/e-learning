@@ -48,4 +48,12 @@ class UserAccount extends Authenticatable
     public function kelas_comment() {
         return $this->hasMany('App\Models\KelasComment', 'users_account_id', 'id');
     }
+
+    public function forum_post() {
+        return $this->hasMany('App\Models\ForumPost', 'users_account_id', 'id');
+    }
+
+    public function forum_comment() {
+        return $this->hasMany('App\Models\ForumComment', 'users_account_id', 'id');
+    }
 }

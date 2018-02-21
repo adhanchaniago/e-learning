@@ -2,6 +2,7 @@
 
 namespace App\Http\Middleware;
 
+use Config;
 use Auth;
 use Closure;
 

@@ -131,7 +131,9 @@ Route::group(['prefix' => 'peserta', 'middleware' => ['auth', 'peserta']], funct
     Route::post('/virtualclass/post', 'Peserta\VirtualClassController@postVClassPost')->name('postVClassPost');
     Route::post('/virtualclass/comment', 'Peserta\VirtualClassController@postVClassComment')->name('postVClassComment');
 
-    Route::get('/materi', 'Peserta\VirtualClassController@getPMateriPage')->name('getPMateriPage');
+    Route::get('/materi', 'Peserta\MateriController@getListPMateriPage')->name('getListPMateriPage');
+    Route::get('/materi/data', 'Peserta\MateriController@GetDataListPMateri')->name('GetDataListPMateri');
+    Route::get('/materi/download/{id}', 'Peserta\MateriController@getDownloadPMateri')->name('getDownloadPMateri');
 
 });
 

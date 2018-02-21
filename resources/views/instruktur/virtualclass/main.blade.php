@@ -190,7 +190,7 @@
 		function elFinderBrowser (field_name, url, type, win) {
 			tinymce.activeEditor.windowManager.open({
 				file: '{!! route('elfinder.tinymce4') !!}',
-				title: 'elFinder 2.0',
+				title: 'File Manager',
 				width: 900,
 				height: 450,
 				resizable: 'yes'

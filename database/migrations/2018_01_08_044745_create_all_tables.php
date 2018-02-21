@@ -138,6 +138,27 @@ class CreateAllTables extends Migration
             $table->foreign('kelas_post_id')->references('id')->on('kelas_post')->onDelete('cascade');
             $table->foreign('users_account_id')->references('id')->on('users_account')->onDelete('cascade');
         });
+
+        Schema::create('forum_post', function (Blueprint $table) {
+            $table->increments('id');
+            $table->integer('users_account_id')->unsigned();
+            $table->string('judul');
+            $table->text('konten');
+            $table->timestamps();
+
+            $table->foreign('users_account_id')->references('id')->on('users_account')->onDelete('cascade');
+        });
+
+        Schema::create('forum_comment', function (Blueprint $table) {
+            $table->increments('id');
+            $table->integer('forum_post_id')->unsigned();
+            $table->integer('users_account_id')->unsigned();
+            $table->text('konten');
+            $table->timestamps();
+
+            $table->foreign('forum_post_id')->references('id')->on('forum_post')->onDelete('cascade');
+            $table->foreign('users_account_id')->references('id')->on('users_account')->onDelete('cascade');
+        });
     }
 
     /**
@@ -158,5 +179,7 @@ class CreateAllTables extends Migration
         Schema::dropIfExists('materi_pelajaran');
         Schema::dropIfExists('kelas_post');
         Schema::dropIfExists('kelas_comment');
+         Schema::dropIfExists('forum_post');
+          Schema::dropIfExists('forum_comment');
     }
 }

@@ -17,6 +17,6 @@ class MateriPelajaran extends Model
     }
 
     public function users_account() {
-    	return $this->belongsTo('App\Models\UserAccount'. 'users_account_id', 'id');
+    	return $this->belongsTo('App\Models\UserAccount', 'users_account_id', 'id');
     }
 }

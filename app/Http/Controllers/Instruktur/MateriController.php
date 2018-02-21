@@ -27,7 +27,7 @@ class MateriController extends Controller
         return Datatables::of($materiPelajaran)
             ->addColumn('action', function ($materi) {
                 return '
-                    <a href="materi/download/'.$materi->id.'" class="btn btn-sm btn-success btn-icon btn-icon-mini btn-round"><i class="fa fa-download"></i></a>
+                    <a href="materi/download/'.$materi->id.'" class="btn btn-sm btn-green btn-icon btn-icon-mini btn-round"><i class="fa fa-download"></i></a>
                     <a href="materi/hapus/'.$materi->id.'" class="btn btn-sm btn-danger btn-icon btn-icon-mini btn-round"><i class="fa fa-trash"></i></a>
                 ';
             })
