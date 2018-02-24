@@ -18,12 +18,12 @@
         @elseif (Auth::user()->hak_akses->slug == 'instruktur')
             <a href="{{ route('getVirtualClassListPage') }}" class="list-group-item list-group-item-action"><i class="fa fa-gear"></i> Kelas Virtual</a>
             <a href="{{ route('getMateriPage') }}" class="list-group-item list-group-item-action"><i class="fa fa-gear"></i> Materi</a>
-            <a href="#" class="list-group-item list-group-item-action"><i class="fa fa-gear"></i> Forum Diskusi</a>
         @elseif (Auth::user()->hak_akses->slug == 'peserta')
             <a href="{{ route('getListPMateriPage') }}" class="list-group-item list-group-item-action"><i class="fa fa-gear"></i> Materi</a>
             <a href="{{ route('getPVClassList') }}" class="list-group-item list-group-item-action"><i class="fa fa-gear"></i> Kelas Virtual</a>
-            <a href="" class="list-group-item list-group-item-action"><i class="fa fa-gear"></i> Forum Diskusi</a>
         @endif
+        <a href="{{ route('getForumListPage') }}" class="list-group-item list-group-item-action"><i class="fa fa-gear"></i> Forum Diskusi</a>
+        <a href="{{ route('getLiveChatPage') }}" class="list-group-item list-group-item-action"><i class="fa fa-gear"></i> Live Chat</a>
         <a href="{{ route('getLogout') }}" class="list-group-item list-group-item-action"><i class="fa fa-sign-out"></i> Logout</a>
     </div>
 </div>

@@ -1,0 +1,134 @@
+.no-padding {
+    padding: 0;
+}
+
+.search-input {
+    border-radius: 30px;
+    border: 1px solid #E3E3E3;
+}
+
+.search-input:focus {
+    border: 1px solid #f96332;
+    border-radius: 30px;
+}
+
+.chat-left {
+    height: 470px;  
+    border: 1px solid #ededed;
+}
+
+.contact-list {
+    padding: 10px;
+    height: 400px;
+    overflow: auto;
+}
+
+.chat-search {
+    height: 70px;
+    padding: 10px;
+}
+
+.contact-list ul {
+    padding-left: 0;
+}
+
+.contact {
+    padding-left: 10px;
+    padding-right: 10px;
+    list-style-type: none;
+    height: 70px;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+}
+
+.contact:hover {
+    border-left: 5px solid #227856;
+    background: #ededed;
+}
+
+.foto-contact {
+    margin-right: 10px;
+}
+
+.nama-contact {
+    display: flex;
+    height: 40px;
+    align-items: center;
+}
+
+.chat-right {
+    border: 1px solid #ededed;
+    background: #ededed;
+    height: 470px;
+}
+
+.chat-head {
+    height: 50px;
+    width: 100%;
+    background: #ffffff;
+}
+
+.chat-body ul li {
+   display: inline-block;
+   clear: both;
+   float: left;
+   margin: 10px 10px 5px 10px;
+   width: calc(100% - 25px);
+   font-size: 0.9em;
+}
+
+.chat-body {
+    height: 370px;
+    overflow: auto;
+}
+
+.chat-body ul {
+    padding: 10px 0 0 0;
+}
+
+.chat-body ul li:nth-last-child(1) {
+  margin-bottom: 20px;
+}
+.chat-body ul li.sent img {
+  margin: 6px 8px 0 0;
+}
+.chat-body ul li.sent p {
+  background: #227856;
+  color: #ffffff;
+}
+.chat-body ul li.replies img {
+  float: right;
+  margin: 6px 0 0 8px;
+}
+.chat-body ul li.replies p {
+  background: #ffffff;
+  float: right;
+}
+.chat-body ul li img {
+  width: 22px;
+  border-radius: 50%;
+  float: left;
+}
+.chat-body ul li p {
+  display: inline-block;
+  padding: 10px 15px;
+  border-radius: 20px;
+  max-width: 250px;
+  line-height: 130%;
+}
+
+.chat-foot {
+    height: 50px;
+    width: 100%;
+    background: #fff;
+    position: absolute;
+    bottom: 0;
+}
+
+.chat-foot form input {
+    height: 50px;
+    border: none;
+    width: 100%;
+    padding: 5px 5px 5px 10px;
+}

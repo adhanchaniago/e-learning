@@ -31,6 +31,16 @@ Route::group(['middleware' => ['auth']], function() {
     Route::get('/password/ubah', 'General\PasswordController@getChangePasswordPage')->name('getChangePasswordPage');
     Route::put('/password/ubah', 'General\PasswordController@putChangePassword')->name('putChangePassword');
 
+    Route::get('/forum/list', 'General\ForumController@getForumListPage')->name('getForumListPage');
+    Route::get('/forum/tambah', 'General\ForumController@getAddForumPage')->name('getAddForumPage');
+    Route::post('/forum/tambah', 'General\ForumController@postAddForum')->name('postAddForum');
+    // Edit & Delete
+    Route::get('/forum/{id}', 'General\ForumController@getLihatForumPage')->name('getLihatForumPage');
+    Route::post('/forum/komen/tambah', 'General\ForumController@postForumComment')->name('postForumComment');
+
+    Route::get('/livechat', 'General\ChatController@getLiveChatPage')->name('getLiveChatPage');
+    Route::post('/livechat/carikontak', 'General\ChatController@gpostCariKontak')->name('gpostCariKontak');
+
 });
 
 // Staff Section

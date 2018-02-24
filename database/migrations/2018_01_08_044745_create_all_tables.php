@@ -120,8 +120,6 @@ class CreateAllTables extends Migration
             $table->integer('users_account_id')->unsigned();
             $table->integer('kelas_virtual_id')->unsigned();
             $table->text('konten');
-            $table->boolean('sisipan')->default(0);
-            $table->string('lokasi_sisipan')->nullable();
             $table->timestamps();
 
             $table->foreign('users_account_id')->references('id')->on('users_account')->onDelete('cascade');
