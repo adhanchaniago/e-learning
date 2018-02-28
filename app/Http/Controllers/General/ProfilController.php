@@ -91,4 +91,9 @@ class ProfilController extends Controller
             return redirect()->back();
         }
     }
+
+    public function getUserProfil($id)
+    {
+        dd('profil');
+    }
 }

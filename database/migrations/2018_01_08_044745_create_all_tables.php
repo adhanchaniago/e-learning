@@ -38,8 +38,8 @@ class CreateAllTables extends Migration
             $table->string('nik')->unique();
             $table->string('email')->unique();
             $table->string('nama');
-            $table->string('tempat_lahir');
-            $table->date('tanggal_lahir');
+            $table->string('tempat_lahir')->nullable();
+            $table->date('tanggal_lahir')->nullable();
             $table->enum('jenis_kelamin', ['Pria', 'Wanita']);
             $table->enum('agama', ['Islam', 'Katolik', 'Protestan', 'Hindu', 'Buddha'])->nullable();
             $table->text('alamat')->nullable();

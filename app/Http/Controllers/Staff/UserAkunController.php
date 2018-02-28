@@ -85,10 +85,7 @@ class UserAkunController extends Controller
     		'nik' => 'required|unique:users_profil',
     		'nama' => 'required',
     		'email' => 'required|email|unique:users_profil',
-    		'tempat_lahir' => 'required',
-    		'tanggal_lahir' => 'required|date',
     		'jenis_kelamin' => 'required',
-    		'agama' => 'required',
     		'kantor_cabang_id' => 'required',
     		'hak_akses_id' => 'required'
     	],[

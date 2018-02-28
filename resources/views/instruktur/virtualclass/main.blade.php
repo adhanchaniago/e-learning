@@ -80,7 +80,7 @@
 					 			<div class="media">
 					 				<img class="mr-3 rounded-circle" src="{!! asset('storage/profil/'.$value->user_account->user_profil->photo) !!}" height="70px" width="70px"> 
 					 				<div class="media-body">
-					 					<p><a href="" class="cv-thumbnail-title"><strong>{{ $value->user_account->user_profil->nama }}</strong></a><p>
+					 					<p><a href="{{ route('getUserProfil', [$value->user_account->id]) }}" class="cv-thumbnail-title" target="_blank"><strong>{{ $value->user_account->user_profil->nama }}</strong></a><p>
 										<p>{!! $value->konten !!}</p>
 									</div>
 								</div>
@@ -100,7 +100,7 @@
 													<img class="mr-3 rounded-circle" src="{{ asset('storage/profil/'.$element->user_account->user_profil->photo) }}" alt="Generic placeholder image" style="height: 50px; width: 50px;">
 													<div class="media-body">
 														<p style="font-size: 10pt;">
-															<a href="" class="cv-thumbnail-title"><strong>{{ $element->user_account->user_profil->nama }}</strong></a><small class="pull-right">{{ $element->created_at->format('d M Y H:i') }}</small> <br>
+															<a href="{{ route('getUserProfil', [$element->user_account->id]) }}" class="cv-thumbnail-title" target="_blank"><strong>{{ $element->user_account->user_profil->nama }}</strong></a><small class="pull-right">{{ $element->created_at->format('d M Y H:i') }}</small> <br>
 															{{ $element->konten }}
 														</p>
 													</div>
@@ -125,18 +125,38 @@
 				<div class="card">
 					<div class="card-body" style="min-height: 50px;">
 						<p>Tambah Tugas</p>
-						<form action="" method="post">
+						<form action="" method="post" class="tugas-form">
+							<input type="hidden" id="tugas_kelas_id" name="tugas_kelas_id" value="{{ $kelas->id }}">
 							<div class="form-group">
-								<input type="text" name="tugas_judul" placeholder="Judul Tugas" class="form-control">
+								<input type="text" name="tugas_judul" id="tugas_judul" placeholder="Judul Tugas" class="form-control">
 							</div>
 							<div class="form-group">
 								<textarea name="tugas_deskripsi" id="tugas-konten" class="form-control"></textarea>
 							</div>
 							<div class="form-group text-right">
-								<button type="submit" class="btn btn-green" id="post-submit">Tambah Tugas</button>
+								<button type="submit" class="btn btn-green">Tambah Tugas</button>
 							</div>
 						</form>
 					</div>
+				</div>
+				<div class="tugas-area">
+					@foreach ($tugas as $item)
+						<div class="card" data-id="{{ $item->id }}">
+							<div class="card-body" style="min-height: 50px;">
+								<div class="media">
+									<div class="media-body">
+										<a href="{{ route('getLihatDaftarJawaban', [$item->id]) }}" target="_blank"><h5 class="mt-0 mb-1 cv-thumbnail-title">{{ $item->judul }}</h5></a>
+										<p style="font-size: 8pt;">Pada : {{ $item->created_at->format('d M Y H:i') }}</p>
+										{!! $item->deskripsi !!}
+									</div>
+								</div>
+							</div>
+							<div class="card-footer">
+								{{ count($item->tugas_jawaban) }} Responden 
+								<span class="pull-right">{{ $item->created_at->format('d M Y H:i') }}</span>
+							</div>
+						</div>
+					@endforeach
 				</div>
 			</div>
 			<div class="tab-pane fade" id="anggota" role="tabpanel" aria-labelledby="anggota-tab">
@@ -234,7 +254,33 @@
 			channel.bind('new-comment', function(data) {
 				var newData = JSON.parse(data.data);
 				appendComment(newData);
-			})
+			});
+
+			channel.bind('new-tugas', function(data) {
+				var newData = JSON.parse(data.data);
+				appendTugas(newData);
+			});
+
+			function appendTugas(tugas) {
+				if(typeof tugas.id == 'undefined' || tugas.id <= 0) {
+					return false;
+				}
+
+				var tugasBox = 	'<div class="card" data-id="'+tugas.id+'">';
+					tugasBox +=		'<div class="card-body" style="min-height: 50px;">';
+					tugasBox +=			'<div class="media">';
+					tugasBox +=				'<div class="media-body">';
+					tugasBox +=					'<a href=""><h5 class="mt-0 mb-1 cv-thumbnail-title">'+tugas.judul+'</h5></a>';
+					tugasBox +=					'<p style="font-size: 8pt;">Pada : '+tugas.waktu+'</p>';
+					tugasBox +=					tugas.deskripsi;
+					tugasBox +=				'</div>';
+					tugasBox +=			'</div>';
+					tugasBox +=		'</div>';
+					tugasBox +=	'</div>';
+
+				$('.tugas-area').hide().prepend(tugasBox).fadeIn('slow');
+				return tugasBox;
+			}
 
 			function appendPost(post) {
 				if(typeof post.id == 'undefined' || post.id <= 0) {
@@ -374,6 +420,27 @@
 					error: function(error) {
 						comBox.removeAttr('disabled');
 						alert('error');
+					}
+				});
+			});
+
+			$('.tugas-form').on('submit', function(event) {
+				event.preventDefault();
+				$.ajax({
+					url: '{!! route('postNewTugas') !!}',
+					method: 'POST',
+					dataType: 'json',
+					data: {
+						kelas_id: $('#tugas_kelas_id').val(),
+						judul: $('#tugas_judul').val(),
+						deskripsi: $('#tugas-konten').val(),
+						_token: '{!! csrf_token() !!}'
+					},
+					success: function(data) {
+						$('.tugas-form')[0].reset();
+					},
+					error: function(error) {
+
 					}
 				});
 			});

@@ -27,8 +27,8 @@ class UserAkunSeeder extends Seeder
                 'created_at' => Carbon::now(),
                 'updated_at' => Carbon::now()
             ],[
-                'nama' => 'Asisten Manager',
-                'slug' => 'asmen',
+                'nama' => 'Pimpinan',
+                'slug' => 'pimpinan',
                 'deskripsi' => '',
                 'created_at' => Carbon::now(),
                 'updated_at' => Carbon::now()
@@ -51,17 +51,53 @@ class UserAkunSeeder extends Seeder
 
         DB::table('kantor_cabang')->insert([
             [
-                'nama' => 'Kantor Wilayah Medan',
-                'alamat' => 'Jl. Pegadaian No. 12 Medan - Sumatera Utara',
+                'nama' => 'KANWIL MEDAN',
+                'alamat' => 'Jl. Pegadaian No. 112, Medan - Sumatera Utara',
                 'telepon' => '0614567247'
             ],[
-                'nama' => 'Kantor Wilayah Pekanbaru',
-                'alamat' => 'Jl. Jend. Sudirman No. 167 A-B Pekanbaru - Riau',
+                'nama' => 'KANWIL BALIKPAPAN',
+                'alamat' => 'Jl. Jenderal Sudirman Stalkuda, Balikpapan - Riau',
+                'telepon' => '0542762002'
+            ],[
+                'nama' => 'KANWIL PEKANBARU',
+                'alamat' => 'Jl. Jend. Sudirman No. 167 A-B, Pekanbaru - Riau',
                 'telepon' => '076139195'
             ],[
-                'nama' => 'Kantor Wilayah Palembang',
-                'alamat' => 'Jl. Merdeka No. 11 Palembang - Sumatera Selatan',
+                'nama' => 'KANWIL PALEMBANG',
+                'alamat' => 'Jl. Merdeka No. 11, Palembang - Sumatera Selatan',
                 'telepon' => '0711361529'
+            ],[
+                'nama' => 'KANWIL JAKARTA 1',
+                'alamat' => 'Jl. Senen Raya No. 36, Jakarta Pusat - DKI Jakarta',
+                'telepon' => '0213505151'
+            ],[
+                'nama' => 'KANWIL MAKASSAR',
+                'alamat' => 'Ruko Kumala Raya A No. 76/78, Jl. Kumala Raya No. 76/78, Makassar - Sulawesi Selatan',
+                'telepon' => '0411856613/14'
+            ],[
+                'nama' => 'KANWIL BANDUNG',
+                'alamat' => 'Jl. Pugkur No. 125, Bandung - Jawa Barat',
+                'telepon' => '0224262280'
+            ],[
+                'nama' => 'KANWIL SURABAYA',
+                'alamat' => 'Jl. Dinoyotangsi, Surabaya - Jawa Timur',
+                'telepon' => '0315675294'
+            ],[
+                'nama' => 'KANWIL MANADO',
+                'alamat' => 'Jl. Dr.Soetomo No. 199, Manado - Sulawesi Utara',
+                'telepon' => '0431869262'
+            ],[
+                'nama' => 'KANWIL DENPASAR',
+                'alamat' => 'Jl. Raya Puputan No. 23.C, Denpasar - Bali',
+                'telepon' => '0361242011'
+            ],[
+                'nama' => 'KANWIL JAKARTA 2',
+                'alamat' => 'Jl. Pasar Senen, Jakarta Pusat - DKI Jakarta',
+                'telepon' => '0213450759'
+            ],[
+                'nama' => 'KANWIL SEMARANG',
+                'alamat' => 'Jl. Kimangun Sarkoro No. 7, Semarang - Jawa Tengah',
+                'telepon' => '0248415896'
             ]
         ]);
 
@@ -88,98 +124,11 @@ class UserAkunSeeder extends Seeder
             'agama' => 'Islam',
             'alamat' => 'Komplek Filano Mandiri Tabing Padang',
             'telepon' => '081268280648',
-            'photo' => '',
+            'photo' => 'admin.jpg',
             'kantor_cabang_id' => '2'
         ]);
 
         $userStaff->user_profil()->save($staffProfil);
-
-        // Insert Asmen Account
-
-        $userAsmen = new UserAccount([
-            'username' => 'asmen@e-learning.dev',
-            'password' => bcrypt('asmen1234'),
-            'hak_akses_id' => '2',
-            'status' => '1',
-            'created_at' => Carbon::now(),
-            'updated_at' => Carbon::now()
-        ]);
-
-        $userAsmen->save();
-
-        $asmenProfil = new UserProfil([
-            'nik' => 'P444353',
-            'email' => 'taslim.boy@gmail.com',
-            'nama' => 'Boy Taslim',
-            'tempat_lahir' => 'Padang',
-            'tanggal_lahir' => '1990-01-12',
-            'jenis_kelamin' => 'Pria',
-            'agama' => 'Islam',
-            'alamat' => 'Jl. Perintis Kemerdekaan No. 3 Padang',
-            'telepon' => '081132424422',
-            'photo' => '',
-            'kantor_cabang_id' => '2'
-        ]);
-
-        $userAsmen->user_profil()->save($asmenProfil);
-
-        // Insert Instruktur Account
-
-        $userInstruktur = new UserAccount([
-            'username' => 'instruktur@e-learning.dev',
-            'password' => bcrypt('instruktur1234'),
-            'hak_akses_id' => '3',
-            'status' => '1',
-            'created_at' => Carbon::now(),
-            'updated_at' => Carbon::now()
-        ]);
-
-        $userInstruktur->save();
-
-        $instruktruProfil = new UserProfil([
-            'nik' => 'P441212',
-            'email' => 'yes1234@gmail.com',
-            'nama' => 'Yesmaidar',
-            'tempat_lahir' => 'Pematang Siantar',
-            'tanggal_lahir' => '1980-11-03',
-            'jenis_kelamin' => 'Wanita',
-            'agama' => 'Islam',
-            'alamat' => 'Jl. Pemuda No. 1 Medan',
-            'telepon' => '081112344321',
-            'photo' => '',
-            'kantor_cabang_id' => '1'
-        ]);
-
-        $userInstruktur->user_profil()->save($instruktruProfil);
-
-        // Insert Peserta Account
-
-        $userPeserta = new UserAccount([
-            'username' => 'peserta@e-learning.dev',
-            'password' => bcrypt('peserta1234'),
-            'hak_akses_id' => '4',
-            'status' => '1',
-            'created_at' => Carbon::now(),
-            'updated_at' => Carbon::now()
-        ]);
-
-        $userPeserta->save();
-
-        $pesertaProfil = new UserProfil([
-            'nik' => 'P449890',
-            'email' => 'sibutar.butar12@gmail.com',
-            'nama' => 'Jhon Sibutarbutar',
-            'tempat_lahir' => 'Medan',
-            'tanggal_lahir' => '1989-09-30',
-            'jenis_kelamin' => 'Pria',
-            'agama' => 'Islam',
-            'alamat' => 'Jl. Jend. Sudirman No. 52 Padang',
-            'telepon' => '085243551123',
-            'photo' => '',
-            'kantor_cabang_id' => '1'
-        ]);
-
-        $userPeserta->user_profil()->save($pesertaProfil);
         
     }
 }

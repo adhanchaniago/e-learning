@@ -27,6 +27,7 @@ Route::group(['middleware' => ['auth']], function() {
     Route::put('/profil/ubah', 'General\ProfilController@putChangeProfil')->name('putChangeProfil');
     Route::get('/profil/foto', 'General\ProfilController@getChangeFotoPage')->name('getChangeFotoPage');
     Route::put('/profil/foto', 'General\ProfilController@putChangeFoto')->name('putChangeFoto');
+    Route::get('/profil/{id}', 'General\ProfilController@getUserProfil')->name('getUserProfil');
 
     Route::get('/password/ubah', 'General\PasswordController@getChangePasswordPage')->name('getChangePasswordPage');
     Route::put('/password/ubah', 'General\PasswordController@putChangePassword')->name('putChangePassword');
@@ -125,6 +126,9 @@ Route::group(['prefix' => 'instruktur', 'middleware' => ['auth', 'instruktur']],
     Route::post('/virtualclass/post', 'Instruktur\VirtualClassController@postKelasPost')->name('postKelasPost');
     Route::post('/virtualclass/comment', 'Instruktur\VirtualClassController@postKelasComment')->name('postKelasComment');
 
+    Route::post('/tugas/post', 'Instruktur\TugasController@postNewTugas')->name('postNewTugas');
+    Route::get('/tugas/{id}', 'Instruktur\TugasController@getLihatDaftarJawaban')->name('getLihatDaftarJawaban');
+
 });
 
 // Peserta Section
@@ -145,6 +149,8 @@ Route::group(['prefix' => 'peserta', 'middleware' => ['auth', 'peserta']], funct
     Route::get('/materi', 'Peserta\MateriController@getListPMateriPage')->name('getListPMateriPage');
     Route::get('/materi/data', 'Peserta\MateriController@GetDataListPMateri')->name('GetDataListPMateri');
     Route::get('/materi/download/{id}', 'Peserta\MateriController@getDownloadPMateri')->name('getDownloadPMateri');
+
+    Route::post('tugas/jawaban', 'Peserta\TugasController@postTugasJawaban')->name('postTugasJawaban');
 
 });
 

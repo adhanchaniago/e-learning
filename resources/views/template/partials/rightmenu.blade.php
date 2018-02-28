@@ -11,7 +11,7 @@
     <div class="list-group">
         <a href="/" class="list-group-item list-group-item-action"><i class="fa fa-home"></i> Beranda</a>
         @if (Auth::user()->hak_akses->slug == 'staff')
-            <a href="{{ route('getUserAkunPage') }}" class="list-group-item list-group-item-action"><i class="fa fa-edit"></i> Kelola User Akun</a>
+            <a href="{{ route('getUserAkunPage') }}" class="list-group-item list-group-item-action"><i class="fa fa-user"></i> Kelola User Akun</a>
             <a href="{{ route('getAngkatanDiklatPage') }}" class="list-group-item list-group-item-action"><i class="fa fa-edit"></i> Kelola Angkatan Diklat</a>
             <a href="{{ route('getMataPelajaranPage') }}" class="list-group-item list-group-item-action"><i class="fa fa-edit"></i> Kelola Mata Pelajaran</a>
             <a href="{{ route('getVirtualClassPage') }}" class="list-group-item list-group-item-action"><i class="fa fa-edit"></i> Kelola Kelas Virtual</a>

@@ -13,34 +13,6 @@ class AdditionalSeeder extends Seeder
      */
     public function run()
     {
-        
-    	DB::table('angkatan_diklat')->insert([
-            [
-                'nama_diklat' => 'Diklat Penaksir & Analisis Kredit Muda Angkatan XI Tahun 2017',
-                'tanggal_mulai' => '2017-03-07',
-                'tanggal_selesai' => '2017-04-29',
-                'keterangan' => '-',
-                'status' => 1,
-                'created_at' => Carbon::now(),
-                'updated_at' => Carbon::now()
-            ],[
-                'nama_diklat' => 'Pendidikan Dan Pelatihan Gadai Syariah',
-                'tanggal_mulai' => '2017-07-13',
-                'tanggal_selesai' => '2017-07-22',
-                'keterangan' => '-',
-                'status' => 1,
-                'created_at' => Carbon::now(),
-                'updated_at' => Carbon::now()
-            ],[
-                'nama_diklat' => 'Diklat Penaksir & Analisis Kredit Madya Angkatan II Tahun 2017',
-                'tanggal_mulai' => '2015-04-27',
-                'tanggal_selesai' => '2015-05-21',
-                'keterangan' => '-',
-                'status' => 1,
-                'created_at' => Carbon::now(),
-                'updated_at' => Carbon::now()
-            ]
-        ]);
 
         DB::table('mata_pelajaran')->insert([
             [
@@ -81,6 +53,31 @@ class AdditionalSeeder extends Seeder
             ],[
                 'slug' => 'PAS',
                 'nama_pelajaran' => 'Pegadaian Sistem Informasi Online',
+                'created_at' => Carbon::now(),
+                'updated_at' => Carbon::now()
+            ],[
+                'slug' => 'AK',
+                'nama_pelajaran' => 'Akuntansi dan Keuangan',
+                'created_at' => Carbon::now(),
+                'updated_at' => Carbon::now()
+            ],[
+                'slug' => 'BP',
+                'nama_pelajaran' => 'Budaya Perusahaan',
+                'created_at' => Carbon::now(),
+                'updated_at' => Carbon::now()
+            ],[
+                'slug' => 'SPP',
+                'nama_pelajaran' => 'Standar Pelayanan Pegadaian',
+                'created_at' => Carbon::now(),
+                'updated_at' => Carbon::now()
+            ],[
+                'slug' => 'PD',
+                'nama_pelajaran' => 'Personality Development',
+                'created_at' => Carbon::now(),
+                'updated_at' => Carbon::now()
+            ],[
+                'slug' => 'PMIS',
+                'nama_pelajaran' => 'Pemasaran Market Inteligen & Sales',
                 'created_at' => Carbon::now(),
                 'updated_at' => Carbon::now()
             ]

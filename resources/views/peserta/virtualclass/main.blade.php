@@ -46,9 +46,6 @@
 						<a class="nav-link" id="tugas-tab" data-toggle="tab" href="#tugas" role="tab" aria-controls="tugas" aria-selected="false">Tugas</a>
 					</li>
 					<li class="nav-item">
-						<a class="nav-link" id="polling-tab" data-toggle="tab" href="#polling" role="tab" aria-controls="polling" aria-selected="false">Polling</a>
-					</li>
-					<li class="nav-item">
 						<a class="nav-link" id="anggota-tab" data-toggle="tab" href="#anggota" role="tab" aria-controls="anggota" aria-selected="false">Anggota</a>
 					</li>
 				</ul>
@@ -120,17 +117,37 @@
 				</div>
 			</div>
 			<div class="tab-pane fade" id="tugas" role="tabpanel" aria-labelledby="tugas-tab">
-				<div class="card">
-					<div class="card-body" style="min-height: 50px;">
-						INI HALAMAN TUGAS
-					</div>
-				</div>
-			</div>
-			<div class="tab-pane fade" id="polling" role="tabpanel" aria-labelledby="polling-tab">
-				<div class="card">
-					<div class="card-body" style="min-height: 50px;">
-						INI HALAMAN POLLING
-					</div>
+				<div class="tugas-area">
+					@foreach ($tugas as $item)
+						<div class="card" data-id="{{ $item->id }}">
+							<div class="card-body" style="min-height: 50px;">
+								<div class="media">
+									<div class="media-body">
+										<a href="{{ route('getLihatDaftarJawaban', [$item->id]) }}" target="_blank"><h5 class="mt-0 mb-1 cv-thumbnail-title">{{ $item->judul }}</h5></a>
+										<p style="font-size: 8pt;">Pada : {{ $item->created_at->format('d M Y H:i') }}</p>
+										{!! $item->deskripsi !!}
+									</div>
+								</div>
+							</div>
+							<div class="card-footer">
+								{{ count($item->tugas_jawaban) }} Responden 
+								<span class="pull-right">{{ $item->created_at->format('d M Y H:i') }}</span>
+							</div>
+							<div class="card-footer">
+								Posting Jawaban : <br><br>
+								<form action="{{ route('postTugasJawaban') }}" method="post" enctype="multipart/form-data" class="tugas-jawaban-form">
+									<input type="hidden" name="_token" value="{{ csrf_token() }}">
+									<input type="hidden" name="tugas_id" value="{{ $item->id }}">
+									<div class="form-group">
+										<input type="file" class="form-control" name="file_tugas">
+									</div>
+									<div class="form-group text-right">
+										<input type="submit" class="btn btn-sm btn-green" value="Posting">
+									</div>
+								</form>
+							</div>
+						</div>
+					@endforeach
 				</div>
 			</div>
 			<div class="tab-pane fade" id="anggota" role="tabpanel" aria-labelledby="anggota-tab">

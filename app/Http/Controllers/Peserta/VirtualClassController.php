@@ -6,6 +6,7 @@ use App\Models\KelasVirtual;
 use App\Models\KelasPost;
 use App\Models\KelasComment;
 use App\Models\AngkatanPeserta;
+use App\Models\TugasPost;
 
 use Auth;
 use Pusher\Pusher;
@@ -32,12 +33,14 @@ class VirtualClassController extends Controller
     	$listKelas = KelasVirtual::where('angkatan_diklat_id', $kelas->angkatan_diklat_id)->get();
     	$posting = KelasPost::where('kelas_virtual_id', $id)->orderBy('created_at', 'desc')->paginate(5);
     	$anggota = AngkatanPeserta::where('angkatan_diklat_id', $kelas->angkatan_diklat_id)->get();
+        $tugas = TugasPost::where('kelas_virtual_id', $id)->orderBy('created_at', 'desc')->get();
 
     	return view('peserta.virtualclass.main', [
     		'kelas' => $kelas,
     		'listKelas' => $listKelas,
     		'posting' => $posting, 
-    		'anggota' => $anggota
+    		'anggota' => $anggota,
+            'tugas' => $tugas
     	]);
     }
 
