@@ -57,6 +57,16 @@
     align-items: center;
 }
 
+.foto-head {
+    margin-right: 10px;
+}
+
+.nama-head {
+    display: flex;
+    height: 40px;
+    align-items: center;
+}
+
 .chat-right {
     border: 1px solid #ededed;
     background: #ededed;
@@ -64,9 +74,12 @@
 }
 
 .chat-head {
-    height: 50px;
+    height: 60px;
     width: 100%;
     background: #ffffff;
+    display: flex;
+    align-items: center;
+    padding-left: 7px;
 }
 
 .chat-body ul li {

@@ -40,6 +40,7 @@ Route::group(['middleware' => ['auth']], function() {
 
     Route::get('/livechat', 'General\ChatController@getLiveChatPage')->name('getLiveChatPage');
     Route::post('/livechat/carikontak', 'General\ChatController@gpostCariKontak')->name('gpostCariKontak');
+    Route::post('/livechat/getchat', 'General\ChatController@postGetChat')->name('postGetChat');
 
 });
 

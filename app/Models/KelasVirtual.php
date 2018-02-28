@@ -28,4 +28,12 @@ class KelasVirtual extends Model
     public function kelas_post() {
         return $this->hasMany('App\Models\KelasPost', 'kelas_virtual_id', 'id');
     }
+
+    public function tugas_post() {
+        return $this->hasMany('App\Models\TugasPost', 'kelas_virtual_id', 'id');
+    }
+
+    public function reward_to() {
+        return $this->hasMany('App\Models\RewardTo', 'kelas_virtual_id', 'id');
+    }
 }

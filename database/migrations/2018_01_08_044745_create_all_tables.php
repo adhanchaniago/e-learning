@@ -157,6 +157,107 @@ class CreateAllTables extends Migration
             $table->foreign('forum_post_id')->references('id')->on('forum_post')->onDelete('cascade');
             $table->foreign('users_account_id')->references('id')->on('users_account')->onDelete('cascade');
         });
+
+        Schema::create('tugas_post', function (Blueprint $table) {
+            $table->increments('id');
+            $table->integer('kelas_virtual_id')->unsigned();
+            $table->string('judul');
+            $table->text('deskripsi');
+            $table->timestamps();
+
+            $table->foreign('kelas_virtual_id')->references('id')->on('kelas_virtual')->onDelete('cascade');
+        });
+
+        Schema::create('tugas_jawaban', function (Blueprint $table) {
+            $table->increments('id');
+            $table->integer('tugas_post_id')->unsigned();
+            $table->integer('users_account_id')->unsigned();
+            $table->string('file_tugas');
+            $table->string('keterangan');
+            $table->timestamps();
+
+            $table->foreign('tugas_post_id')->references('id')->on('tugas_post')->onDelete('cascade');
+            $table->foreign('users_account_id')->references('id')->on('users_account')->onDelete('cascade');
+        });
+
+        Schema::create('tugas_nilai', function (Blueprint $table) {
+            $table->increments('id');
+            $table->integer('tugas_jawaban_id')->unsigned();
+            $table->integer('nilai');
+            $table->timestamps();
+
+            $table->foreign('tugas_jawaban_id')->references('id')->on('tugas_jawaban')->onDelete('cascade');
+        });
+
+        Schema::create('polling_post', function (Blueprint $table) {
+            $table->increments('id');
+            $table->integer('users_account_id')->unsigned();
+            $table->string('judul');
+            $table->string('deskripsi');
+            $table->timestamps();
+
+            $table->foreign('users_account_id')->references('id')->on('users_account')->onDelete('cascade');
+        });
+
+        Schema::create('polling_detail', function (Blueprint $table) {
+            $table->increments('id');
+            $table->integer('polling_post_id')->unsigned();
+            $table->string('deskripsi');
+            $table->timestamps();
+
+            $table->foreign('polling_post_id')->references('id')->on('polling_post')->onDelete('cascade');
+        });
+
+        Schema::create('polling_hasil', function (Blueprint $table) {
+            $table->increments('id');
+            $table->integer('polling_detail_id')->unsigned();
+            $table->integer('users_account_id')->unsigned();
+            $table->timestamps();
+
+            $table->foreign('polling_detail_id')->references('id')->on('polling_detail')->onDelete('cascade');
+            $table->foreign('users_account_id')->references('id')->on('users_account')->onDelete('cascade');
+        });
+
+        Schema::create('reward_list', function (Blueprint $table) {
+            $table->increments('id');
+            $table->string('nama');
+            $table->string('keterangan');
+            $table->string('gambar');
+            $table->timestamps();
+        });
+
+        Schema::create('reward_to', function (Blueprint $table) {
+            $table->increments('id');
+            $table->integer('kelas_virtual_id')->unsigned();
+            $table->integer('users_account_id')->unsigned();
+            $table->integer('reward_list_id')->unsigned();
+            $table->timestamps();
+
+            $table->foreign('kelas_virtual_id')->references('id')->on('kelas_virtual')->onDelete('cascade');
+            $table->foreign('users_account_id')->references('id')->on('users_account')->onDelete('cascade');
+            $table->foreign('reward_list_id')->references('id')->on('reward_list')->onDelete('cascade');
+        });
+
+        Schema::create('chat_room', function (Blueprint $table) {
+            $table->increments('id');
+            $table->integer('users_one_id')->unsigned();
+            $table->integer('users_two_id')->unsigned();
+            $table->timestamps();
+
+            $table->foreign('users_one_id')->references('id')->on('users_account')->onDelete('cascade');
+            $table->foreign('users_two_id')->references('id')->on('users_account')->onDelete('cascade');
+        });
+
+        Schema::create('chat_message', function (Blueprint $table) {
+            $table->increments('id');
+            $table->integer('chat_room_id')->unsigned();
+            $table->integer('users_account_id')->unsigned();
+            $table->string('message');
+            $table->timestamps();
+
+            $table->foreign('chat_room_id')->references('id')->on('chat_room')->onDelete('cascade');
+            $table->foreign('users_account_id')->references('id')->on('users_account')->onDelete('cascade');
+        });
     }
 
     /**
@@ -177,7 +278,17 @@ class CreateAllTables extends Migration
         Schema::dropIfExists('materi_pelajaran');
         Schema::dropIfExists('kelas_post');
         Schema::dropIfExists('kelas_comment');
-         Schema::dropIfExists('forum_post');
-          Schema::dropIfExists('forum_comment');
+        Schema::dropIfExists('forum_post');
+        Schema::dropIfExists('forum_comment');
+        Schema::dropIfExists('tugas_post');
+        Schema::dropIfExists('tugas_jawaban');
+        Schema::dropIfExists('tugas_nilai');
+        Schema::dropIfExists('polling_post');
+        Schema::dropIfExists('polling_detail');
+        Schema::dropIfExists('polling_hasil');
+        Schema::dropIfExists('reward_list');
+        Schema::dropIfExists('reward_to');
+        Schema::dropIfExists('chat_room');
+        Schema::dropIfExists('chat_message');
     }
 }

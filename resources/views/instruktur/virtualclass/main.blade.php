@@ -52,9 +52,6 @@
 						<a class="nav-link" id="tugas-tab" data-toggle="tab" href="#tugas" role="tab" aria-controls="tugas" aria-selected="false">Tugas</a>
 					</li>
 					<li class="nav-item">
-						<a class="nav-link" id="polling-tab" data-toggle="tab" href="#polling" role="tab" aria-controls="polling" aria-selected="false">Polling</a>
-					</li>
-					<li class="nav-item">
 						<a class="nav-link" id="anggota-tab" data-toggle="tab" href="#anggota" role="tab" aria-controls="anggota" aria-selected="false">Anggota</a>
 					</li>
 				</ul>
@@ -127,14 +124,18 @@
 			<div class="tab-pane fade" id="tugas" role="tabpanel" aria-labelledby="tugas-tab">
 				<div class="card">
 					<div class="card-body" style="min-height: 50px;">
-						INI HALAMAN TUGAS
-					</div>
-				</div>
-			</div>
-			<div class="tab-pane fade" id="polling" role="tabpanel" aria-labelledby="polling-tab">
-				<div class="card">
-					<div class="card-body" style="min-height: 50px;">
-						INI HALAMAN POLLING
+						<p>Tambah Tugas</p>
+						<form action="" method="post">
+							<div class="form-group">
+								<input type="text" name="tugas_judul" placeholder="Judul Tugas" class="form-control">
+							</div>
+							<div class="form-group">
+								<textarea name="tugas_deskripsi" id="tugas-konten" class="form-control"></textarea>
+							</div>
+							<div class="form-group text-right">
+								<button type="submit" class="btn btn-green" id="post-submit">Tambah Tugas</button>
+							</div>
+						</form>
 					</div>
 				</div>
 			</div>
@@ -173,6 +174,19 @@
 	<script src="{{ asset('vendor/tinymce/tinymce.min.js') }}" type="text/javascript"></script>
 	
 	<script>	
+
+		tinymce.init({
+			selector: '#tugas-konten',
+			height: 150,
+			theme: 'modern',
+			file_browser_callback : elFinderBrowser,
+			plugins: [
+				"advlist autolink lists link image charmap print preview anchor",
+				"searchreplace visualblocks code fullscreen",
+				"insertdatetime media table contextmenu paste imagetools wordcount"
+			],
+			toolbar: "insertfile undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image",
+		});
 
 		tinymce.init({
 			selector: '#post-konten',

@@ -56,4 +56,32 @@ class UserAccount extends Authenticatable
     public function forum_comment() {
         return $this->hasMany('App\Models\ForumComment', 'users_account_id', 'id');
     }
+
+    public function tugas_jawaban() {
+        return $this->hasMany('App\Models\TugasJawaban', 'users_account_id', 'id');
+    }
+
+    public function polling_post() {
+        return $this->hasMany('App\Models\PollingPost', 'users_account_id', 'id');
+    }
+
+    public function polling_hasil() {
+        return $this->hasMany('App\Models\PollingHasil', 'users_account_id', 'id');
+    }
+
+    public function rewward_to() {
+        return $this->hasMany('App\Models\RewardTo', 'users_account_id', 'id');
+    }
+
+    public function chat_one() {
+        return $this->hasMany('App\Models\ChatRoom', 'users_one_id', 'id');
+    }
+
+    public function chat_two() {
+        return $this->hasMany('App\Models\ChatRoom', 'users_two_id', 'id');
+    }
+
+    public function chat_message() {
+        return $this->hasMany('App\Models\ChatMessage', 'users_account_id', 'id');
+    }
 }
