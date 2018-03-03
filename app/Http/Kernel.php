@@ -60,6 +60,7 @@ class Kernel extends HttpKernel
         'staff' => \App\Http\Middleware\Staff::class,
         'instruktur' => \App\Http\Middleware\Instruktur::class,
         'peserta' => \App\Http\Middleware\Peserta::class,
+        'pimpinan' => \App\Http\Middleware\Pimpinan::class,
         'throttle' => \Illuminate\Routing\Middleware\ThrottleRequests::class,
         'filebrowser' => \App\Http\Middleware\FileBrowser::class,
     ];

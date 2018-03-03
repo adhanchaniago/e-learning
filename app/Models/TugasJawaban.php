@@ -21,6 +21,6 @@ class TugasJawaban extends Model
     }
 
     public function tugas_nilai() {
-        return $this->hasMany('App\Models\TugasJawaban', 'tugas_jawaban_id', 'id');
+        return $this->hasMany('App\Models\TugasNilai', 'tugas_jawaban_id', 'id');
     }
 }

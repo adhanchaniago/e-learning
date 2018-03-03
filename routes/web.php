@@ -128,6 +128,9 @@ Route::group(['prefix' => 'instruktur', 'middleware' => ['auth', 'instruktur']],
 
     Route::post('/tugas/post', 'Instruktur\TugasController@postNewTugas')->name('postNewTugas');
     Route::get('/tugas/{id}', 'Instruktur\TugasController@getLihatDaftarJawaban')->name('getLihatDaftarJawaban');
+    Route::get('/tugas/jawaban/{id}', 'Instruktur\TugasController@getFileJawabanTugas')->name('getFileJawabanTugas');
+    Route::get('/tugas/nilai/{id}', 'Instruktur\TugasController@getBeriNilaiPage')->name('getBeriNilaiPage');
+    Route::post('/tugas/nilai/{id}', 'Instruktur\TugasController@postBeriNilaiTugas')->name('postBeriNilaiTugas');
 
 });
 
@@ -155,3 +158,16 @@ Route::group(['prefix' => 'peserta', 'middleware' => ['auth', 'peserta']], funct
 });
 
 // Pimpinan Section
+
+Route::group(['prefix' => 'pimpinan', 'middleware' => ['auth', 'pimpinan']], function() {
+
+    Route::get('/', function() {
+        return redirect()->route('getPimpinanHomePage');
+    });
+
+    Route::get('/home', 'Pimpinan\MainController@getPimpinanHomePage')->name('getPimpinanHomePage');
+    Route::get('/data/instruktur', 'Pimpinan\LaporanController@getDataInstrukturPage')->name('getDataInstrukturPage');
+    Route::get('/data/instruktur/get', 'Pimpinan\LaporanController@getDataInstruktur')->name('getDataInstruktur');
+    Route::get('/data/instruktur/pdf', 'Pimpinan\LaporanController@getPDFInstruktur')->name('getPDFInstruktur');
+
+});

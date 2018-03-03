@@ -28,6 +28,8 @@ class RedirectIfAuthenticated
                     return redirect()->route('getInstrukturHomePage');
                 } elseif ($hakAkses == 'peserta') {
                     return redirect()->route('getPesertaHomePage');
+                } elseif ($hakAkses == 'pimpinan') {
+                    return redirect()->route('getPimpinanHomePage');
                 } else {
                     return redirect()->route('getLogout');
                 }

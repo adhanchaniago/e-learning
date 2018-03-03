@@ -123,29 +123,41 @@
 							<div class="card-body" style="min-height: 50px;">
 								<div class="media">
 									<div class="media-body">
-										<a href="{{ route('getLihatDaftarJawaban', [$item->id]) }}" target="_blank"><h5 class="mt-0 mb-1 cv-thumbnail-title">{{ $item->judul }}</h5></a>
+										<a href="#" target="_blank"><h5 class="mt-0 mb-1 cv-thumbnail-title">{{ $item->judul }}</h5></a>
 										<p style="font-size: 8pt;">Pada : {{ $item->created_at->format('d M Y H:i') }}</p>
 										{!! $item->deskripsi !!}
 									</div>
 								</div>
 							</div>
-							<div class="card-footer">
-								{{ count($item->tugas_jawaban) }} Responden 
-								<span class="pull-right">{{ $item->created_at->format('d M Y H:i') }}</span>
-							</div>
-							<div class="card-footer">
-								Posting Jawaban : <br><br>
-								<form action="{{ route('postTugasJawaban') }}" method="post" enctype="multipart/form-data" class="tugas-jawaban-form">
-									<input type="hidden" name="_token" value="{{ csrf_token() }}">
-									<input type="hidden" name="tugas_id" value="{{ $item->id }}">
-									<div class="form-group">
-										<input type="file" class="form-control" name="file_tugas">
-									</div>
-									<div class="form-group text-right">
-										<input type="submit" class="btn btn-sm btn-green" value="Posting">
-									</div>
-								</form>
-							</div>
+							@if (count($tugas_jawaban = \App\Models\TugasJawaban::where('tugas_post_id', $item->id)->where('users_account_id', Auth::user()->id)->get()) == 0)
+								<div class="card-footer">Belum Dikerjakan</div>
+								<div class="card-body">
+									<p>Posting Tugas :</p>
+									<form action="{{ route('postTugasJawaban') }}" method="post" enctype="multipart/form-data" class="tugas-jawaban-form">
+										<input type="hidden" name="_token" value="{{ csrf_token() }}">
+										<input type="hidden" name="tugas_id" value="{{ $item->id }}">
+										<div class="form-group">
+											<input type="file" class="form-control" name="file_tugas" required>
+										</div>
+										<div class="form-group">
+											<input type="text" class="form-control" name="keterangan" placeholder="Keterangan" required>
+										</div>
+										<div class="form-group text-right">
+											<input type="submit" class="btn btn-sm btn-green" value="Posting">
+										</div>
+									</form>
+								</div>
+							@else
+								<div class="card-footer">
+									Sudah Dikerjakan
+									@if (count(\App\Models\TugasJawaban::where('tugas_post_id', $item->id)->where('users_account_id', Auth::user()->id)->first()->tugas_nilai) != 0)
+										<span class="pull-right">Nilai : {{ \App\Models\TugasJawaban::where('tugas_post_id', $item->id)->where('users_account_id', Auth::user()->id)->first()->tugas_nilai->first()->nilai }}/100</span>
+									@else
+										<span class="pull-right">Nilai : -/100</span>
+									@endif
+									
+								</div>
+							@endif
 						</div>
 					@endforeach
 				</div>

@@ -180,6 +180,7 @@ return [
         // Custom Vendor
         Yajra\Datatables\DatatablesServiceProvider::class,
         Barryvdh\Elfinder\ElfinderServiceProvider::class,
+        Barryvdh\DomPDF\ServiceProvider::class,
 
     ],
 
@@ -232,6 +233,7 @@ return [
 
         // Custom Vendor
         'Datatables' => Yajra\Datatables\Facades\Datatables::class,
+        'PDF' => Barryvdh\DomPDF\Facade::class,
 
     ],
 
