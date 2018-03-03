@@ -64,4 +64,14 @@ class LaporanController extends Controller
 
         return $pdf->stream('pdf/instruktur/xxx.pdf')->header('Content-Type','application/pdf');
     }
+
+    public function getListAngkatanDiklatPage()
+    {
+    	
+    }
+
+    public function getDataPesertaPage()
+    {
+
+    }
 }

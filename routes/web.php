@@ -166,8 +166,13 @@ Route::group(['prefix' => 'pimpinan', 'middleware' => ['auth', 'pimpinan']], fun
     });
 
     Route::get('/home', 'Pimpinan\MainController@getPimpinanHomePage')->name('getPimpinanHomePage');
+
     Route::get('/data/instruktur', 'Pimpinan\LaporanController@getDataInstrukturPage')->name('getDataInstrukturPage');
     Route::get('/data/instruktur/get', 'Pimpinan\LaporanController@getDataInstruktur')->name('getDataInstruktur');
     Route::get('/data/instruktur/pdf', 'Pimpinan\LaporanController@getPDFInstruktur')->name('getPDFInstruktur');
+
+    Route::get('/data/angkatandiklat', 'Pimpinan\LaporanController@getListAngkatanDiklatPage')->name('getListAngkatanDiklatPage');
+
+    // Route::get('/data/peserta', 'Pimpinan\LaporanController@getDataPesertaPage')->name('getDataPesertaPage');
 
 });
