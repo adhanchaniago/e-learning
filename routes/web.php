@@ -153,7 +153,10 @@ Route::group(['prefix' => 'peserta', 'middleware' => ['auth', 'peserta']], funct
     Route::get('/materi/data', 'Peserta\MateriController@GetDataListPMateri')->name('GetDataListPMateri');
     Route::get('/materi/download/{id}', 'Peserta\MateriController@getDownloadPMateri')->name('getDownloadPMateri');
 
-    Route::post('tugas/jawaban', 'Peserta\TugasController@postTugasJawaban')->name('postTugasJawaban');
+    Route::post('/tugas/jawaban', 'Peserta\TugasController@postTugasJawaban')->name('postTugasJawaban');
+
+    Route::get('/nilai', 'Peserta\NilaiController@getNilaiPage')->name('getNilaiPage');
+    Route::get('/nilai/pdf', 'Peserta\NilaiController@getPDFNilai')->name('getPDFPNilai');
 
 });
 
@@ -173,6 +176,11 @@ Route::group(['prefix' => 'pimpinan', 'middleware' => ['auth', 'pimpinan']], fun
 
     Route::get('/data/angkatandiklat', 'Pimpinan\LaporanController@getListAngkatanDiklatPage')->name('getListAngkatanDiklatPage');
 
-    // Route::get('/data/peserta', 'Pimpinan\LaporanController@getDataPesertaPage')->name('getDataPesertaPage');
+    Route::get('/data/peserta/{id}', 'Pimpinan\LaporanController@getDataPesertaPage')->name('getDataPesertaPage');
+    Route::get('/data/peserta/{id}/get', 'Pimpinan\LaporanController@getDataPeserta')->name('getDataPeserta');
+    Route::get('/data/peserta/{id}/pdf', 'Pimpinan\LaporanController@getPDFPeserta')->name('getPDFPeserta');
+
+    Route::get('/nilai/peserta/{id}', 'Pimpinan\LaporanController@getDataNilaiPage')->name('getDataNilaiPage');
+    Route::get('/nilai/peserta/{id}/pdf', 'Pimpinan\LaporanController@getPDFNilai')->name('getPDFNilai');
 
 });

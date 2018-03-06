@@ -7,7 +7,7 @@
 <ul class="list-unstyled">
 	@foreach ($listKelas as $kelas)
 		<div class="card">
-			<div class="card-body top-card-green">
+			<div class="card-body left-card-green">
 				<li class="media">
 					<div class="media-body">
 						<h5 class="mt-0 mb-1">
