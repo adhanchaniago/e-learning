@@ -13,6 +13,7 @@
 				@include('template.partials.formerror')
 				<form action="" method="post" enctype="multipart/form-data">
 					<input type="hidden" name="_token" value="{{ csrf_token() }}">
+					<input type="hidden" name="_method" value="PUT">
 					<div class="form-group row">
 						<label for="nama" class="col-sm-4 col-form-label">Nama Penghargaan</label>
 						<div class="col-sm-8">

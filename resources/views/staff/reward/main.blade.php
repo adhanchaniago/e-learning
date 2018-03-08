@@ -14,8 +14,8 @@
 			<thead>
 				<tr>
 					<th>ID</th>
-					<th>Kode</th>
-					<th>Nama Mata Pelajaran</th>
+					<th>Nama</th>
+					<th>Keterangan</th>
 					<th style="width: 15%">Aksi</th>
 				</tr>
 			</thead>
@@ -39,15 +39,15 @@
 	<script>
 		$(function(){
 			$('#tb-test').DataTable({
-				// processing: true,
-				// serverSide: true,
-				// ajax: '{!! route('getDataMataPelajaran') !!}',
-				// columns: [
-				// 	{ data: 'id', name: 'id' },
-				// 	{ data: 'slug', name: 'slug' },
-				// 	{ data: 'nama_pelajaran', name: 'nama_pelajaran' },
-				// 	{ data: 'action', name: 'action' }
-				// ],
+				processing: true,
+				serverSide: true,
+				ajax: '{!! route('getRewardData') !!}',
+				columns: [
+					{ data: 'id', name: 'id' },
+					{ data: 'nama', name: 'nama' },
+					{ data: 'keterangan', name: 'keterangan' },
+					{ data: 'action', name: 'action' }
+				],
 				responsive: {
 					details: {
 						display: $.fn.dataTable.Responsive.display.modal( {

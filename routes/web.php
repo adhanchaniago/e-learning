@@ -100,7 +100,10 @@ Route::group(['prefix' => 'staff', 'middleware' => ['auth', 'staff']], function(
     Route::delete('/virtualclass/hapus/{id}', 'Staff\VirtualClassController@deleteHapusVirtualClass')->name('deleteHapusVirtualClass');
 
     Route::get('/penghargaan', 'Staff\RewardController@getRewardPage')->name('getRewardPage');
+    Route::geT('/penghargaan/data', 'Staff\RewardController@getRewardData')->name('getRewardData');
     Route::get('/penghargaan/tambah', 'Staff\RewardController@getAddRewardPage')->name('getAddRewardPage');
+    Route::post('/penghargaan/tambah', 'Staff\RewardController@postAddReward')->name('postAddReward');
+    Route::get('/penghargaan/ubah/{id}', 'Staff\RewardController@getUbahRewardPage')->name('getUbahRewardPage');
 
 });
 
