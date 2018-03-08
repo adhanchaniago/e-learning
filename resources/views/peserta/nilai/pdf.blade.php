@@ -138,7 +138,7 @@
 	<div class="footer text-center">
 		<p>Padang, {{ date('d M Y') }} <br>Asmen Operasional Diklat</p>
 		<br><br>
-		<p>{{ $pimpinan->nama }} <br>NIK. {{ $pimpinan->nik }}</p>
+		<p><u>{{ $pimpinan->nama }}</u> <br>NIK. {{ $pimpinan->nik }}</p>
 	</div>
 </body>
 </html>

@@ -30,9 +30,8 @@
                             <input type="hidden" name="_token" value="{{ csrf_token() }}">
                             <div class="header header-primary text-center">
                                 <div class="logo-container">
-                                    <img src="{{ asset('vendor/now-ui-kit/img/now-logo.png') }}" alt="">
+                                    <img src="{{ asset('img/pegadaian-logo.png') }}" alt="">
                                 </div>
-                                <p>E-Learning Diklat <br> PT. Pegadaian (Persero) Padang</p>
                             </div>
                             <div class="content">
                                 <div class="input-group form-group-no-border input-lg">
@@ -49,7 +48,7 @@
                                 </div>
                             </div>
                             <div class="footer text-center">
-                                <button type="submit" class="btn btn-primary btn-round btn-lg btn-block">Masuk</button>
+                                <button type="submit" class="btn btn-default btn-round btn-lg btn-block">Masuk</button>
                             </div>
                             <div class="pull-right">
                                 <h6>

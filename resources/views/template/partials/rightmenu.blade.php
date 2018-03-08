@@ -15,6 +15,7 @@
             <a href="{{ route('getAngkatanDiklatPage') }}" class="list-group-item list-group-item-action"><i class="fa fa-tags"></i> Kelola Angkatan Diklat</a>
             <a href="{{ route('getMataPelajaranPage') }}" class="list-group-item list-group-item-action"><i class="fa fa-book"></i> Kelola Mata Pelajaran</a>
             <a href="{{ route('getVirtualClassPage') }}" class="list-group-item list-group-item-action"><i class="fa fa-institution"></i> Kelola Kelas Virtual</a>
+            <a href="{{ route('getRewardPage') }}" class="list-group-item list-group-item-action"><i class="fa fa-id-badge"></i> Kelola Penghargaan</a>
         @elseif (Auth::user()->hak_akses->slug == 'instruktur')
             <a href="{{ route('getMateriPage') }}" class="list-group-item list-group-item-action"><i class="fa fa-file-text"></i> Materi</a>
             <a href="{{ route('getVirtualClassListPage') }}" class="list-group-item list-group-item-action"><i class="fa fa-institution"></i> Kelas Virtual</a>

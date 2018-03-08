@@ -99,6 +99,9 @@ Route::group(['prefix' => 'staff', 'middleware' => ['auth', 'staff']], function(
     Route::get('/virtualclass/hapus/{id}', 'Staff\VirtualClassController@getHapusVirtualClassPage')->name('getHapusVirtualClassPage');
     Route::delete('/virtualclass/hapus/{id}', 'Staff\VirtualClassController@deleteHapusVirtualClass')->name('deleteHapusVirtualClass');
 
+    Route::get('/penghargaan', 'Staff\RewardController@getRewardPage')->name('getRewardPage');
+    Route::get('/penghargaan/tambah', 'Staff\RewardController@getAddRewardPage')->name('getAddRewardPage');
+
 });
 
 // Instruktur Section
