@@ -36,7 +36,7 @@
 						<div class="col-md-4"></div>
 						<div class="col-sm-8">
 							<button type="submit" class="btn btn-green">Tambah Penghargaan</button>
-							<a href="{{ route('getAddRewardPage') }}" class="btn btn-default">Batal</a>
+							<a href="{{ route('getRewardPage') }}" class="btn btn-default">Batal</a>
 						</div>
 					</div>
 				</form>

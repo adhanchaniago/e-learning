@@ -9,6 +9,7 @@ use Carbon\Carbon;
 
 use App\Models\KantorCabang;
 use App\Models\UserProfil;
+use App\Models\UserAccount;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -94,6 +95,10 @@ class ProfilController extends Controller
 
     public function getUserProfil($id)
     {
-        dd('profil');
+        $profil = UserAccount::find($id);
+
+        return view('global.profil', [
+            'profil' => $profil
+        ]);
     }
 }

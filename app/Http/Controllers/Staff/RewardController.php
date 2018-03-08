@@ -72,5 +72,33 @@ class RewardController extends Controller
     public function getUbahRewardPage($id)
     {
     	$reward = RewardList::find($id);
+
+    	return view('staff.reward.edit', [
+    		'reward' => $reward
+    	]);
+    }
+
+    public function putUbahReward($id, Request $request)
+    {
+    	$this->validate($request, [
+    		'id' => 'required'
+    	]);
+    	$reward = RewardList::find($request->id);
+    	$reward->nama = $request->nama;
+    	$reward->keterangan = $request->keterangan;
+    	if ($request->hasFile('gambar')) {
+    		$filename = str_slug($request->nama, '-').'.'.$request->file('gambar')->getClientOriginalExtension();
+	    	$destinasi = 'public/reward';
+	    	$upload = $request->file('gambar')->storeAs($destinasi, $filename);
+	    	if ($upload) {
+	    		$reward->gambar = $filename;
+	    		$reward->save();
+	    		Session::flash('success', 'Penghargaan berhasil dirubah.');
+	    		return redirect()->route('getRewardPage');
+	    	}
+    	}
+    	$reward->save();
+    	Session::flash('success', 'Penghargaan berhasil dirubah.');
+    	return redirect()->route('getRewardPage');
     }
 }

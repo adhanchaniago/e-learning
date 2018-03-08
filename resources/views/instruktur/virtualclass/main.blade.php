@@ -174,8 +174,9 @@
 							<div class="media">
 								<img class="align-self-center mr-3" src="{{ asset('storage/profil/'.$peserta->user_account->user_profil->photo) }}" height="100px" width="100px">
 								<div class="media-body">
-									<p><a href="" class="cv-thumbnail-title"><strong>{{ $peserta->user_account->user_profil->nama }}</strong></a><p>
-									Peserta
+									<p><a href="{{ route('getUserProfil', [$peserta->user_account->id]) }}" target="_blank" class="cv-thumbnail-title"><strong>{{ $peserta->user_account->user_profil->nama }}</strong></a><p>
+									Peserta <br><br>
+									<a href="{{ route('getPutRewardBadge', [$peserta->user_account->id, $kelas->id]) }}" class="text-green" target="_blank"><i class="fa fa-id-badge"> Beri Penghargaan</i></a>
 								</div>
 							</div><hr>
 						@endforeach

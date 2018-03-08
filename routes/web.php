@@ -100,10 +100,11 @@ Route::group(['prefix' => 'staff', 'middleware' => ['auth', 'staff']], function(
     Route::delete('/virtualclass/hapus/{id}', 'Staff\VirtualClassController@deleteHapusVirtualClass')->name('deleteHapusVirtualClass');
 
     Route::get('/penghargaan', 'Staff\RewardController@getRewardPage')->name('getRewardPage');
-    Route::geT('/penghargaan/data', 'Staff\RewardController@getRewardData')->name('getRewardData');
+    Route::get('/penghargaan/data', 'Staff\RewardController@getRewardData')->name('getRewardData');
     Route::get('/penghargaan/tambah', 'Staff\RewardController@getAddRewardPage')->name('getAddRewardPage');
     Route::post('/penghargaan/tambah', 'Staff\RewardController@postAddReward')->name('postAddReward');
     Route::get('/penghargaan/ubah/{id}', 'Staff\RewardController@getUbahRewardPage')->name('getUbahRewardPage');
+    Route::put('/penghargaan/ubah/{id}', 'Staff\RewardController@putUbahReward')->name('putUbahReward');
 
 });
 
@@ -137,6 +138,9 @@ Route::group(['prefix' => 'instruktur', 'middleware' => ['auth', 'instruktur']],
     Route::get('/tugas/jawaban/{id}', 'Instruktur\TugasController@getFileJawabanTugas')->name('getFileJawabanTugas');
     Route::get('/tugas/nilai/{id}', 'Instruktur\TugasController@getBeriNilaiPage')->name('getBeriNilaiPage');
     Route::post('/tugas/nilai/{id}', 'Instruktur\TugasController@postBeriNilaiTugas')->name('postBeriNilaiTugas');
+
+    Route::get('/reward/put/{id}/{kelas}', 'Instruktur\RewardController@getPutRewardBadge')->name('getPutRewardBadge');
+    Route::post('/reward/put/{id}/{kelas}', 'Instruktur\RewardController@postPutReward')->name('postPutReward');
 
 });
 

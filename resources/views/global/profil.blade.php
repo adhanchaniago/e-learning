@@ -1,11 +1,12 @@
 @extends('template.default')
 
-@section('title', 'Instruktur Home')
+@section('title', 'Profil')
 
 @section('content')
 
 <div class="card">
 	<div class="card-body">
+		<h5 class="category">User Profil</h5><hr>
 		<p class="category">Biodata Diri</p>
 		<div class="row">
 			<div class="col-md-8">
@@ -47,6 +48,9 @@
 						<td><p>{{ $profil->user_profil->email }}</p></td>
 					</tr>
 				</table>	
+			</div>		
+			<div class="col-md-4 text-right">
+				<img src="{{ asset('storage/profil/'.$profil->user_profil->photo) }}" width="200px">
 			</div>
 		</div>
 		<p class="category">Cabang Asal</p>
