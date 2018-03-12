@@ -84,4 +84,8 @@ class UserAccount extends Authenticatable
     public function chat_message() {
         return $this->hasMany('App\Models\ChatMessage', 'users_account_id', 'id');
     }
+
+    public function test_counter() {
+        return $this->hasMany('App\Models\TestCounter', 'users_account_id', 'id');
+    }
 }

@@ -8,6 +8,7 @@ use App\Models\UserProfil;
 use App\Models\KantorCabang;
 use App\Models\AngkatanDiklat;
 use App\Models\AngkatanPeserta;
+use App\Models\TestCounter;
 
 use Auth;
 use Session;
@@ -135,6 +136,13 @@ class UserAkunController extends Controller
     			'users_account_id' => $userAkun->id
     		]);
     		$angkatanPeserta->save();
+
+            $testCounter = new TestCounter([
+                'users_account_id' => $userAkun->id,
+                'pre_test_count' => 0,
+                'pos_test_count' => 0
+            ]);
+            $testCounter->save();
     	}
 
         // Storage::makeDirectory('public/kelas/'.$userAkun->id, 0777);

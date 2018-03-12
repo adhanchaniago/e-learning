@@ -142,6 +142,12 @@ Route::group(['prefix' => 'instruktur', 'middleware' => ['auth', 'instruktur']],
     Route::get('/reward/put/{id}/{kelas}', 'Instruktur\RewardController@getPutRewardBadge')->name('getPutRewardBadge');
     Route::post('/reward/put/{id}/{kelas}', 'Instruktur\RewardController@postPutReward')->name('postPutReward');
 
+    Route::get('/pretest/tambah/{id}', 'Instruktur\PretestController@getTambahPretestPage')->name('getTambahPretestPage');
+    Route::post('/pretest/tambah/{id}', 'Instruktur\PretestController@postTambahPretest')->name('postTambahPretest');
+    Route::get('/pretest/jawaban/list/{id}', 'Instruktur\PretestController@getListJawabanPretest')->name('getListJawabanPretest');
+    Route::get('/pretest/jawaban/detail/{kelas}/{user}', 'Instruktur\PretestController@getDetailJawabanPretest')->name('getDetailJawabanPretest');
+    Route::post('/pretest/jawaban/detail/{kelas}/{user}', 'Instruktur\PretestController@postNilaiPretest')->name('postNilaiPretest');
+
 });
 
 // Peserta Section
@@ -167,6 +173,14 @@ Route::group(['prefix' => 'peserta', 'middleware' => ['auth', 'peserta']], funct
 
     Route::get('/nilai', 'Peserta\NilaiController@getNilaiPage')->name('getNilaiPage');
     Route::get('/nilai/pdf', 'Peserta\NilaiController@getPDFNilai')->name('getPDFPNilai');
+
+});
+
+Route::group(['prefix' => 'pretest', 'middleware' => ['auth']], function() {
+
+    Route::get('/list', 'Peserta\PretestController@getPreTestList')->name('getPreTestList');
+    Route::get('/soal/{id}', 'Peserta\PretestController@getPretestSoal')->name('getPretestSoal');
+    Route::post('/soal/{id}', 'Peserta\PretestController@postPretestSoal')->name('postPretestSoal');
 
 });
 

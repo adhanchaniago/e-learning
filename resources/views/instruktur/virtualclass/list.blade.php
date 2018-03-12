@@ -25,7 +25,7 @@
 						<span class="badge badge-default">{{ $kelas->mata_pelajaran->nama_pelajaran }}</span> 
 						<br><br>
 						<p>{{ $kelas->keterangan }}</p>
-						<p class="cv-thumbnail-foot"><strong>{{ $kelas->angkatan_diklat->nama_diklat }}</strong></p>
+						<p class="cv-thumbnail-foot"><strong>{{ $kelas->angkatan_diklat->nama_diklat }}</strong> | <a href="{{ route('getTambahPretestPage', [$kelas->id]) }}">PRE-TEST</a> | <a href="">POST-TEST</a></p>
 					</div>
 				</li>
 			</div>

@@ -35,7 +35,7 @@ class CreateAllTables extends Migration
 
         Schema::create('users_profil', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('nik')->unique();
+            $table->integer('nik')->unique();
             $table->string('email')->unique();
             $table->string('nama');
             $table->string('tempat_lahir')->nullable();
@@ -258,6 +258,77 @@ class CreateAllTables extends Migration
             $table->foreign('chat_room_id')->references('id')->on('chat_room')->onDelete('cascade');
             $table->foreign('users_account_id')->references('id')->on('users_account')->onDelete('cascade');
         });
+
+        Schema::create('test_counter', function (Blueprint $table) {
+            $table->increments('id');
+            $table->integer('users_account_id')->unsigned();
+            $table->integer('pre_test_count');
+            $table->integer('pos_test_count');
+            $table->timestamps();
+
+            $table->foreign('users_account_id')->references('id')->on('users_account')->onDelete('cascade');
+        });
+
+        Schema::create('pre_test', function (Blueprint $table) {
+            $table->increments('id');
+            $table->integer('kelas_virtual_id')->unsigned();
+            $table->timestamps();
+
+            $table->foreign('kelas_virtual_id')->references('id')->on('kelas_virtual')->onDelete('cascade');
+        });
+
+        Schema::create('pretest_soal', function (Blueprint $table) {
+            $table->increments('id');
+            $table->integer('pre_test_id')->unsigned();
+            $table->enum('jenis_soal', ['objektif', 'essay']);
+            $table->string('soal');
+            $table->string('opsi_a')->nullable();
+            $table->string('opsi_b')->nullable();
+            $table->string('opsi_c')->nullable();
+            $table->string('opsi_d')->nullable();
+            $table->timestamps();
+
+            $table->foreign('pre_test_id')->references('id')->on('pre_test')->onDelete('cascade');
+        });
+
+        Schema::create('pretest_jawaban', function(Blueprint $table) {
+            $table->increments('id');
+            $table->integer('users_account_id')->unsigned();
+            $table->integer('pretest_soal_id')->unsigned();
+            $table->string('jawaban');
+            $table->integer('nilai');
+        });
+
+        Schema::create('post_test', function (Blueprint $table) {
+            $table->increments('id');
+            $table->integer('kelas_virtual_id')->unsigned();
+            $table->timestamps();
+
+            $table->foreign('kelas_virtual_id')->references('id')->on('kelas_virtual')->onDelete('cascade');
+        });
+
+        Schema::create('posttest_soal', function (Blueprint $table) {
+            $table->increments('id');
+            $table->integer('post_test_id')->unsigned();
+            $table->enum('jenis_soal', ['objektif', 'essay']);
+            $table->string('soal');
+            $table->string('opsi_a')->nullable();
+            $table->string('opsi_b')->nullable();
+            $table->string('opsi_c')->nullable();
+            $table->string('opsi_d')->nullable();
+            $table->timestamps();
+
+            $table->foreign('post_test_id')->references('id')->on('post_test')->onDelete('cascade');
+        });
+
+        Schema::create('posttest_jawaban', function(Blueprint $table) {
+            $table->increments('id');
+            $table->integer('users_account_id')->unsigned();
+            $table->integer('posttest_soal_id')->unsigned();
+            $table->string('jawaban');
+            $table->integer('nilai');
+        });
+
     }
 
     /**

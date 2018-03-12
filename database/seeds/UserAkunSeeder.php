@@ -115,7 +115,7 @@ class UserAkunSeeder extends Seeder
         $userStaff->save();
 
         $staffProfil = new UserProfil([
-            'nik' => 'P444262',
+            'nik' => '444262423',
             'email' => 'adiraka8@gmail.com',
             'nama' => 'Adi Raka Siwi',
             'tempat_lahir' => 'Padang',

@@ -36,4 +36,8 @@ class KelasVirtual extends Model
     public function reward_to() {
         return $this->hasMany('App\Models\RewardTo', 'kelas_virtual_id', 'id');
     }
+
+    public function pre_test() {
+        return $this->hasMany('App\Models\PreTest', 'kelas_virtual_id', 'id');
+    }
 }

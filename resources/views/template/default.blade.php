@@ -68,6 +68,22 @@
                                     </div>
                                 </div>
 
+                            @elseif (Session::has('info'))
+
+                                <div class="alert alert-info animated fadeInDown with-time-out" role="alert">
+                                    <div class="container">
+                                        <div class="alert-icon">
+                                            <i class="now-ui-icons travel_info"></i>
+                                        </div>
+                                        <strong>Info!</strong> {{ Session::get('info') }}
+                                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                            <span aria-hidden="true">
+                                                <i class="now-ui-icons ui-1_simple-remove"></i>
+                                            </span>
+                                        </button>
+                                    </div>
+                                </div>
+
                             @endif
 
                             @yield('content')

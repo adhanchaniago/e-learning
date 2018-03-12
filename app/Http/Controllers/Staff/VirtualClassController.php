@@ -7,6 +7,7 @@ use App\Models\AngkatanDiklat;
 use App\Models\MataPelajaran;
 use App\Models\UserAccount;
 use App\Models\UserProfil;
+use App\Models\PreTest;
 
 use Auth;
 use Session;
@@ -84,6 +85,11 @@ class VirtualClassController extends Controller
             'users_account_id' => $request->instruktur_id
         ]);
    		$kelas->save();
+
+        $pretest = new PreTest([
+            'kelas_virtual_id' => $kelas->id,
+        ]);
+        $pretest->save();
 
    		Session::flash('success', 'Kelas Virtual berhasil ditambahkan.');
     	return redirect()->route('getVirtualClassPage');
