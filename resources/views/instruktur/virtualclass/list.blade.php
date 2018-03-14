@@ -25,7 +25,12 @@
 						<span class="badge badge-default">{{ $kelas->mata_pelajaran->nama_pelajaran }}</span> 
 						<br><br>
 						<p>{{ $kelas->keterangan }}</p>
-						<p class="cv-thumbnail-foot"><strong>{{ $kelas->angkatan_diklat->nama_diklat }}</strong> | <a href="{{ route('getTambahPretestPage', [$kelas->id]) }}">PRE-TEST</a> | <a href="">POST-TEST</a></p>
+						<p class="cv-thumbnail-foot">
+							<strong>{{ $kelas->angkatan_diklat->nama_diklat }}</strong> | 
+							<a href="{{ route('getTambahPretestPage', [$kelas->id]) }}">PRE-TEST</a> <a href="{{ route('getNilaiPretest', [$kelas->id]) }}">NILAI</a> | 
+							<a href="{{ route('getTambahPosttestPage', [$kelas->id]) }}">POST-TEST</a> <a href="{{ route('getNilaiPosttest', [$kelas->id]) }}">NILAI</a> |
+							<a href="{{ route('getLaporanTest', [$kelas->id]) }}">LAPORAN</a>
+						</p>
 					</div>
 				</li>
 			</div>

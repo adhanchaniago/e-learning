@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers\Instruktur;
 
-use App\Models\PreTest;
-use App\Models\PretestSoal;
-use App\Models\PretestJawaban;
+use App\Models\PostTest;
+use App\Models\PosttestSoal;
+use App\Models\PosttestJawaban;
 use App\Models\AngkatanPeserta;
 use App\Models\UserAccount;
 use App\Models\KelasVirtual;
@@ -14,20 +14,20 @@ use Session;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
-class PretestController extends Controller
+class PosttestController extends Controller
 {
-    public function getTambahPretestPage($id)
+    public function getTambahPosttestPage($id)
     {
     	$kelasID = $id;
-    	$listSoal = PreTest::where('kelas_virtual_id', $kelasID)->first()->soal;
+    	$listSoal = PostTest::where('kelas_virtual_id', $kelasID)->first()->soal;
     	
-    	return view('instruktur.pretest.tambah', [ 
+    	return view('instruktur.posttest.tambah', [ 
     		'kelasID' => $kelasID,
     		'listSoal' => $listSoal
     	]);
     }
 
-    public function postTambahPretest(Request $request, $id)
+    public function postTambahPosttest($id, Request $request)
     {
     	$this->validate($request, [
     		'kelas_virtual_id' => 'required',
@@ -35,19 +35,19 @@ class PretestController extends Controller
     		'jns_soal' => 'required'
     	]);
     	
-    	$pretestID = PreTest::where('kelas_virtual_id', $request->kelas_virtual_id)->first()->id;
+    	$posttestID = PostTest::where('kelas_virtual_id', $request->kelas_virtual_id)->first()->id;
     	$jenis = $request->jns_soal;
 
     	if ($jenis == 'essay') {
-    		$input = new PretestSoal([
-    			'pre_test_id' => $pretestID,
+    		$input = new PosttestSoal([
+    			'post_test_id' => $posttestID,
     			'jenis_soal' => $jenis,
     			'soal' => $request->soal
     		]);		
     		$input->save();
     	} elseif ($jenis == 'objektif') {
-    		$input = new PretestSoal([
-    			'pre_test_id' => $pretestID,
+    		$input = new PosttestSoal([
+    			'post_test_id' => $posttestID,
     			'jenis_soal' => $jenis,
     			'soal' => $request->soal,
     			'opsi_a' => $request->opsi_a,
@@ -58,43 +58,43 @@ class PretestController extends Controller
     		$input->save();
     	}
     	
-    	Session::flash('success', 'Soal PreTest berhasil ditambahkan.');
+    	Session::flash('success', 'Soal PostTest berhasil ditambahkan.');
     	return redirect()->back();
     }
 
-    public function getListJawabanPretest($id)
+    public function getListJawabanPosttest($id)
     {
-        $kelasID = $id;
-        $angkatanID = PreTest::where('kelas_virtual_id', $id)->first()->kelas->angkatan_diklat->id;
+    	$kelasID = $id;
+        $angkatanID = PostTest::where('kelas_virtual_id', $id)->first()->kelas->angkatan_diklat->id;
         $listPeserta = AngkatanPeserta::where('angkatan_diklat_id', $angkatanID)->get();
 
-        return view('instruktur.pretest.list_jawaban',[
+        return view('instruktur.posttest.list_jawaban',[
             'listPeserta' => $listPeserta, 
             'kelasID' => $kelasID
         ]);
     }
 
-    public function getDetailJawabanPretest($kelas, $user)
+    public function getDetailJawabanPosttest($kelas, $user)
     {
-        $user = UserAccount::find($user);
+    	$user = UserAccount::find($user);
         $kelasV = KelasVirtual::find($kelas);
-        $preTestID = PreTest::where('kelas_virtual_id', $kelas)->first()->id;
-        $listSoal = PretestSoal::where('pre_test_id', $preTestID)->get();
+        $postTestID = PostTest::where('kelas_virtual_id', $kelas)->first()->id;
+        $listSoal = PosttestSoal::where('post_test_id', $postTestID)->get();
 
-        return view('instruktur.pretest.detail',[
+        return view('instruktur.posttest.detail',[
             'user' => $user,
             'listSoal' => $listSoal, 
             'kelas' => $kelasV
         ]);
     }
 
-    public function postNilaiPretest(Request $request)
+    public function postNilaiPosttest(Request $request)
     {
         $userID = $request->user_id;
         $countSoal = count($request->soal_id);
 
         for ($i=0; $i < $countSoal; $i++) { 
-            $update = PretestJawaban::where('users_account_id', $userID)->where('pretest_soal_id', $request->soal_id[$i])->first();
+            $update = PosttestJawaban::where('users_account_id', $userID)->where('posttest_soal_id', $request->soal_id[$i])->first();
             $update->nilai = $request->{'nilai_'.$i};
             $update->save();
         }
@@ -102,14 +102,14 @@ class PretestController extends Controller
         return redirect()->back();
     }
 
-    public function getNilaiPretest($id)
+    public function getNilaiPosttest($id)
     {
         $dataNilai = [];
         $kelasID = $id;
-        $preTest = PreTest::where('kelas_virtual_id', $id)->first();
+        $postTest = PostTest::where('kelas_virtual_id', $id)->first();
         $angkatanID = KelasVirtual::find($id)->angkatan_diklat->id;
         $peserta = AngkatanPeserta::where('angkatan_diklat_id', $angkatanID)->get();
-        $countSoal = count($preTest->soal);
+        $countSoal = count($postTest->soal);
 
         foreach ($peserta as $key => $value) {
 
@@ -118,7 +118,7 @@ class PretestController extends Controller
             $dataNilai[$key]['nama'] = $value->user_account->user_profil->nama;
             $totNilai = 0;
 
-            foreach ($preTest->soal as $key2 => $value2) {
+            foreach ($postTest->soal as $key2 => $value2) {
 
                 $nilai = @$value2->jawaban->where('users_account_id', $value->user_account->id)->first()->nilai;
                 $dataNilai[$key]['nilai'][$key2] = $nilai;
@@ -131,14 +131,14 @@ class PretestController extends Controller
 
         }
         
-        return view('instruktur.pretest.nilai', [
+        return view('instruktur.posttest.nilai', [
             'dataNilai' => $dataNilai,
             'countSoal' => $countSoal,
             'kelasID' => $kelasID
         ]);
     }
 
-    public function getNilaiPretestData($id)
+    public function getNilaiPosttestData($id)
     {
         $dataNilai = [];
 
@@ -146,13 +146,13 @@ class PretestController extends Controller
 
         $angkatanID = KelasVirtual::find($id)->angkatan_diklat->id;
         $peserta = AngkatanPeserta::where('angkatan_diklat_id', $angkatanID)->get();
-        $preTest = PreTest::where('kelas_virtual_id', $id)->first();
+        $psotTest = PostTest::where('kelas_virtual_id', $id)->first();
 
         foreach ($peserta as $key => $value) {
 
             $dataNilai['peserta'][] = $value->user_account->user_profil->nama;
 
-            foreach ($preTest->soal as $key2 => $value2) {
+            foreach ($psotTest->soal as $key2 => $value2) {
 
                 $dataNilai['nilai'][$key2]['nama'] = 'S'.($key2+1);
                 $dataNilai['nilai'][$key2]['warna'] = $warna[$key2];

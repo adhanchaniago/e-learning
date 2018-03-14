@@ -8,6 +8,7 @@ use App\Models\MataPelajaran;
 use App\Models\UserAccount;
 use App\Models\UserProfil;
 use App\Models\PreTest;
+use App\Models\PostTest;
 
 use Auth;
 use Session;
@@ -90,6 +91,11 @@ class VirtualClassController extends Controller
             'kelas_virtual_id' => $kelas->id,
         ]);
         $pretest->save();
+
+        $posttest = new PostTest([
+            'kelas_virtual_id' => $kelas->id,
+        ]);
+        $posttest->save();
 
    		Session::flash('success', 'Kelas Virtual berhasil ditambahkan.');
     	return redirect()->route('getVirtualClassPage');

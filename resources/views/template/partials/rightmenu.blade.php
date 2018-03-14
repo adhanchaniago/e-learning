@@ -22,6 +22,7 @@
         @elseif (Auth::user()->hak_akses->slug == 'peserta')
             <a href="{{ route('getListPMateriPage') }}" class="list-group-item list-group-item-action"><i class="fa fa-file-text"></i> Materi</a>
             <a href="{{ route('getPVClassList') }}" class="list-group-item list-group-item-action"><i class="fa fa-institution"></i> Kelas Virtual</a>
+            <a href="{{ route('getPostTestList') }}" class="list-group-item list-group-item-action"><i class="fa fa-pencil"></i> Post Test</a>
             <a href="{{ route('getNilaiPage') }}" class="list-group-item list-group-item-action"><i class="fa fa-book"></i> Lihat Nilai</a>
         @elseif (Auth::user()->hak_akses->slug == 'pimpinan')
             <a href="{{ route('getDataInstrukturPage') }}" class="list-group-item list-group-item-action"><i class="fa fa-book"></i> Data Instuktur</a>

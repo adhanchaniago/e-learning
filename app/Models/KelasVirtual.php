@@ -40,4 +40,8 @@ class KelasVirtual extends Model
     public function pre_test() {
         return $this->hasMany('App\Models\PreTest', 'kelas_virtual_id', 'id');
     }
+
+    public function post_test() {
+        return $this->hasMany('App\Models\PostTest', 'kelas_virtual_id', 'id');
+    }
 }

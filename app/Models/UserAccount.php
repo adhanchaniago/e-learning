@@ -88,4 +88,12 @@ class UserAccount extends Authenticatable
     public function test_counter() {
         return $this->hasMany('App\Models\TestCounter', 'users_account_id', 'id');
     }
+
+    public function pretest_jawaban() {
+        return $this->hasMany('App\Models\PretestJawaban', 'users_account_id', 'id');
+    }
+
+    public function posttest_jawaban() {
+        return $this->hasMany('App\Models\PosttestJawaban', 'users_account_id', 'id');
+    }
 }
