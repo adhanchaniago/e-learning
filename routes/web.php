@@ -224,4 +224,11 @@ Route::group(['prefix' => 'pimpinan', 'middleware' => ['auth', 'pimpinan']], fun
     Route::get('/nilai/peserta/{id}', 'Pimpinan\LaporanController@getDataNilaiPage')->name('getDataNilaiPage');
     Route::get('/nilai/peserta/{id}/pdf', 'Pimpinan\LaporanController@getPDFNilai')->name('getPDFNilai');
 
+    Route::get('/virtualclass/angkatan', 'Pimpinan\VirtualClassController@getAngkatanList')->name('getAngkatanList');
+    Route::get('/virtualclass/list/{id}', 'Pimpinan\VirtualClassController@getListKelas')->name('getListKelas');
+    Route::get('/virtualclass/{id}', 'Pimpinan\VirtualClassController@getKelas')->name('getKelas');
+
+    Route::get('/laporan/test/{id}', 'Pimpinan\MainController@getTestLaporan')->name('getTestLaporan');
+    Route::get('/laporan/test/data/{id}', 'Pimpinan\MainController@getTestLaporanData')->name('getTestLaporanData');
+
 });

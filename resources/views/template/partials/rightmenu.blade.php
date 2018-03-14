@@ -27,7 +27,7 @@
         @elseif (Auth::user()->hak_akses->slug == 'pimpinan')
             <a href="{{ route('getDataInstrukturPage') }}" class="list-group-item list-group-item-action"><i class="fa fa-book"></i> Data Instuktur</a>
             <a href="{{ route('getListAngkatanDiklatPage') }}" class="list-group-item list-group-item-action"><i class="fa fa-book"></i> Data Diklat</a>
-            <a href="" class="list-group-item list-group-item-action"><i class="fa fa-institution"></i> Kelas Virtual</a>
+            <a href="{{ route('getAngkatanList') }}" class="list-group-item list-group-item-action"><i class="fa fa-institution"></i> Kelas Virtual</a>
         @endif
         <a href="{{ route('getForumListPage') }}" class="list-group-item list-group-item-action"><i class="fa fa-globe"></i> Forum Diskusi</a>
         <a href="{{ route('getLiveChatPage') }}" class="list-group-item list-group-item-action"><i class="fa fa-send"></i> Live Chat</a>
