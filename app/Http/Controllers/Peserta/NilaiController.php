@@ -6,6 +6,7 @@ use App\Models\AngkatanDiklat;
 use App\Models\AngkatanPeserta;
 use App\Models\KelasVirtual;
 use App\Models\UserProfil;
+use App\Models\UserAccount;
 
 use Auth;
 use PDF;
@@ -23,7 +24,9 @@ class NilaiController extends Controller
     	$angkatanID = AngkatanPeserta::where('users_account_id', $user->user_account->id)->first()->angkatan_diklat_id;
     	$angkatan = AngkatanDiklat::find($angkatanID);
     	$listNilai = $this->getNilaiData($angkatanID, $user->user_account->id);
-    	$pimpinan = UserProfil::where('nik', 'P84567')->first();
+        $pimpinan = UserAccount::whereHas('hak_akses', function($query) {
+            $query->where('slug', 'pimpinan');
+        })->first();
 
     	return view('peserta.nilai.main', [
     		'user' => $user, 
@@ -40,7 +43,9 @@ class NilaiController extends Controller
     	$angkatanID = AngkatanPeserta::where('users_account_id', $user->user_account->id)->first()->angkatan_diklat_id;
     	$angkatan = AngkatanDiklat::find($angkatanID);
     	$listNilai = $this->getNilaiData($angkatanID, $user->user_account->id);
-    	$pimpinan = UserProfil::where('nik', 'P84567')->first();
+    	$pimpinan = UserAccount::whereHas('hak_akses', function($query) {
+            $query->where('slug', 'pimpinan');
+        })->first();
 
     	$pdf = PDF::loadView('peserta.nilai.pdf', [
     		'user' => $user, 

@@ -6,6 +6,7 @@ use App\Models\MataPelajaran;
 use App\Models\MateriPelajaran;
 
 use Auth;
+use Response;
 use Storage;
 use Session;
 use Carbon\Carbon;
@@ -18,7 +19,11 @@ class MateriController extends Controller
 {
     public function getListPMateriPage()
     {
-    	return view('peserta.materi.list');
+        $listMateri = MateriPelajaran::all();
+
+    	return view('peserta.materi.list', [
+            'listMateri' => $listMateri
+        ]);
     }
 
     public function GetDataListPMateri()
@@ -46,5 +51,26 @@ class MateriController extends Controller
     	$materi = MateriPelajaran::find($id);
 
         return Storage::download($materi->lokasi);
+    }
+
+    public function getLihatMateri($id)
+    {
+        $materi = MateriPelajaran::find($id);
+        $name = $materi->lokasi;
+        // $filename = storage_path().'/app/'.$materi->lokasi;
+
+        // $headers = [
+        //     'Content-type' => 'video/mp4',
+        //     'Content-Disposition' => 'inline; filename="'.$filename.'"'
+        // ];
+
+        // return Response::make(file_get_contents($filename), 200, $headers);
+
+        // $filelocation = substr($name, 6);
+
+        return view('peserta.materi.lihat', [
+            'filelocation' => $name,
+            'materi' => $materi
+        ]);
     }
 }

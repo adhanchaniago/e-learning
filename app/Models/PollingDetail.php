@@ -17,6 +17,6 @@ class PollingDetail extends Model
     }
 
     public function polling_hasil() {
-    	return $this->hasMany('App\Models\PollingDetail', 'polling_detail_id', 'id');
+    	return $this->hasMany('App\Models\PollingHasil', 'polling_detail_id', 'id');
     }
 }

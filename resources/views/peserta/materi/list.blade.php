@@ -4,40 +4,42 @@
 
 @section('content')
 
+<div class="row">
+	
+	@foreach ($listMateri as $materi)
+		
+		<div class="col-md-4">
+			<div class="card">
+				<div class="card-body top-card-green text-center">
+					<p class="category" style="font-size: 12pt;">{{ $materi->judul_materi }}</p><hr>
+					<p>{{ $materi->mata_pelajaran->nama_pelajaran }}</p>
+					<p class="category">{{ $materi->users_account->user_profil->nama }}</p>
+					<p>{{ $materi->keterangan }}</p><hr>
+					@if ($materi->jenis_file == 'pdf' || $materi->jenis_file == 'ppt')
+						<a href="{{ route('getDownloadPMateri', [$materi->id]) }}" class="btn btn-green btn-block">DOWNLOAD</a>
+					@elseif ($materi->jenis_file == 'video')
+						<a href="{{ route('getLihatMateri', [$materi->id]) }}" class="btn btn-green btn-block">WATCH</a>
+					@endif
+				</div>
+			</div>
+		</div>
 
-<div class="card">
-	<div class="card-body top-card-green">
-		<p class="category">Materi Pelajaran</p>
-		<p><strong>Tabel Materi Pelajaran :</strong></p>
-		<table id="tb-test" class="table table-bordered display responsive nowrap" width="100%" style="font-size: 12px;">
-			<thead>
-				<tr>
-					<th width="10px">ID</th>
-					<th>Judul Materi</th>
-					<th>Mata Pelajaran</th>
-					<th>Tipe File</th>
-					<th>Instruktur</th>
-					<th>Keterangan</th>
-					<th>Download</th>
-				</tr>
-			</thead>
-			<tbody></tbody>
-		</table>
-	</div>
+	@endforeach
+
 </div>
 
 @endsection
 
 @push('style')
 
-	<link rel="stylesheet" href="{{ asset('vendor/datatables/datatables.min.css') }}" />
+	{{-- <link rel="stylesheet" href="{{ asset('vendor/datatables/datatables.min.css') }}" /> --}}
 
 @endpush
 
 
 @push('script')
 	
-	<script src="{{ asset('vendor/datatables/datatables.min.js') }}" type="text/javascript"></script>
+	{{-- <script src="{{ asset('vendor/datatables/datatables.min.js') }}" type="text/javascript"></script>
 	<script>
 		$(function(){
 			$('#tb-test').DataTable({
@@ -71,6 +73,6 @@
 				}
 			});
 		});
-	</script>
+	</script> --}}
 
 @endpush
