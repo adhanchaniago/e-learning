@@ -19,9 +19,11 @@
 								<tr>
 									<td width="5%">{{ $key+1 }}.</td>
 									<td colspan="2">{{ $value->soal }}</td>
-									<td rowspan="3" width="1%">
+									<td rowspan="3" width="10%">
 										<input type="hidden" name="soal_id[]" value="{{ $value->id }}">
-										<input type="text" name="nilai_{{ $key }}" placeholder="Nilai 0-100" style="width: 100px;" value="{{ @$value->jawaban->where('users_account_id', $user->id)->first()->nilai }}">
+										{{-- <input type="text" name="nilai_{{ $key }}" placeholder="Nilai 0-100" style="width: 100px;" value="{{ @$value->jawaban->where('users_account_id', $user->id)->first()->nilai }}"> --}}
+										<span><input type="radio" name="nilai_{{ $key }}" value="100"> Benar</span><br>
+										<span><input type="radio" name="nilai_{{ $key }}" value="0"> Salah</span>
 									</td>
 								</tr>
 								<tr>

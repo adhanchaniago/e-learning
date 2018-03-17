@@ -70,7 +70,7 @@
 		<div class="text-right">
 			<p>Padang, {{ date('d M Y') }} <br>Asmen Operasional Diklat</p>
 			<br><br>
-			<p>{{ $pimpinan->nama }} <br>NIK. {{ $pimpinan->nik }}</p>
+			<p>{{ $pimpinan->user_profil->nama }} <br>NIK. {{ $pimpinan->user_profil->nik }}</p>
 		</div>
 		<hr>
 		<div class="text-center">

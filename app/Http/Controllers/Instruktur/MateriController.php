@@ -63,26 +63,26 @@ class MateriController extends Controller
             ]);
 
             $users_account_id = Auth::user()->id;
-            $filename = rand(11111,99999).'-'.$request->file('materi')->getClientOriginalName();
             $filekategori = '';
             $extension = $request->file('materi')->getClientOriginalExtension();
+            $filename = rand(11111,99999).'-'.$users_account_id.'.'.$extension;
             $destinasi = '';
 
             if ($extension == 'pdf') {
-                $destinasi = 'public/materi/pdf';
+                $destinasi = 'materi/pdf';
                 $filekategori = 'pdf';
             } elseif ($extension == 'ppt' || $extension == 'pptx') {
-                $destinasi = 'public/materi/ppt';
+                $destinasi = 'materi/ppt';
                 $filekategori = 'ppt';
-            } elseif ($extension == 'mp4' || $extension == 'avi' || $extension == 'mkv') {
-                $destinasi = 'public/materi/video';
+            } elseif ($extension == 'mp4' || $extension == 'MP4') {
+                $destinasi = 'materi/video';
                 $filekategori = 'video';
             } else {
                 Session::flash('failure', 'Format file tidak didukung..');
                 return redirect()->back();
             }
 
-            $upload = $request->file('materi')->storeAs($destinasi, $filename);
+            $upload = $request->file('materi')->storeAs('public/'.$destinasi, $filename);
             $filefullpath = $destinasi.'/'.$filename;
             
             if ($upload) {
@@ -123,7 +123,7 @@ class MateriController extends Controller
         ]);
 
         $materi = MateriPelajaran::find($request->id);
-        $deleteFile = Storage::delete($materi->lokasi);
+        $deleteFile = Storage::delete('public/'.$materi->lokasi);
 
         if ($deleteFile) {
             $materi->delete();
@@ -139,6 +139,6 @@ class MateriController extends Controller
     {
         $materi = MateriPelajaran::find($id);
 
-        return Storage::download($materi->lokasi);
+        return Storage::download('public/'.$materi->lokasi);
     }
 }

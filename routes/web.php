@@ -163,8 +163,14 @@ Route::group(['prefix' => 'instruktur', 'middleware' => ['auth', 'instruktur']],
     Route::get('/posttest/nilai/{id}', 'Instruktur\PosttestController@getNilaiPosttest')->name('getNilaiPosttest');
     Route::get('/posttest/nilai/data/{id}', 'Instruktur\PosttestController@getNilaiPosttestData')->name('getNilaiPosttestData');
 
+    Route::get('/polling/main', 'Instruktur\PollingController@getPollingMainPage')->name('getPollingMainPage');
+    Route::get('/polling/tambah', 'Instruktur\PollingController@getAddPollingPage')->name('getAddPollingPage');
+    Route::post('/polling/tambah', 'Instruktur\PollingController@postAddPolling')->name('postAddPolling');
+    Route::get('/polling/detail/{id}', 'Instruktur\PollingController@getPollingDetail')->name('getPollingDetail');
+    Route::get('/polling/data/{id}', 'Instruktur\PollingController@getPollingData')->name('getPollingData');
+
     Route::get('/laporan/test/{id}', 'Instruktur\MainController@getLaporanTest')->name('getLaporanTest');
-    Route::geT('/laporan/test/data/{id}', 'Instruktur\MainController@getLaporanTestData')->name('getLaporanTestData');
+    Route::get('/laporan/test/data/{id}', 'Instruktur\MainController@getLaporanTestData')->name('getLaporanTestData');
 
 });
 
@@ -186,6 +192,7 @@ Route::group(['prefix' => 'peserta', 'middleware' => ['auth', 'peserta']], funct
     Route::get('/materi', 'Peserta\MateriController@getListPMateriPage')->name('getListPMateriPage');
     Route::get('/materi/data', 'Peserta\MateriController@GetDataListPMateri')->name('GetDataListPMateri');
     Route::get('/materi/download/{id}', 'Peserta\MateriController@getDownloadPMateri')->name('getDownloadPMateri');
+    Route::get('/materi/lihat/{id}', 'Peserta\MateriController@getLihatMateri')->name('getLihatMateri');
 
     Route::post('/tugas/jawaban', 'Peserta\TugasController@postTugasJawaban')->name('postTugasJawaban');
 
@@ -195,6 +202,10 @@ Route::group(['prefix' => 'peserta', 'middleware' => ['auth', 'peserta']], funct
     Route::get('/posttest/list', 'Peserta\PosttestController@getPostTestList')->name('getPostTestList');
     Route::get('/posttest/soal/{id}', 'Peserta\PosttestController@getPosttestSoal')->name('getPosttestSoal');
     Route::post('/posttest/soal/{id}', 'Peserta\PosttestController@postPosttestSoal')->name('postPosttestSoal');
+
+    Route::get('/polling/list', 'Peserta\PollingController@getPollingListPage')->name('getPollingListPage');
+    Route::get('/polling/vote/{id}', 'Peserta\PollingController@getPollingVote')->name('getPollingVote');
+    Route::post('/polling/vote/{id}', 'Peserta\PollingController@postPollingVote')->name('postPollingVote');
 
 });
 
