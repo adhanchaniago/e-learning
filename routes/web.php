@@ -40,8 +40,13 @@ Route::group(['middleware' => ['auth']], function() {
     Route::post('/forum/komen/tambah', 'General\ForumController@postForumComment')->name('postForumComment');
 
     Route::get('/livechat', 'General\ChatController@getLiveChatPage')->name('getLiveChatPage');
-    Route::post('/livechat/carikontak', 'General\ChatController@gpostCariKontak')->name('gpostCariKontak');
-    Route::post('/livechat/getchat', 'General\ChatController@postGetChat')->name('postGetChat');
+    Route::get('/livechat/getuser', 'General\ChatController@getLiveChatUserData')->name('getLiveChatUserData');
+    Route::get('/livechat/getdata', 'General\ChatController@getLiveChatData')->name('getLiveChatData');
+    Route::post('/livechat/sendchat', 'General\ChatController@postSendChat')->name('postSendChat');
+
+
+    // Route::post('/livechat/carikontak', 'General\ChatController@gpostCariKontak')->name('gpostCariKontak');
+    // Route::post('/livechat/getchat', 'General\ChatController@postGetChat')->name('postGetChat');
 
 });
 

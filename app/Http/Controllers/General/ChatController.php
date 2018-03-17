@@ -2,27 +2,61 @@
 
 namespace App\Http\Controllers\General;
 
+use Auth;
+use App\Events\ChatEvent;
+use App\Http\Controllers\Controller;
+use App\Http\Requests\SendMessageRequest;
 use App\Models\UserAccount;
 use App\Models\UserProfil;
-
-use Auth;
+use App\Models\ChatMessage;
 use Illuminate\Http\Request;
-use App\Http\Controllers\Controller;
 
 class ChatController extends Controller
 {
-    public function getLiveChatPage()
+    public function getLiveChatPage(Request $request)
     {
-    	$users = UserAccount::all();
 
-    	return view('global.chat.main', [
-    		'users' => $users
-    	]);
+        $users = UserAccount::all();
+
+        return view('global.chat.main', [ 'users' => $users ]);
+    }
+
+    public function getLiveChatData(Request $request)
+    {
+         $pesan = ChatMessage::select('sender','receiver','message','created_at')
+         ->whereIn('sender',[$request->sender,$request->receiver])
+         ->whereIn('receiver',[$request->sender,$request->receiver])->take(20)->get();
+
+        return ['messages'=>$pesan];
+    }
+
+    public function getLiveChatUserData(Request $request)
+    {
+        $users = UserAccount::select('id','username')->with(['user_profil' => function($query) {
+            $query->select('id', 'nama', 'photo');
+        }])->get();
+
+
+        $listUser = $users->except(Auth::id());
+        foreach ($listUser as $user) {
+            $user['messages'] = [];
+        }
+
+        return ['friends'=>$listUser,'user'=> UserAccount::with('user_profil')->find(Auth::id())];
+    }
+
+    public function postSendChat(SendMessageRequest $request)
+    {
+        $chatMessage = ChatMessage::create($request->all());
+
+        $sender = UserAccount::find(Auth::id());
+        $receiver = UserAccount::find($request->receiver);
+        event(new ChatEvent($sender,$receiver,$request->message));
     }
 
     public function gpostCariKontak(Request $request) 
     {
-    	$vCari = $request->cari;
+        $vCari = $request->cari;
         $data = UserProfil::where('nama', 'LIKE', '%'.$vCari.'%')->get();
         $jsonData = [];
 
@@ -57,4 +91,5 @@ class ChatController extends Controller
             'data' => $jsonData
         ]);
     }
+
 }
