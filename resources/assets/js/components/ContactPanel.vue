@@ -4,6 +4,9 @@
             <img class="rounded-circle foto-contact pull-left" :src="friendsFoto" width="40px;" height="40px;">
             <div class="nama-contact"> {{ nama }}</div>
             <div class="nama-contact"> </div>
+            <transition name="fade">
+                <span class="badge badge-light badge-chat">4</span>
+            </transition>
         </div>
     </li>
 </template>

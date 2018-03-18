@@ -55801,7 +55801,12 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 
 /* harmony default export */ __webpack_exports__["default"] = ({
-    props: ['liclass'],
+    props: ['liclass', 'friendPhoto', 'yourPhoto'],
+    computed: {
+        userphoto: function userphoto() {
+            if (this.liclass == 'sent') return this.yourPhoto;else return this.friendPhoto;
+        }
+    },
     mounted: function mounted() {
         console.log('Component mounted.');
     }
@@ -55820,7 +55825,7 @@ var render = function() {
     { class: _vm.liclass },
     [
       _c("img", {
-        attrs: { src: "http://emilcarlsson.se/assets/mikeross.png", alt: "" }
+        attrs: { src: _vm.userphoto, alt: "", height: "25", width: "25" }
       }),
       _vm._v(" "),
       _vm._t("default")
@@ -55901,6 +55906,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     props: ['id', 'nama', 'photo'],
@@ -55928,18 +55936,29 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("li", { staticClass: "contact", on: { click: _vm.pickThis } }, [
-    _c("div", { staticClass: "wrap" }, [
-      _c("img", {
-        staticClass: "rounded-circle foto-contact pull-left",
-        attrs: { src: _vm.friendsFoto, width: "40px;", height: "40px;" }
-      }),
-      _vm._v(" "),
-      _c("div", { staticClass: "nama-contact" }, [
-        _vm._v(" " + _vm._s(_vm.nama))
-      ]),
-      _vm._v(" "),
-      _c("div", { staticClass: "nama-contact" })
-    ])
+    _c(
+      "div",
+      { staticClass: "wrap" },
+      [
+        _c("img", {
+          staticClass: "rounded-circle foto-contact pull-left",
+          attrs: { src: _vm.friendsFoto, width: "40px;", height: "40px;" }
+        }),
+        _vm._v(" "),
+        _c("div", { staticClass: "nama-contact" }, [
+          _vm._v(" " + _vm._s(_vm.nama))
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "nama-contact" }),
+        _vm._v(" "),
+        _c("transition", { attrs: { name: "fade" } }, [
+          _c("span", { staticClass: "badge badge-light badge-chat" }, [
+            _vm._v("4")
+          ])
+        ])
+      ],
+      1
+    )
   ])
 }
 var staticRenderFns = []

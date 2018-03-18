@@ -36,7 +36,6 @@
 									:id="contact.user_profil.id" 
 									:nama="contact.user_profil.nama" 
 									:photo="contact.user_profil.photo"
-									:model="searchList"
 									>
 								</contact-panel>
 								</transition-group>
@@ -73,7 +72,9 @@
 									<chat-panel 
 										v-for="(pesan, index) in selectedFriend.messages" 
 										:key="index" 
-										:liclass='chat.liclass[index]'>
+										:liclass='chat.liclass[index]'
+										:your-photo="channel.yourPhoto"
+										:friend-photo="channel.friendPhoto">
 										<p>@{{ pesan }}</p>
 									</chat-panel>
 							</ul>
@@ -151,10 +152,11 @@
 				getUserChat() {
 					axios.get('/livechat/getuser')
 					.then((response) => {
+						console.log(response.data.user.user_profil.photo)
 
 						this.users.you = response.data.user
 						this.channel.yourID = response.data.user.id
-						this.channel.yourPhoto = 'http://e-learning.test/storage/profil/'+response.data.user.photo
+						this.channel.yourPhoto = 'http://e-learning.test/storage/profil/'+response.data.user.user_profil.photo
 
 						for (var i = 0; i < response.data.friends.length; i++) {
 							Vue.set(this.users.friends, i, {})
@@ -281,6 +283,9 @@
 				Echo.private('chat')
 				.listen('ChatEvent', (e) => {
 					if (e.receiver.id == this.channel.yourID) {
+						console.log('got messages');
+
+						
 						this.users.friends[this.findIndex(this.users.friends, 'id', e.sender.id)].messages.push(e.message);
 						this.chat.liclass.push('replies');
 					}
