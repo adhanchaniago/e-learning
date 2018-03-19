@@ -32,14 +32,15 @@
 }
 
 .contact {
-    padding-left: 10px;
-    padding-right: 10px;
-    list-style-type: none;
-    height: 70px;
-    display: flex;
-    align-items: center;
-    cursor: pointer;
-    transition: all .25s linear;
+  position: relative;
+  padding-left: 10px;
+  padding-right: 10px;
+  list-style-type: none;
+  height: 70px;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  transition: all .25s linear;
 }
 
 .contact:hover {
@@ -156,4 +157,13 @@ input[type="text" i]:disabled{
 .loader-state{
   position: absolute;
   right: 10px;
+}
+
+.badge-chat{
+  border-color: #ddd;
+  color: #e3e3e3;
+  position: absolute;
+  background-color: #227856;
+  top: 25px;
+  right: 5px;
 }
