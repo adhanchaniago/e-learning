@@ -250,13 +250,13 @@ class CreateAllTables extends Migration
 
         Schema::create('chat_message', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('chat_room_id')->unsigned();
-            $table->integer('users_account_id')->unsigned();
+            $table->integer('sender');
+            $table->integer('receiver')->unsigned();
             $table->string('message');
+            $table->timestamp('last_seein')->default('CURRENT_TIMESTAMP');
             $table->timestamps();
 
-            $table->foreign('chat_room_id')->references('id')->on('chat_room')->onDelete('cascade');
-            $table->foreign('users_account_id')->references('id')->on('users_account')->onDelete('cascade');
+            $table->foreign('receiver')->references('id')->on('users_account')->onDelete('cascade');
         });
 
         Schema::create('test_counter', function (Blueprint $table) {

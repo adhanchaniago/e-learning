@@ -44,10 +44,6 @@ Route::group(['middleware' => ['auth']], function() {
     Route::get('/livechat/getdata', 'General\ChatController@getLiveChatData')->name('getLiveChatData');
     Route::post('/livechat/sendchat', 'General\ChatController@postSendChat')->name('postSendChat');
 
-
-    // Route::post('/livechat/carikontak', 'General\ChatController@gpostCariKontak')->name('gpostCariKontak');
-    // Route::post('/livechat/getchat', 'General\ChatController@postGetChat')->name('postGetChat');
-
 });
 
 // Staff Section
