@@ -33,10 +33,13 @@
 									@picked="selectedFriends" 
 									v-for="(contact,index) in searchList" 
 									:key="index"
+									:index="index"
+									:inbox="contact.inbox"
 									:id="contact.user_profil.id" 
 									:nama="contact.user_profil.nama" 
-									:photo="contact.user_profil.photo"
-									>
+									:photo="contact.user_profil.photo" 
+									:liclass="chat.contactClass" 
+									:jabatan="contact.jabatan">
 								</contact-panel>
 								</transition-group>
 							</ul>
@@ -46,28 +49,27 @@
 
 					<div class="col-sm-8 chat-right no-padding">
 						<div class="chat-head">
-							<selected-friends-panel
-								:typing="channel.typing"
-								:friend-name="channel.friendName"
-								:friend-photo="channel.friendPhoto">
-							</selected-friends-panel>
-							<div class="loader-state">
-								<ball-scale-loader 
-									v-if="!chat.chatReadyState" 
-									color="#237A57" 
-									size="20px">
-								</ball-scale-loader>
-							</div>
+							<transition name="fade" mode="out-in" :duration="250">
+								<selected-friends-panel
+									:key="channel.friendID"
+									:typing="channel.typing"
+									:friend-name="channel.friendName" 
+									:jabatan="channel.jabatan" 
+									:friend-photo="channel.friendPhoto">
+								</selected-friends-panel>
+							</transition>
+								<div class="loader-state">
+									<ball-scale-loader 
+										v-if="!chat.chatReadyState" 
+										color="#237A57" 
+										size="20px">
+									</ball-scale-loader>
+								</div>
+
 							
 						</div>
 						<div class="chat-body" v-if="chat.appReadyState" style="overflow: hidden;">
-							<transition
-									name="staggered-fade"
-									mode="out-in"
-									v-bind:css="false"
-									v-on:before-enter="chatBeforeEnter"
-									v-on:enter="chatEnter"
-									v-on:leave="chatLeave">
+							<transition name="fade">
 							<ul v-chat-scroll style="height: 370px; overflow-x: auto;">
 									<chat-panel 
 										v-for="(pesan, index) in selectedFriend.messages" 
@@ -114,6 +116,7 @@
 					yourPhoto : '',
 					friendID : '',
 					friendName : '',
+					jabatan : '',
 					friendPhoto : '',
 					typing : '',
 				},
@@ -121,6 +124,7 @@
 					chatReadyState : false,
 					appReadyState : false,
 					textMessage : '',
+					contactClass : '',
 					liclass : []
 				}
 			},
@@ -152,19 +156,24 @@
 				getUserChat() {
 					axios.get('/livechat/getuser')
 					.then((response) => {
-						console.log(response.data.user.user_profil.photo)
+						console.log(response)
 
 						this.users.you = response.data.user
 						this.channel.yourID = response.data.user.id
-						this.channel.yourPhoto = 'http://e-learning.test/storage/profil/'+response.data.user.user_profil.photo
+						if (response.data.user.user_profil.photo == '')
+							this.channel.yourPhoto = 'http://'+window.location.hostname+'/storage/profil/default-user-image.png';
+						else
+							this.channel.yourPhoto = 'http://'+window.location.hostname+'/storage/profil/'+response.data.user.user_profil.photo
+						
 
 						for (var i = 0; i < response.data.friends.length; i++) {
-							Vue.set(this.users.friends, i, {})
+							Vue.set(this.users.friends, i, {'inbox':0})
 							for (var j = 0; j < Object.keys(response.data.friends[i]).length; j++) {
 								Vue.set(this.users.friends[i], 'id', response.data.friends[i].id)
 								Vue.set(this.users.friends[i], 'username', response.data.friends[i].username)
 								Vue.set(this.users.friends[i], 'messages', response.data.friends[i].messages)
 								Vue.set(this.users.friends[i], 'user_profil', response.data.friends[i].user_profil)
+								Vue.set(this.users.friends[i], 'jabatan', response.data.friends[i].hak_akses.nama)
 							}
 						}
 
@@ -191,7 +200,6 @@
 									this.chat.liclass.push('sent');
 								else
 									this.chat.liclass.push('replies');
-								
 							}
 
 						}
@@ -218,9 +226,14 @@
 				},
 
 				selectedFriends(e) {
+					this.users.friends[e.index].inbox = 0;
 					this.channel.friendID = e.id;
 					this.channel.friendName = e.nama;
 					this.channel.friendPhoto = e.photo;
+					this.channel.jabatan = e.jabatan;
+					this.chat.contactClass = e.id;
+					this.chat.textMessage = '';
+					this.channel.typing = '';
 					this.getDataChat();
 				},
 
@@ -236,27 +249,10 @@
 					el.style.opacity = 0
 					el.style.height = 0
 				},
-				chatBeforeEnter: function (el) {
-					el.style.opacity = 0
-					el.style.height = 0
-				},
 				contactEnter: function (el, done) {
 					var delay = el.dataset.index * 50
 					setTimeout(function () {
 						Velocity( el, { opacity: 1, height: '4em' }, { complete: done })
-					}, delay)
-				},
-				chatEnter: function (el, done) {
-					console.log('test')
-					var delay = el.dataset.index * 50
-					setTimeout(function () {
-						Velocity( el, { opacity: 1, height: '4em' }, { easing: "easeInSine",complete: done })
-					}, delay)
-				},
-				chatLeave: function (el, done) {
-					var delay = el.dataset.index * 500
-					setTimeout(function () {
-						Velocity( el, { opacity: 0, height: '2em' }, { complete: done })
 					}, delay)
 				},
 				contactLeave: function (el, done) {
@@ -283,17 +279,18 @@
 				Echo.private('chat')
 				.listen('ChatEvent', (e) => {
 					if (e.receiver.id == this.channel.yourID) {
-						console.log('got messages');
+						if (e.sender.id !== this.channel.friendID)
+						this.users.friends[this.findIndex(this.users.friends, 'id', e.sender.id)].inbox += 1;
 
-						
 						this.users.friends[this.findIndex(this.users.friends, 'id', e.sender.id)].messages.push(e.message);
 						this.chat.liclass.push('replies');
 					}
 				})
 				.listenForWhisper('typing', (e) => {
+					this.channel.typing = '';
 					if (e.receiver == this.channel.yourID && e.sender == this.channel.friendID)
 						if (e.action != '')
-							this.channel.typing = 'mengetik...';
+							this.channel.typing = 'mengetik';
 					else
 						this.channel.typing = '';
 				});

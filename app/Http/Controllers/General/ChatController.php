@@ -32,9 +32,13 @@ class ChatController extends Controller
 
     public function getLiveChatUserData(Request $request)
     {
-        $users = UserAccount::select('id','username')->with(['user_profil' => function($query) {
+        $users = UserAccount::select('id','username','hak_akses_id')
+        ->with(['user_profil' => function($query) {
             $query->select('id', 'nama', 'photo');
-        }])->get();
+        }])->with(['hak_akses' => function($query) {
+            $query->select('id', 'nama');
+        }])
+        ->get();
 
 
         $listUser = $users->except(Auth::id());
