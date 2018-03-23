@@ -247,12 +247,12 @@
 				},
 				contactBeforeEnter: function (el) {
 					el.style.opacity = 0
-					el.style.height = 0
+					el.style.height = '45px';
 				},
 				contactEnter: function (el, done) {
 					var delay = el.dataset.index * 50
 					setTimeout(function () {
-						Velocity( el, { opacity: 1, height: '4em' }, { complete: done })
+						Velocity( el, { opacity: 1, height: '60px' }, { complete: done })
 					}, delay)
 				},
 				contactLeave: function (el, done) {

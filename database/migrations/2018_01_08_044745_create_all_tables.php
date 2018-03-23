@@ -238,22 +238,22 @@ class CreateAllTables extends Migration
             $table->foreign('reward_list_id')->references('id')->on('reward_list')->onDelete('cascade');
         });
 
-        Schema::create('chat_room', function (Blueprint $table) {
-            $table->increments('id');
-            $table->integer('users_one_id')->unsigned();
-            $table->integer('users_two_id')->unsigned();
-            $table->timestamps();
+        // Schema::create('chat_room', function (Blueprint $table) {
+        //     $table->increments('id');
+        //     $table->integer('users_one_id')->unsigned();
+        //     $table->integer('users_two_id')->unsigned();
+        //     $table->timestamps();
 
-            $table->foreign('users_one_id')->references('id')->on('users_account')->onDelete('cascade');
-            $table->foreign('users_two_id')->references('id')->on('users_account')->onDelete('cascade');
-        });
+        //     $table->foreign('users_one_id')->references('id')->on('users_account')->onDelete('cascade');
+        //     $table->foreign('users_two_id')->references('id')->on('users_account')->onDelete('cascade');
+        // });
 
         Schema::create('chat_message', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('sender');
             $table->integer('receiver')->unsigned();
             $table->string('message');
-            $table->timestamp('last_seein')->default('CURRENT_TIMESTAMP');
+            $table->timestamp('last_seein')->useCurrent();
             $table->timestamps();
 
             $table->foreign('receiver')->references('id')->on('users_account')->onDelete('cascade');
@@ -359,7 +359,7 @@ class CreateAllTables extends Migration
         Schema::dropIfExists('polling_hasil');
         Schema::dropIfExists('reward_list');
         Schema::dropIfExists('reward_to');
-        Schema::dropIfExists('chat_room');
+        // Schema::dropIfExists('chat_room');
         Schema::dropIfExists('chat_message');
     }
 }

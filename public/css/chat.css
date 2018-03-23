@@ -33,11 +33,9 @@
 
 .contact {
   position: relative;
-  padding-left: 10px;
-  padding-right: 10px;
+  padding: 10px;
   list-style-type: none;
   height: 70px;
-  display: flex;
   align-items: center;
   cursor: pointer;
   transition: all .25s linear;
@@ -58,6 +56,15 @@
 }
 
 .nama-contact {
+  align-items: center;
+  font-size: 16px;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  width: 60%;
+}
+
+.nama-contact2 {
   display: flex;
   align-items: center;
   font-size: 16px;

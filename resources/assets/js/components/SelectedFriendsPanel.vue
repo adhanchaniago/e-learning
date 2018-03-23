@@ -1,7 +1,7 @@
 <template>
     <div class="wrap">
         <img :src="avatar" class="foto-head pull-left rounded-circle" height="40px" width="40px">
-        <div class="nama-contact">{{ nama }}</div>
+        <div class="nama-contact2">{{ nama }}</div>
         <div class="role-contact">{{ role }}</div>
 
             <div v-if="ketik" class="nama-contact chat-ket">{{ typing }}</div>
