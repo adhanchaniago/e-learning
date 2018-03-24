@@ -64,7 +64,7 @@ class MainController extends Controller
 
             $dataNilai[$key]['pre-test'] = round($preRata = $preTotNilai / $countSoalPre, 2);
             $dataNilai[$key]['post-test'] = round($postRata = $postTotNilai / $countSoalPost, 2);
-
+            $dataNilai[$key]['keterangan'] = '';
             if ($preRata < $postRata) {
             	$dataNilai[$key]['keterangan'] = 'Meningkat';
             } elseif ($preRata > $postRata) {
