@@ -76,17 +76,28 @@
 			monthsShort: ['Jan', 'Feb', 'Mar', 'Apr', 'Mey', 'Jun', 'Jul', 'Agu', 'Sep', 'Okt', 'Nov', 'Des']
 		};
 
+		// var selesai = $('#tanggal_selesai').datepicker({
+		// 	dateFormat: "yyyy-mm-dd",
+  //   		autoClose: true,
+  //   		language: 'en'
+		// });
+
 		$('#tanggal_mulai').datepicker({
 			dateFormat: "yyyy-mm-dd",
     		autoClose: true,
-    		language: 'en'
-		});
+    		language: 'en',
+    		onSelect: function onSelect(fd, date) {
+    			console.log(fd);
+    			$('#tanggal_selesai').datepicker({
+    				minDate: new Date(fd),
+    				dateFormat: "yyyy-mm-dd",
+    				autoClose: true,
+    				language: 'en'
+    			});
+    		}
+		})
 
-		$('#tanggal_selesai').datepicker({
-			dateFormat: "yyyy-mm-dd",
-    		autoClose: true,
-    		language: 'en'
-		});
+		
 
 
 	});
