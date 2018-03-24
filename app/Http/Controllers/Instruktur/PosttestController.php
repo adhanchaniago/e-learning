@@ -159,7 +159,7 @@ class PosttestController extends Controller
 
                 foreach ($value2->jawaban->sortBy('id') as $key3 => $value3) {
 
-                    $dataNilai['nilai'][$key2]['nilai'][$key3] = $value3->nilai;
+                    $dataNilai['nilai'][$key2]['nilai'][] = $value3->nilai;
 
                 }
 
