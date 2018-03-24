@@ -157,7 +157,7 @@ class PosttestController extends Controller
                 $dataNilai['nilai'][$key2]['nama'] = 'S'.($key2+1);
                 $dataNilai['nilai'][$key2]['warna'] = $warna[$key2];
 
-                foreach ($value2->jawaban as $key3 => $value3) {
+                foreach ($value2->jawaban->sortBy('id') as $key3 => $value3) {
 
                     $dataNilai['nilai'][$key2]['nilai'][$key3] = $value3->nilai;
 

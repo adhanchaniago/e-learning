@@ -152,7 +152,7 @@ class PretestController extends Controller
 
             $dataNilai['peserta'][] = $value->user_account->user_profil->nama;
 
-            foreach ($preTest->soal as $key2 => $value2) {
+            foreach ($preTest->soal->sortBy('id') as $key2 => $value2) {
 
                 $dataNilai['nilai'][$key2]['nama'] = 'S'.($key2+1);
                 $dataNilai['nilai'][$key2]['warna'] = $warna[$key2];
