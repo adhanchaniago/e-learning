@@ -63,5 +63,6 @@ class Kernel extends HttpKernel
         'pimpinan' => \App\Http\Middleware\Pimpinan::class,
         'throttle' => \Illuminate\Routing\Middleware\ThrottleRequests::class,
         'filebrowser' => \App\Http\Middleware\FileBrowser::class,
+        'pretest' => \App\Http\Middleware\PreTest::class,
     ];
 }

@@ -7,12 +7,23 @@
 <div class="row">
 	<div class="col-md-12">
 		<div class="card">
+			<div class="card-body" style="min-height: 1px;">
+				<h5 class="text-center category">WAKTU TEST</h5>
+				<h1 class="text-center" id="hitung-mundur"></h1>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div class="row">
+	<div class="col-md-12">
+		<div class="card">
 			<div class="card-body top-card-green">
 				<div class="media-body">
-					<p class="category">Pre-Test {{ $kelas->mata_pelajaran->nama_pelajaran }}</p>
+					<p class="category">Pre-Test {{ $kelas->mata_pelajaran->nama_pelajaran }} | <span>WAKTU 60:60</span></p>
 					<hr>
 					<p>Silahkan jawab beberapa pertanyaan di bawah ini :</p>
-					<form action="" method="post">
+					<form  id='form-test' action="" method="post">
 						<input type="hidden" name="_token" value="{{ csrf_token() }}">
 					@foreach ($listSoal as $key => $value)
 						@if ($value->jenis_soal == 'objektif')
@@ -76,3 +87,28 @@
 </div>
 
 @endsection
+
+@push('script')
+	
+	<script src="{{ asset('vendor/countdown/jquery.countdown.min.js') }}" type="text/javascript"></script>
+	<script>
+		
+		$(function(){
+
+			// 5400000 = 90Menit  $(this).html(event.strftime(totalHours + ' : %M : %S '));
+			// 1000	= 1Detik
+
+			var waktuLimit = new Date().getTime() + 5400000;
+
+			$('#hitung-mundur').countdown(waktuLimit, function(e) {
+				$(this).html(e.strftime('%H : %M : %S '));
+			}).on('finish.countdown', function(event) {
+				console.log('selesai');
+				$('#form-test').trigger('submit');
+			});
+
+		});
+
+	</script>
+
+@endpush

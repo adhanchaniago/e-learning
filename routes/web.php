@@ -21,7 +21,7 @@ Route::group(['middleware' => ['guest']], function(){
 
 // General Function
 
-Route::group(['middleware' => ['auth']], function() {
+Route::group(['middleware' => ['auth', 'pretest']], function() {
 
     Route::get('/profil/ubah', 'General\ProfilController@getChangeProfilPage')->name('getChangeProfilPage');
     Route::put('/profil/ubah', 'General\ProfilController@putChangeProfil')->name('putChangeProfil');
@@ -205,7 +205,7 @@ Route::group(['prefix' => 'peserta', 'middleware' => ['auth', 'peserta']], funct
 
 });
 
-Route::group(['prefix' => 'pretest', 'middleware' => ['auth']], function() {
+Route::group(['prefix' => 'pretest', 'middleware' => []], function() {
 
     Route::get('/list', 'Peserta\PretestController@getPreTestList')->name('getPreTestList');
     Route::get('/soal/{id}', 'Peserta\PretestController@getPretestSoal')->name('getPretestSoal');
